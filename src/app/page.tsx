@@ -1,5 +1,5 @@
-import ComingSoon from "@/app/components/ComingSoon";
+import Home from "@/app/components/Home";
 
-export default function Home() {
-  return <ComingSoon />;
+export default function Page() {
+  return <Home />;
 }
