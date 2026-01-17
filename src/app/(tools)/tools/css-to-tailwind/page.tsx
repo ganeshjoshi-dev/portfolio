@@ -516,7 +516,7 @@ const cssToTailwindMap: Record<string, (value: string) => string | null> = {
     return map[v] || `rotate-[${v}]`;
   },
 
-  'translate': (_v) => null, // Handled via translateX/Y
+  'translate': () => null, // Handled via translateX/Y
 
   // Animation
   'animation': (v) => {
