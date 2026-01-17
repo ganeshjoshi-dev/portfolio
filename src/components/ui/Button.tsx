@@ -44,7 +44,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
     // External link - render as <a>
     if ('href' in props && props.href && props.external) {
-      const { href, external: _external, ...anchorProps } = props;
+      const { href, external, ...anchorProps } = props;
+      void external; // Extracted to exclude from spread
       return (
         <a
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -61,7 +62,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
     // Internal link - render as Next.js Link
     if ('href' in props && props.href) {
-      const { href, external: _external, ...linkProps } = props;
+      const { href, external, ...linkProps } = props;
+      void external; // Extracted to exclude from spread
       return (
         <Link
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -75,7 +77,9 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     }
 
     // Default - render as button
-    const { href: _href, external: _external, ...buttonProps } = props as ButtonAsButton & { href?: undefined; external?: undefined };
+    const { href, external, ...buttonProps } = props as ButtonAsButton & { href?: undefined; external?: undefined };
+    void href; // Extracted to exclude from spread
+    void external; // Extracted to exclude from spread
     return (
       <button
         ref={ref as React.Ref<HTMLButtonElement>}
