@@ -11,6 +11,13 @@ const config = {
     extend: {
       colors: brandTheme.colors,
       spacing: brandTheme.spacing,
+      fontFamily: {
+        sans: ['Inter', 'var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'var(--font-geist-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      maxWidth: {
+        'screen-2xl': '1280px',
+      },
     },
   },
   plugins: [],

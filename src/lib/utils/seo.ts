@@ -1,0 +1,45 @@
+export const siteConfig = {
+  name: "Ganesh Joshi",
+  title: "Ganesh Joshi – Full Stack Developer & Creative Problem Solver",
+  description:
+    "Full Stack Developer specializing in eCommerce, modern web tech, and user-centric design. Adobe Certified Expert building fast, scalable web experiences.",
+  url: "https://ganeshjoshi.dev",
+  ogImage: "/images/og-image.jpg",
+  keywords: [
+    "Full Stack Developer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Adobe Commerce",
+    "eCommerce",
+    "Frontend Developer",
+    "Web Performance",
+    // Developer Tools Keywords
+    "free developer tools",
+    "online dev tools",
+    "CSS generator",
+    "gradient generator",
+    "JSON to TypeScript",
+    "Tailwind CSS tools",
+    "web development tools",
+    "code converter online",
+  ],
+  // Tools-specific SEO
+  toolsTitle: "Free Developer Tools | GJ Dev Tools",
+  toolsDescription:
+    "Free online developer tools for CSS, converters, and utilities. Gradient generator, JSON to TypeScript, regex tester, and more. Beautiful UI, no ads.",
+  toolsKeywords: [
+    "developer tools",
+    "free online tools",
+    "CSS generator",
+    "gradient maker",
+    "JSON to TypeScript converter",
+    "regex tester online",
+    "Tailwind tools",
+    "code converter",
+    "UUID generator",
+    "Base64 encoder",
+    "color palette generator",
+    "shadow generator",
+  ],
+};
