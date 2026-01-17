@@ -1,29 +1,48 @@
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Fira_Code } from "next/font/google";
+import type { Metadata } from "next";
 import "./styles/globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import { AppShell } from "@/components/layout/AppShell";
+import { siteConfig } from "@/lib/utils/seo";
+import { Analytics } from "@vercel/analytics/react";
+import { Providers } from "@/components/providers";
 
-const geistSans = Geist({
+const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const firaCode = Fira_Code({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Ganesh Joshi – Coming Soon",
-  description: "Personal portfolio of Ganesh Joshi. Launching soon!",
+export const metadata: Metadata = {
+  title: siteConfig.title,
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  keywords: siteConfig.keywords,
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
   icons: {
     icon: [
-      { url: '/favicon/favicon.ico', type: 'image/ico' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: "/favicon/favicon.ico", type: "image/ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
 };
 
@@ -32,14 +51,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    jobTitle: "Full Stack Developer",
+    sameAs: ["https://www.linkedin.com/in/joshiganesh", "https://github.com/GJ-MCA"],
+  };
+
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 flex flex-col min-h-screen h-full`}
+        className={`${inter.variable} ${firaCode.variable} antialiased bg-[#0a0e27] text-white flex flex-col min-h-screen h-full`}
       >
-        <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
-        <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <Providers>
+          <AppShell>{children}</AppShell>
+        </Providers>
+        <Analytics />
       </body>
     </html>
   );
