@@ -1,0 +1,192 @@
+﻿# Project Development Rules
+
+## Project Overview
+
+This is a Next.js 14+ portfolio website with a developer tools hub.
+- Framework: Next.js 14+ with App Router
+- Language: TypeScript (strict mode)
+- Styling: Tailwind CSS with custom theme
+- Animations: Framer Motion
+- Fonts: Inter (sans), Fira Code (mono)
+
+### Key Files
+- src/styles/brand-theme.js - Design system tokens
+- src/components/ui/ - Reusable UI components
+- STYLE_GUIDE.md - Usage guidelines
+- tailwind.config.js - Extended Tailwind configuration
+
+## Generic UI Components (ALWAYS USE THESE)
+
+### Button Component
+ALWAYS use the Button component from `@/components/ui` for buttons and button-like links.
+
+```tsx
+import { Button } from '@/components/ui';
+
+// Variants: 'primary' | 'secondary' | 'ghost'
+// Sizes: 'sm' | 'md' | 'lg'
+
+// As button
+<Button variant="primary" size="lg">Submit</Button>
+
+// As internal link (Next.js Link)
+<Button href="/contact" variant="secondary" size="md">Contact</Button>
+
+// As external link
+<Button href="https://github.com" external variant="ghost" size="md">GitHub</Button>
+```
+
+### Form Components
+ALWAYS use form components from `@/components/ui` for form elements.
+
+```tsx
+import { Input, Select, Textarea } from '@/components/ui';
+
+// Input with label and error
+<Input
+  label="Email"
+  type="email"
+  name="email"
+  error={errors.email}
+  helperText="We'll never share your email"
+/>
+
+// Select with options
+<Select
+  label="Category"
+  name="category"
+  placeholder="Select an option"
+  options={[
+    { value: 'general', label: 'General Inquiry' },
+    { value: 'support', label: 'Support' },
+  ]}
+  error={errors.category}
+/>
+
+// Textarea
+<Textarea
+  label="Message"
+  name="message"
+  rows={5}
+  placeholder="Your message..."
+  error={errors.message}
+/>
+```
+
+## Theme and Styling Rules
+
+### ALWAYS Use the Design System
+Never use arbitrary colors. Always reference the theme defined in src/styles/brand-theme.js.
+
+### Color Palette
+- Primary Accent: #00D9FF (cyan-400) - Buttons, links, highlights
+- Primary Hover: rgba(0, 217, 255, 0.2) - Hover backgrounds
+- Secondary: #3B82F6 (blue-500) - Secondary accents
+- Success: #10B981 (emerald-500)
+- Error: #EF4444 (red-500)
+- Warning: #F59E0B (amber-500)
+
+### Background Colors
+- Gradient: from-[#0a0e27] via-[#1a1f3a] to-[#252d47]
+- Surface: #1a1f3a (cards, modals)
+- Surface Hover: #252d47
+
+### Text Colors
+- Primary: text-white
+- Secondary: text-gray-300
+- Muted: text-gray-400
+- Accent: text-cyan-400
+
+### Border Colors
+- Default: border-slate-700/60
+- Hover: border-cyan-400/50
+
+## Component Patterns
+
+### Cards
+bg-slate-900/60 backdrop-blur-sm rounded-xl border border-slate-700/60 p-6 hover:border-cyan-400/50 transition-all duration-300 hover:translate-y-[-4px]
+
+### Main Background Gradient
+bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#252d47]
+
+### Navigation Links
+text-gray-300 hover:text-cyan-300 hover:scale-105 transition-all duration-300
+
+### Container
+max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+
+### Section Spacing
+py-16 sm:py-20 lg:py-28
+
+## Typography
+
+### Fonts
+- Headings/Body: Inter (font-sans)
+- Code/Mono: Fira Code (font-mono)
+
+### Text Sizes
+- Hero: text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold
+- Title: text-2xl sm:text-3xl font-bold
+- Body: text-base sm:text-lg md:text-xl
+- Small: text-sm sm:text-base
+
+## Animation Rules
+
+### Transitions
+- All interactive elements: transition-all duration-300
+
+### Hover Effects
+- Scale: hover:scale-105
+- Card lift: hover:translate-y-[-4px]
+
+### Framer Motion
+- Use for scroll-triggered animations and page transitions
+- Always respect prefers-reduced-motion
+
+## Code Quality Rules
+
+### TypeScript
+- No any types without justification
+- Define interfaces for all props
+- Place types in src/types/
+
+### File Organization
+- Portfolio routes: src/app/(portfolio)/
+- Tools routes: src/app/(tools)/tools/
+- Shared UI components: src/components/ui/
+- Tool-specific components: src/components/tools/
+
+### Naming Conventions
+- Components: PascalCase (GradientGenerator.tsx)
+- Utilities: camelCase (generateGradient.ts)
+- Types: PascalCase (GradientStop, ToolConfig)
+
+## Accessibility Rules
+
+- All interactive elements must have focus-visible states
+- Use semantic HTML (nav, main, section, article)
+- Include aria-label for icon-only buttons
+- Ensure WCAG AA contrast (4.5:1)
+
+### Focus States
+focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
+
+## Git Commit Rules
+
+Use conventional commits:
+- feat: New feature
+- fix: Bug fix
+- chore: Maintenance
+- docs: Documentation
+- refactor: Code refactoring
+
+## Donts
+
+- DONT use raw `<button>`, `<a>`, or `<Link>` for buttons - use the Button component
+- DONT use raw `<input>`, `<select>`, `<textarea>` for forms - use Input, Select, Textarea components
+- DONT use colors outside the theme
+- DONT use any type in TypeScript
+- DONT skip focus-visible states
+- DONT use inline styles
+- DONT use px units for spacing
+- DONT duplicate button/input styling - extend brandTheme.js instead
