@@ -5,6 +5,7 @@ import "./styles/globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { siteConfig } from "@/lib/utils/seo";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/providers";
 
 const inter = Inter({
@@ -73,6 +74,7 @@ export default function RootLayout({
           <AppShell>{children}</AppShell>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
