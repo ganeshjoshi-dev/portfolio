@@ -63,7 +63,7 @@ export default function TestimonialsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
           <motion.h2
             variants={fadeInUp}
@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
               },
             },
           }}
-          className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div

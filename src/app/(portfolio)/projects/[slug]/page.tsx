@@ -71,12 +71,12 @@ export default async function ProjectDetailPage({ params }: Props) {
   });
 
   return (
-    <main className="min-h-screen bg-[#0a0e27] text-white pt-24">
+    <main className="min-h-screen bg-[#0a0e27] text-white pt-20 sm:pt-24 pb-12 sm:pb-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
-      <section className={`${brandTheme.components.container.base} section-padding`}>
+      <section className={`${brandTheme.components.container.base} py-6 sm:py-8`}>
         <Breadcrumbs
           items={[
             { label: 'Home', href: '/' },
@@ -89,32 +89,32 @@ export default async function ProjectDetailPage({ params }: Props) {
           href="/projects"
           variant="ghost"
           size="sm"
-          className="inline-flex items-center gap-2 mt-6 mb-8"
+          className="inline-flex items-center gap-2 mt-4 mb-6 sm:mt-6 sm:mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </Button>
 
-        <h1 className={`${brandTheme.components.text.hero} mb-6`}>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
           {project.title}
         </h1>
 
-        <p className="text-slate-300 text-lg mb-8 max-w-3xl">
+        <p className="text-slate-300 text-base sm:text-lg mb-6 max-w-3xl">
           {project.fullDescription || project.description}
         </p>
 
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-slate-800/60 border border-slate-700/60 rounded-full text-sm text-slate-300"
+              className="px-2.5 py-1 sm:px-3 bg-slate-800/60 border border-slate-700/60 rounded-full text-xs sm:text-sm text-slate-300"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           {project.liveLink && (
             <Button href={project.liveLink} external variant="primary" size="lg">
               View Live

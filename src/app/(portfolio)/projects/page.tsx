@@ -21,10 +21,10 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-[#0a0e27] text-white pt-24">
-      <section className={`${brandTheme.components.container.base} section-padding`}>
+    <main className="min-h-screen bg-[#0a0e27] text-white pt-20 sm:pt-24 pb-12 sm:pb-16">
+      <section className={`${brandTheme.components.container.base} py-8 sm:py-12`}>
         <div className="flex flex-col items-center text-center">
-          <h1 className={`${brandTheme.components.text.hero} mb-6`}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             My <span className={brandTheme.components.logo.brand}>Projects</span>
           </h1>
           <p className="text-slate-300 max-w-2xl">
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
       </section>
 
       <section className={`${brandTheme.components.container.base} section-padding`}>
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2">
           {projects.map((project) => (
             <ProjectCard key={project.id} {...project} />
           ))}

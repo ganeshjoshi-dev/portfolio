@@ -20,7 +20,7 @@ export default function AboutSection() {
   return (
     <section className="relative">
       <div className={`${brandTheme.components.container.base} section-padding`}>
-        <div className="grid gap-10 lg:grid-cols-2 items-start">
+        <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 items-start">
           {/* Left Column - Text */}
           <motion.div
             initial="hidden"

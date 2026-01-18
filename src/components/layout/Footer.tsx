@@ -67,7 +67,7 @@ export default function Footer() {
               Full Stack Developer & Creative Problem Solver
             </p>
             <p className="text-xs text-slate-500 mt-2">
-              Built with passion and lots of ☕
+              Built with passion and curiosity.
             </p>
           </div>
         </div>

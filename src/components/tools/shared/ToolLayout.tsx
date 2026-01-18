@@ -32,7 +32,7 @@ export default function ToolLayout({
   ];
 
   return (
-    <main className="min-h-screen pt-24 pb-16">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
       {/* Structured Data for SEO */}
       {tool && category && (
         <ToolStructuredData tool={tool} category={category} />
@@ -47,7 +47,7 @@ export default function ToolLayout({
           href={backLink}
           className="
             inline-flex items-center gap-2 text-slate-400 hover:text-cyan-300
-            transition-all duration-300 mt-4 mb-6 sm:mb-8 group
+            transition-all duration-300 mt-3 mb-4 sm:mt-4 sm:mb-6 group
           "
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -55,17 +55,17 @@ export default function ToolLayout({
         </Link>
 
         {/* Header */}
-        <header className="mb-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+        <header className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
             {title}
           </h1>
-          <p className="text-slate-400 text-lg max-w-2xl">
+          <p className="text-slate-400 text-base sm:text-lg max-w-2xl">
             {description}
           </p>
         </header>
 
         {/* Tool Content */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {children}
         </div>
       </div>

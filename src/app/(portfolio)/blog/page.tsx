@@ -20,12 +20,12 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-[#0a0e27] text-white pt-24">
-      <section className={`${brandTheme.components.container.base} section-padding text-center`}>
-        <h1 className={`${brandTheme.components.text.hero} mb-4`}>
+    <main className="min-h-screen bg-[#0a0e27] text-white pt-20 sm:pt-24 pb-12 sm:pb-16">
+      <section className={`${brandTheme.components.container.base} py-8 sm:py-12 text-center`}>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
           Blog <span className={brandTheme.components.logo.brand}>Insights</span>
         </h1>
-        <p className="text-slate-300 max-w-2xl mx-auto mb-8">
+        <p className="text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8">
           Articles and case studies are coming soon. I&apos;ll share deep dives on
           performance, UI engineering, and ecommerce experiences.
         </p>

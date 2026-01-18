@@ -114,7 +114,7 @@ const brandTheme = {
 
   // Common spacing
   spacing: {
-    section: 'py-16 sm:py-20 lg:py-28',
+    section: 'py-12 sm:py-16 lg:py-20',
     stack: 'space-y-6',
     gap: 'gap-4 sm:gap-6 lg:gap-8',
   },

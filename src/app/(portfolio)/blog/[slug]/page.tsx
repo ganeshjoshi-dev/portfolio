@@ -89,12 +89,12 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0e27] text-white pt-24">
+    <main className="min-h-screen bg-[#0a0e27] text-white pt-20 sm:pt-24 pb-12 sm:pb-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <article className={`${brandTheme.components.container.base} section-padding max-w-4xl`}>
+      <article className={`${brandTheme.components.container.base} py-6 sm:py-8 max-w-4xl`}>
         <Breadcrumbs
           items={[
             { label: 'Home', href: '/' },
@@ -107,17 +107,17 @@ export default async function BlogPostPage({ params }: Props) {
           href="/blog"
           variant="ghost"
           size="sm"
-          className="inline-flex items-center gap-2 mt-6 mb-8"
+          className="inline-flex items-center gap-2 mt-4 mb-6 sm:mt-6 sm:mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Blog
         </Button>
 
-        <h1 className={`${brandTheme.components.text.hero} mb-6`}>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
           {post.title}
         </h1>
 
-        <time className="text-slate-400 text-sm mb-8 block" dateTime={post.date}>
+        <time className="text-slate-400 text-sm mb-6 sm:mb-8 block" dateTime={post.date}>
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: Props) {
         </time>
 
         <div className="prose prose-invert prose-cyan max-w-none">
-          <p className="text-slate-300 text-lg">{post.content}</p>
+          <p className="text-slate-300 text-base sm:text-lg">{post.content}</p>
         </div>
       </article>
     </main>

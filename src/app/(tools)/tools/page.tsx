@@ -57,23 +57,23 @@ function ToolsHubContent() {
   ];
 
   return (
-    <main className="min-h-screen pt-24 pb-16">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-6">
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-4 sm:mb-6">
             <Sparkles className="w-4 h-4" />
             <span>Free Developer Tools</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Developer{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Tools
             </span>
           </h1>
           
-          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+          <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-8">
             Beautiful, modern tools for everyday development. CSS generators, converters, 
             and utilities — all free, no sign-up required.
           </p>
@@ -87,7 +87,7 @@ function ToolsHubContent() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="
-                w-full pl-12 pr-4 py-4 bg-slate-900/60 border border-slate-700/60
+                w-full pl-12 pr-4 py-3 sm:py-4 bg-slate-900/60 border border-slate-700/60
                 rounded-xl text-white placeholder-slate-500
                 focus:border-cyan-400/50 focus:outline-none focus:ring-2
                 focus:ring-cyan-400/20 transition-all duration-300
@@ -97,7 +97,7 @@ function ToolsHubContent() {
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((category) => (
             <button
               key={category.id}
@@ -150,8 +150,8 @@ function ToolsHubContent() {
         </section>
 
         {/* Coming Soon */}
-        <section className="mt-16 text-center">
-          <div className="inline-block p-8 bg-slate-900/40 border border-dashed border-slate-700/60 rounded-xl">
+        <section className="mt-12 sm:mt-16 text-center">
+          <div className="inline-block p-6 sm:p-8 bg-slate-900/40 border border-dashed border-slate-700/60 rounded-xl">
             <p className="text-slate-500">More tools coming soon!</p>
           </div>
         </section>
@@ -162,29 +162,29 @@ function ToolsHubContent() {
 
 function ToolsLoadingFallback() {
   return (
-    <main className="min-h-screen pt-24 pb-16">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-6">
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-4 sm:mb-6">
             <Sparkles className="w-4 h-4" />
             <span>Free Developer Tools</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Developer{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Tools
             </span>
           </h1>
-          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+          <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-8">
             Beautiful, modern tools for everyday development. CSS generators, converters, 
             and utilities — all free, no sign-up required.
           </p>
           <div className="relative max-w-xl mx-auto">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-            <div className="w-full pl-12 pr-4 py-4 bg-slate-900/60 border border-slate-700/60 rounded-xl h-14 animate-pulse" />
+            <div className="w-full pl-12 pr-4 py-3 sm:py-4 bg-slate-900/60 border border-slate-700/60 rounded-xl h-12 sm:h-14 animate-pulse" />
           </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="w-24 h-10 bg-slate-900/60 border border-slate-700/60 rounded-lg animate-pulse" />
           ))}

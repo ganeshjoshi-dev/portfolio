@@ -255,8 +255,11 @@ text-gray-300 hover:text-cyan-300 hover:scale-105 transition-all duration-300
 ### Container
 max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
 
-### Section Spacing
-py-16 sm:py-20 lg:py-28
+### Section Spacing (use section-padding class or these values)
+py-12 sm:py-16 lg:py-20
+
+### Page Top Padding (below fixed navbar)
+pt-20 sm:pt-24 pb-12 sm:pb-16
 
 ## Typography
 
