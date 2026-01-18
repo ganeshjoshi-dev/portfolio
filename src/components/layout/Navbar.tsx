@@ -98,9 +98,14 @@ export default function Navbar() {
           </div>
 
           <div className="md:hidden">
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`${brandTheme.components.nav.link} p-2`}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              className="p-2"
             >
               <div className="w-6 h-6 flex flex-col justify-around">
                 <span
@@ -119,11 +124,14 @@ export default function Navbar() {
                   }`}
                 ></span>
               </div>
-            </button>
+            </Button>
           </div>
         </div>
 
         <div
+          id="mobile-menu"
+          role="region"
+          aria-label="Mobile navigation"
           className={`md:hidden ${brandTheme.transitions.base} ease-in-out ${
             isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
           } overflow-hidden`}
