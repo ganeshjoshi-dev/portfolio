@@ -18,7 +18,7 @@ export default function CTASection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="relative rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-cyan-400/10 p-10 text-center shadow-lg overflow-hidden"
+          className="relative rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-cyan-400/10 p-6 sm:p-10 text-center shadow-lg overflow-hidden"
         >
           {/* Background glow effect */}
           <motion.div

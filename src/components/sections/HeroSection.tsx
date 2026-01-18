@@ -108,7 +108,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Scroll Indicator */}
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <ScrollIndicator />
           </div>
         </motion.div>
