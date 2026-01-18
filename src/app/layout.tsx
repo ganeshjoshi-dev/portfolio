@@ -3,7 +3,11 @@ import { Inter, Fira_Code } from "next/font/google";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { AppShell } from "@/components/layout/AppShell";
-import { siteConfig } from "@/lib/utils/seo";
+import {
+  siteConfig,
+  generatePersonSchema,
+  generateWebSiteSchema,
+} from "@/lib/utils/seo";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/providers";
@@ -52,14 +56,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    jobTitle: "Full Stack Developer",
-    sameAs: ["https://www.linkedin.com/in/joshiganesh", "https://github.com/GJ-MCA"],
-  };
+  const personSchema = generatePersonSchema();
+  const webSiteSchema = generateWebSiteSchema();
 
   return (
     <html lang="en" className="h-full">
@@ -68,7 +66,11 @@ export default function RootLayout({
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
         <Providers>
           <AppShell>{children}</AppShell>

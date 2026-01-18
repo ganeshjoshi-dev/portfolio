@@ -1,5 +1,22 @@
+import type { Metadata } from "next";
 import brandTheme from "@/styles/brand-theme";
 import { Button } from "@/components/ui";
+import { generatePageMetadata } from "@/lib/utils/seo";
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "Blog | Ganesh Joshi - Developer Insights",
+  description:
+    "Articles and case studies on web development, performance optimization, UI engineering, and eCommerce experiences by Ganesh Joshi.",
+  path: "/blog",
+  keywords: [
+    "Web Development Blog",
+    "React Articles",
+    "Next.js Tutorials",
+    "Frontend Development",
+    "Performance Optimization",
+    "eCommerce Development",
+  ],
+});
 
 export default function BlogPage() {
   return (

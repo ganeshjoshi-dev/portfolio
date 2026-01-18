@@ -1,9 +1,10 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { projects } from '@/lib/data/projects';
 import brandTheme from '@/styles/brand-theme';
-import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button, Breadcrumbs } from '@/components/ui';
+import { siteConfig, generateProjectSchema } from '@/lib/utils/seo';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -15,6 +16,42 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: 'Project Not Found',
+    };
+  }
+
+  const url = `${siteConfig.url}/projects/${project.slug}`;
+
+  return {
+    title: `${project.title} | Ganesh Joshi Projects`,
+    description: project.fullDescription || project.description,
+    keywords: [...project.technologies, 'Project', 'Portfolio', 'Ganesh Joshi'],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: project.title,
+      description: project.fullDescription || project.description,
+      url,
+      siteName: siteConfig.name,
+      images: [{ url: project.image }],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.fullDescription || project.description,
+      images: [project.image],
+    },
+  };
+}
+
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
@@ -23,16 +60,40 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound();
   }
 
+  const projectSchema = generateProjectSchema({
+    name: project.title,
+    description: project.fullDescription || project.description,
+    url: `${siteConfig.url}/projects/${project.slug}`,
+    image: `${siteConfig.url}${project.image}`,
+    author: siteConfig.name,
+    datePublished: project.date,
+    technologies: project.technologies,
+  });
+
   return (
     <main className="min-h-screen bg-[#0a0e27] text-white pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
       <section className={`${brandTheme.components.container.base} section-padding`}>
-        <Link
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Projects', href: '/projects' },
+            { label: project.title },
+          ]}
+        />
+
+        <Button
           href="/projects"
-          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-8"
+          variant="ghost"
+          size="sm"
+          className="inline-flex items-center gap-2 mt-6 mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
-        </Link>
+        </Button>
 
         <h1 className={`${brandTheme.components.text.hero} mb-6`}>
           {project.title}
@@ -53,7 +114,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           ))}
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           {project.liveLink && (
             <Button href={project.liveLink} external variant="primary" size="lg">
               View Live

@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import brandTheme from "@/styles/brand-theme";
 import { projects } from "@/lib/data/projects";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { generatePageMetadata } from "@/lib/utils/seo";
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "Projects | Ganesh Joshi - Full Stack Developer",
+  description:
+    "Explore my portfolio of web development projects including eCommerce platforms, React applications, and full-stack solutions with modern architecture.",
+  path: "/projects",
+  keywords: [
+    "Web Development Projects",
+    "React Projects",
+    "Next.js Portfolio",
+    "eCommerce Projects",
+    "Full Stack Projects",
+    "MERN Stack",
+  ],
+});
 
 export default function ProjectsPage() {
   return (

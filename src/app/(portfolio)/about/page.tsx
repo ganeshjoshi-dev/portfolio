@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import brandTheme from "@/styles/brand-theme";
 import { personal } from "@/lib/data/personal";
+import { generatePageMetadata } from "@/lib/utils/seo";
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "About Ganesh Joshi | Full Stack Developer",
+  description:
+    "Learn about Ganesh Joshi, a Full Stack Developer specializing in Next.js, React, and eCommerce. Based in Ahmedabad, India with 3+ years of experience.",
+  path: "/about",
+  keywords: [
+    "Ganesh Joshi",
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Ahmedabad Developer",
+    "Frontend Developer India",
+  ],
+});
 
 const experience = [
   {
@@ -36,10 +53,11 @@ export default function AboutPage() {
               <div className="h-full w-full rounded-full overflow-hidden bg-slate-900/60">
                 <Image
                   src="/images/about/ganesh_joshi.jpeg"
-                  alt="Ganesh Joshi"
+                  alt="Ganesh Joshi - Full Stack Developer specializing in Next.js and React, based in Ahmedabad, India"
                   width={192}
                   height={192}
                   className="h-full w-full object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -78,7 +96,7 @@ export default function AboutPage() {
         <h2 className={`${brandTheme.components.text.title} mb-6`}>
           Professional <span className={brandTheme.components.logo.brand}>Journey</span>
         </h2>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {experience.map((role) => (
             <div
               key={`${role.company}-${role.title}`}
