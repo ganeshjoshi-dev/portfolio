@@ -1,4 +1,4 @@
-﻿# Project Development Rules
+# Project Development Rules
 
 ## Project Overview
 
@@ -14,6 +14,146 @@ This is a Next.js 14+ portfolio website with a developer tools hub.
 - src/components/ui/ - Reusable UI components
 - STYLE_GUIDE.md - Usage guidelines
 - tailwind.config.js - Extended Tailwind configuration
+
+## Coding Standards & Naming Conventions
+
+### File Naming
+
+| Type | Convention | Examples |
+|------|------------|----------|
+| Components | PascalCase | `Button.tsx`, `Navbar.tsx`, `ProjectCard.tsx` |
+| Hooks | camelCase with `use` prefix | `useGSAP.ts`, `useMagnetic.ts`, `useReducedMotion.ts` |
+| Utilities | camelCase | `generateGradient.ts`, `animations.ts`, `seo.ts` |
+| Types | camelCase | `animations.ts`, `tools.ts` (in src/types/) |
+| Config | camelCase | `constants.ts`, `tools.ts` |
+| Data | camelCase | `personal.ts`, `projects.ts`, `skills.ts` |
+| Barrel exports | `index.ts` | Always use `index.ts` for re-exports |
+
+### Folder Naming
+
+| Type | Convention | Examples |
+|------|------------|----------|
+| Route segments | kebab-case | `gradient-generator/`, `json-to-typescript/` |
+| Feature folders | camelCase | `animations/`, `backgrounds/`, `effects/` |
+| Component groups | camelCase | `ui/`, `layout/`, `sections/` |
+
+### Code Naming
+
+| Type | Convention | Examples |
+|------|------------|----------|
+| Components | PascalCase | `Button`, `Navbar`, `AnimatedBackground` |
+| Interfaces/Types | PascalCase | `ButtonProps`, `AnimationConfig`, `Tool` |
+| Type aliases | PascalCase | `ButtonVariant`, `ToolCategory` |
+| Functions | camelCase | `getButtonClasses`, `createScrollAnimation` |
+| Variables | camelCase | `isMenuOpen`, `scrollProgress`, `reduceMotion` |
+| Constants (objects) | camelCase | `toolCategories`, `navLinks`, `brandTheme` |
+| Boolean variables | `is/has/should` prefix | `isActive`, `hasError`, `shouldAnimate` |
+| Event handlers | `handle` prefix | `handleClick`, `handleSubmit`, `handleScroll` |
+| Callbacks (props) | `on` prefix | `onClick`, `onChange`, `onComplete` |
+
+### Component Structure
+
+```tsx
+'use client'; // Only if needed
+
+import { useState } from 'react';
+import Link from 'next/link';
+// External imports first, then internal imports
+import { Button } from '@/components/ui';
+import brandTheme from '@/styles/brand-theme';
+
+// Types at the top, after imports
+interface ComponentProps {
+  title: string;
+  isActive?: boolean;
+  onAction?: () => void;
+}
+
+// Helper functions before component
+function helperFunction() {}
+
+// Main component
+export default function ComponentName({ title, isActive = false, onAction }: ComponentProps) {
+  const [state, setState] = useState(false);
+  
+  const handleClick = () => {
+    onAction?.();
+  };
+
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
+}
+```
+
+### Export Patterns
+
+- **Components**: Use default exports
+  ```tsx
+  export default function Button() {}
+  // or
+  const Button = forwardRef(...);
+  Button.displayName = 'Button';
+  export default Button;
+  ```
+
+- **Types**: Use named exports alongside component
+  ```tsx
+  export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+  export interface ButtonProps { ... }
+  export default Button;
+  ```
+
+- **Barrel exports (index.ts)**: Re-export defaults and types
+  ```tsx
+  export { default as Button } from './Button';
+  export type { ButtonProps, ButtonVariant } from './Button';
+  ```
+
+- **Hooks**: Use named exports
+  ```tsx
+  export function useGSAP() { ... }
+  // In index.ts
+  export { useGSAP } from './useGSAP';
+  ```
+
+- **Utilities**: Use named exports
+  ```tsx
+  export function getToolById(id: string) { ... }
+  export function searchTools(query: string) { ... }
+  ```
+
+### Import Order
+
+1. React imports
+2. Next.js imports
+3. External library imports
+4. Internal absolute imports (`@/...`)
+5. Relative imports
+6. Style imports
+7. Type-only imports (if separated)
+
+```tsx
+import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Button, Input } from '@/components/ui';
+import { useGSAP } from '@/hooks';
+import { helperFunction } from '../utils';
+import styles from './Component.module.css';
+```
+
+### Path Aliases
+
+Always use path aliases for imports outside the current directory:
+- `@/components/*` - Components
+- `@/hooks/*` - Custom hooks  
+- `@/lib/*` - Library code (animations, data, utils)
+- `@/types/*` - TypeScript types
+- `@/styles/*` - Style files
+- `@/config/*` - Configuration files
 
 ## Generic UI Components (ALWAYS USE THESE)
 
@@ -148,18 +288,18 @@ py-16 sm:py-20 lg:py-28
 ### TypeScript
 - No any types without justification
 - Define interfaces for all props
-- Place types in src/types/
+- Place shared types in src/types/
+- Use type inference where possible, explicit types for function parameters and returns
 
 ### File Organization
 - Portfolio routes: src/app/(portfolio)/
 - Tools routes: src/app/(tools)/tools/
 - Shared UI components: src/components/ui/
 - Tool-specific components: src/components/tools/
-
-### Naming Conventions
-- Components: PascalCase (GradientGenerator.tsx)
-- Utilities: camelCase (generateGradient.ts)
-- Types: PascalCase (GradientStop, ToolConfig)
+- Custom hooks: src/hooks/
+- Utilities: src/lib/utils/
+- Data files: src/lib/data/
+- Animation utilities: src/lib/animations/
 
 ## Accessibility Rules
 
@@ -179,6 +319,9 @@ Use conventional commits:
 - chore: Maintenance
 - docs: Documentation
 - refactor: Code refactoring
+- style: Code style changes (formatting, etc.)
+- test: Adding tests
+- perf: Performance improvements
 
 ## Donts
 
@@ -188,5 +331,9 @@ Use conventional commits:
 - DONT use any type in TypeScript
 - DONT skip focus-visible states
 - DONT use inline styles
-- DONT use px units for spacing
+- DONT use px units for spacing (use Tailwind spacing scale)
 - DONT duplicate button/input styling - extend brandTheme.js instead
+- DONT use default exports for hooks or utilities (use named exports)
+- DONT mix naming conventions (stick to the patterns above)
+- DONT create files with spaces in names
+- DONT use SCREAMING_SNAKE_CASE for constants (use camelCase)
