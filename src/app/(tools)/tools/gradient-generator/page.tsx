@@ -124,7 +124,7 @@ export default function GradientGeneratorPage() {
           {/* Presets */}
           <div className="space-y-3">
             <h3 className="text-sm font-medium text-slate-300">Presets</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
               {gradientPresets.map((preset) => (
                 <button
                   key={preset.id}

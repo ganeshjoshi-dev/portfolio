@@ -1,20 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, AlertCircle } from 'lucide-react';
 import { CopyButtonProps } from '@/types/tools';
 
+type CopyStatus = 'idle' | 'copied' | 'error';
+
 export default function CopyButton({ text, className = '', onCopy }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<CopyStatus>('idle');
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(true);
+      setStatus('copied');
       onCopy?.();
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+      setTimeout(() => setStatus('idle'), 2000);
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
     }
   };
 
@@ -31,12 +34,17 @@ export default function CopyButton({ text, className = '', onCopy }: CopyButtonP
         focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
         ${className}
       `}
-      aria-label={copied ? 'Copied!' : 'Copy to clipboard'}
+      aria-label={status === 'copied' ? 'Copied!' : status === 'error' ? 'Copy failed' : 'Copy to clipboard'}
     >
-      {copied ? (
+      {status === 'copied' ? (
         <>
           <Check className="w-4 h-4 text-emerald-400" />
           <span className="text-emerald-400">Copied!</span>
+        </>
+      ) : status === 'error' ? (
+        <>
+          <AlertCircle className="w-4 h-4 text-red-400" />
+          <span className="text-red-400">Failed to copy</span>
         </>
       ) : (
         <>

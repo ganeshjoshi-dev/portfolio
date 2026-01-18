@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Tool, ToolCategoryConfig } from '@/types/tools';
 import { ToolStructuredData } from '@/components/tools/ToolStructuredData';
+import { Breadcrumbs } from '@/components/ui';
 
 interface ToolLayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,12 @@ export default function ToolLayout({
   tool,
   category,
 }: ToolLayoutProps) {
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Tools', href: '/tools' },
+    { label: title },
+  ];
+
   return (
     <main className="min-h-screen pt-24 pb-16">
       {/* Structured Data for SEO */}
@@ -32,12 +39,15 @@ export default function ToolLayout({
       )}
 
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumbs items={breadcrumbItems} includeSchema={false} />
+
         {/* Back Link */}
         <Link
           href={backLink}
           className="
             inline-flex items-center gap-2 text-slate-400 hover:text-cyan-300
-            transition-all duration-300 mb-8 group
+            transition-all duration-300 mt-4 mb-6 sm:mb-8 group
           "
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

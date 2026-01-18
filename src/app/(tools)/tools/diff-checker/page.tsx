@@ -560,13 +560,13 @@ export default function DiffCheckerPage() {
             </div>
           )}
           
-          <div className="grid grid-cols-2 gap-0 border border-slate-700/60 rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-slate-700/60 rounded-xl overflow-hidden">
             {/* Left Panel Header */}
-            <div className="bg-slate-800/80 px-4 py-2 border-b border-r border-slate-700/60">
+            <div className="bg-slate-800/80 px-4 py-2 border-b lg:border-r border-slate-700/60">
               <span className="text-sm font-medium text-slate-300">Original</span>
             </div>
             {/* Right Panel Header */}
-            <div className="bg-slate-800/80 px-4 py-2 border-b border-slate-700/60">
+            <div className="bg-slate-800/80 px-4 py-2 border-b border-slate-700/60 hidden lg:block">
               <span className="text-sm font-medium text-slate-300">Modified</span>
             </div>
             
@@ -574,7 +574,7 @@ export default function DiffCheckerPage() {
             <div
               ref={leftPanelRef}
               onScroll={() => handleScroll('left')}
-              className="h-[400px] overflow-auto bg-slate-900/60 font-mono text-sm border-r border-slate-700/60"
+              className="h-[300px] lg:h-[400px] overflow-auto bg-slate-900/60 font-mono text-sm lg:border-r border-slate-700/60"
             >
               {diff.length > 0 ? (
                 <div>
@@ -616,12 +616,17 @@ export default function DiffCheckerPage() {
                 </div>
               )}
             </div>
+
+            {/* Right Panel Header - Mobile only */}
+            <div className="bg-slate-800/80 px-4 py-2 border-b border-slate-700/60 lg:hidden">
+              <span className="text-sm font-medium text-slate-300">Modified</span>
+            </div>
             
             {/* Right Panel */}
             <div
               ref={rightPanelRef}
               onScroll={() => handleScroll('right')}
-              className="h-[400px] overflow-auto bg-slate-900/60 font-mono text-sm"
+              className="h-[300px] lg:h-[400px] overflow-auto bg-slate-900/60 font-mono text-sm"
             >
               {diff.length > 0 ? (
                 <div>

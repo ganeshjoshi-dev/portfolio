@@ -84,7 +84,7 @@ export default function ColorPalettePage() {
                   key={harmony.id}
                   onClick={() => setHarmonyType(harmony.id)}
                   className={`
-                    w-full text-left px-4 py-3 rounded-lg transition-all duration-300
+                    w-full text-left px-3 py-2 sm:px-4 sm:py-3 rounded-lg transition-all duration-300
                     ${
                       harmonyType === harmony.id
                         ? 'bg-cyan-400/20 border border-cyan-400/50 text-white'

@@ -124,7 +124,7 @@ export default function JsonToTypeScriptPage() {
 
         {/* Output */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <h3 className="text-sm font-medium text-slate-300">TypeScript Output</h3>
             <TabSwitcher
               options={[
@@ -143,7 +143,7 @@ export default function JsonToTypeScriptPage() {
               value={rootName}
               onChange={(e) => setRootName(e.target.value || 'Root')}
               className="
-                px-3 py-2 bg-slate-800/60 border border-slate-700/60
+                w-full sm:w-auto px-3 py-2 bg-slate-800/60 border border-slate-700/60
                 rounded-lg text-white text-sm
                 focus:border-cyan-400/50 focus:outline-none
                 transition-all duration-300
