@@ -18,7 +18,7 @@ export default function CTASection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="relative rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-cyan-400/10 p-10 text-center shadow-lg overflow-hidden"
+          className="relative rounded-2xl sm:rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-cyan-400/10 p-5 sm:p-8 lg:p-10 text-center shadow-lg overflow-hidden"
         >
           {/* Background glow effect */}
           <motion.div
@@ -34,13 +34,13 @@ export default function CTASection() {
 
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl sm:text-4xl font-bold text-white mb-4 relative z-10"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 relative z-10"
           >
             Ready to build something amazing?
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="text-slate-300 max-w-2xl mx-auto mb-8 relative z-10"
+            className="text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8 relative z-10"
           >
             Let&apos;s collaborate on your next web experience. I bring a blend of
             technical depth and user-first design to every project.

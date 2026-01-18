@@ -20,7 +20,7 @@ export default function AboutSection() {
   return (
     <section className="relative">
       <div className={`${brandTheme.components.container.base} section-padding`}>
-        <div className="grid gap-10 lg:grid-cols-2 items-start">
+        <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 items-start">
           {/* Left Column - Text */}
           <motion.div
             initial="hidden"
@@ -94,7 +94,7 @@ export default function AboutSection() {
                 }}
               >
                 <TiltWrapper maxTilt={4} scale={1.01}>
-                  <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 shadow-lg transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)]">
+                  <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4 sm:p-6 shadow-lg transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)]">
                     <h3 className="text-lg font-semibold text-white mb-2">
                       {highlight.title}
                     </h3>

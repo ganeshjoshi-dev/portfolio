@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import brandTheme from "@/styles/brand-theme";
-import { testimonials } from "@/lib/data/testimonials";
+import { testimonials, hasRealTestimonials } from "@/lib/data/testimonials";
 import { useReducedMotion } from "@/hooks";
 import { TiltWrapper } from "@/components/animations";
 import {
@@ -15,6 +15,45 @@ import {
 export default function TestimonialsSection() {
   const reduceMotion = useReducedMotion();
 
+  // Show placeholder message if no real testimonials yet
+  if (!hasRealTestimonials) {
+    return (
+      <section className="relative">
+        <div className={`${brandTheme.components.container.base} section-padding`}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+            className="text-center"
+          >
+            <motion.h2
+              variants={fadeInUp}
+              className={`${brandTheme.components.text.title} mb-3`}
+            >
+              What People <span className={brandTheme.components.logo.brand}>Say</span>
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="text-slate-300 max-w-2xl mx-auto mb-8"
+            >
+              Testimonials from colleagues and clients are coming soon.
+              I&apos;m excited to share feedback from my professional collaborations.
+            </motion.p>
+            <motion.div
+              variants={fadeInUp}
+              className="inline-block p-8 bg-slate-900/40 border border-dashed border-slate-700/60 rounded-xl"
+            >
+              <p className="text-slate-500 text-sm">
+                Real testimonials will be updated as new collaborations come in.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="relative">
       <div className={`${brandTheme.components.container.base} section-padding`}>
@@ -24,7 +63,7 @@ export default function TestimonialsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
           <motion.h2
             variants={fadeInUp}
@@ -54,7 +93,7 @@ export default function TestimonialsSection() {
               },
             },
           }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div

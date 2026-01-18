@@ -26,7 +26,7 @@ export default function ProjectsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="flex flex-col items-center text-center mb-10"
+          className="flex flex-col items-center text-center mb-8"
         >
           <motion.h2
             variants={fadeInUp}
@@ -56,7 +56,7 @@ export default function ProjectsSection() {
               },
             },
           }}
-          className="grid gap-8 lg:grid-cols-2"
+          className="grid gap-6 lg:gap-8 lg:grid-cols-2"
         >
           {featuredProjects.map((project, index) => (
             <motion.div
@@ -88,7 +88,7 @@ export default function ProjectsSection() {
             delay: reduceMotion ? 0 : 0.3,
             ease: easings.smooth,
           }}
-          className="mt-10 text-center"
+          className="mt-8 text-center"
         >
           <MagneticWrapper strength={0.15}>
             <Button href="/projects" variant="secondary" size="lg">

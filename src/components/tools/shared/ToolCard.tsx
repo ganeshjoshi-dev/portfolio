@@ -63,7 +63,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
         focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
       "
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
         {/* Icon */}
         <div className="
           p-3 rounded-lg bg-slate-800/60 border border-slate-700/60

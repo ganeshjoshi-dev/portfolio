@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GITHUB_URL, LINKEDIN_URL } from "@/config/constants";
 import brandTheme from "@/styles/brand-theme";
+import { Button } from "@/components/ui";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,23 +22,23 @@ export default function Footer() {
             <p className="text-sm text-slate-300 mb-4">
               Building experiences that feel effortless and look exceptional.
             </p>
-            <div className="flex items-center gap-4">
-              <a
+            <div className="flex items-center gap-3">
+              <Button
                 href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-300 hover:text-cyan-300 transition-colors"
+                external
+                variant="ghost"
+                size="sm"
               >
                 GitHub
-              </a>
-              <a
+              </Button>
+              <Button
                 href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-300 hover:text-cyan-300 transition-colors"
+                external
+                variant="ghost"
+                size="sm"
               >
                 LinkedIn
-              </a>
+              </Button>
             </div>
           </div>
 
@@ -57,7 +58,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:text-right">
+          <div className="text-center md:text-right">
             <div className={`${brandTheme.components.logo.base} mb-2`}>
               <span className={brandTheme.components.logo.brand}>Ganesh</span>{" "}
               Joshi
@@ -66,7 +67,7 @@ export default function Footer() {
               Full Stack Developer & Creative Problem Solver
             </p>
             <p className="text-xs text-slate-500 mt-2">
-              Built with passion and lots of ☕
+              Built with passion and curiosity.
             </p>
           </div>
         </div>

@@ -32,7 +32,7 @@ export default function SkillsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
           <motion.h2
             variants={fadeInUp}
@@ -50,7 +50,7 @@ export default function SkillsSection() {
         </motion.div>
 
         {/* Skills Grid with Staggered Animation */}
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2">
           {categories.map((category, categoryIndex) => (
             <motion.div
               key={category.key}

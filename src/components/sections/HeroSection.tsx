@@ -25,7 +25,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
           variants={staggerContainerSlow}
-          className="min-h-screen flex flex-col items-center justify-center text-center pt-24 pb-16"
+          className="min-h-screen flex flex-col items-center justify-center text-center pt-20 sm:pt-24 pb-12 sm:pb-16"
         >
           {/* Profile Image */}
           <motion.div
@@ -108,7 +108,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Scroll Indicator */}
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <ScrollIndicator />
           </div>
         </motion.div>

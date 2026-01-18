@@ -2,7 +2,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
+/* import TestimonialsSection from "@/components/sections/TestimonialsSection"; */
 import CTASection from "@/components/sections/CTASection";
 
 export default function Page() {
@@ -18,9 +18,9 @@ export default function Page() {
       <section id="skills">
         <SkillsSection />
       </section>
-      <section id="testimonials">
+     {/*  <section id="testimonials">
         <TestimonialsSection />
-      </section>
+      </section> */}
       <section id="contact">
         <CTASection />
       </section>

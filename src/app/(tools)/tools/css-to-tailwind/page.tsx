@@ -491,7 +491,65 @@ const cssToTailwindMap: Record<string, (value: string) => string | null> = {
   // Transforms
   'transform': (v) => {
     if (v === 'none') return 'transform-none';
-    return null; // Complex transforms handled separately
+    
+    // Handle scale() function
+    const scaleMatch = v.match(/scale\(([^)]+)\)/);
+    if (scaleMatch) {
+      const scaleValue = scaleMatch[1].trim();
+      // Handle single value scale(x) or scale(x, y) where both are same
+      const parts = scaleValue.split(',').map(s => s.trim());
+      const num = parseFloat(parts[0]);
+      if (!isNaN(num)) {
+        const percentage = Math.round(num * 100);
+        // Check for common Tailwind scale values
+        const scaleMap: Record<number, string> = {
+          0: 'scale-0',
+          50: 'scale-50',
+          75: 'scale-75',
+          90: 'scale-90',
+          95: 'scale-95',
+          100: 'scale-100',
+          105: 'scale-105',
+          110: 'scale-110',
+          125: 'scale-125',
+          150: 'scale-150',
+        };
+        return scaleMap[percentage] || `scale-[${num}]`;
+      }
+    }
+    
+    // Handle rotate() function
+    const rotateMatch = v.match(/rotate\(([^)]+)\)/);
+    if (rotateMatch) {
+      const rotateValue = rotateMatch[1].trim();
+      const rotateMap: Record<string, string> = {
+        '0deg': 'rotate-0',
+        '1deg': 'rotate-1',
+        '2deg': 'rotate-2',
+        '3deg': 'rotate-3',
+        '6deg': 'rotate-6',
+        '12deg': 'rotate-12',
+        '45deg': 'rotate-45',
+        '90deg': 'rotate-90',
+        '180deg': 'rotate-180',
+      };
+      return rotateMap[rotateValue] || `rotate-[${rotateValue}]`;
+    }
+    
+    // Handle translateX/translateY
+    const translateXMatch = v.match(/translateX\(([^)]+)\)/);
+    if (translateXMatch) {
+      const value = translateXMatch[1].trim();
+      return `translate-x-[${value}]`;
+    }
+    
+    const translateYMatch = v.match(/translateY\(([^)]+)\)/);
+    if (translateYMatch) {
+      const value = translateYMatch[1].trim();
+      return `translate-y-[${value}]`;
+    }
+    
+    return null; // Complex transforms not handled
   },
 
   'scale': (v) => {
@@ -1401,8 +1459,9 @@ function parseCssBlocks(css: string): CssRuleBlock[] {
   // Remove comments
   let cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
   
-  // Handle @media queries
-  const mediaRegex = /@media\s*([^{]+)\s*\{([\s\S]*?)\}\s*\}/g;
+  // Handle @media queries with proper brace matching
+  // This regex handles one level of nesting: @media { selector { declarations } }
+  const mediaRegex = /@media\s*([^{]+)\s*\{((?:[^{}]*|\{[^{}]*\})*)\}/g;
   let mediaMatch;
   
   while ((mediaMatch = mediaRegex.exec(cleanCss)) !== null) {

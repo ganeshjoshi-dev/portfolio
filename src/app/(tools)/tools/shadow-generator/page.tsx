@@ -152,7 +152,7 @@ export default function ShadowGeneratorPage() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <SliderInput label="X Offset" value={shadow.x} min={-50} max={50} unit="px" onChange={(x) => updateLayer(shadow.id, { x })} />
                   <SliderInput label="Y Offset" value={shadow.y} min={-50} max={50} unit="px" onChange={(y) => updateLayer(shadow.id, { y })} />
                   <SliderInput label="Blur" value={shadow.blur} min={0} max={100} unit="px" onChange={(blur) => updateLayer(shadow.id, { blur })} />

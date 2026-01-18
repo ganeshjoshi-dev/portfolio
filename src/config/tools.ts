@@ -67,6 +67,16 @@ export const tools: Tool[] = [
     icon: 'RectangleHorizontal',
     keywords: ['border', 'radius', 'rounded', 'corners'],
   },
+  {
+    id: 'sprite-css',
+    name: 'Sprite CSS Generator',
+    description: 'Extract CSS from sprite sheets with visual selection',
+    category: 'css',
+    path: '/tools/sprite-css',
+    icon: 'Grid3X3',
+    isNew: true,
+    keywords: ['sprite', 'spritesheet', 'css', 'background-position', 'image'],
+  },
 
   // Converter Tools
   {
