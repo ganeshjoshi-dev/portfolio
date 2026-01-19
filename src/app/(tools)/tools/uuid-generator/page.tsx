@@ -106,34 +106,35 @@ export default function UuidGeneratorPage() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-between">
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={addUuid}
-              className="flex items-center gap-2 px-4 py-2 bg-cyan-400/20 border border-cyan-400/50 rounded-lg text-sm text-cyan-300 hover:bg-cyan-400/30 transition-all duration-300"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-cyan-400/20 border border-cyan-400/50 rounded-lg text-sm text-cyan-300 hover:bg-cyan-400/30 transition-all duration-300"
             >
               <Plus className="w-4 h-4" />
               Add
             </button>
             <button
               onClick={regenerateAll}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
             >
               <RefreshCw className="w-4 h-4" />
-              Regenerate All
+              <span className="hidden sm:inline">Regenerate All</span>
+              <span className="sm:hidden">Regenerate</span>
             </button>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={copyAll}
-              className="px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
+              className="px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
             >
               Copy All
             </button>
             {uuids.length > 1 && (
               <button
                 onClick={clearAll}
-                className="px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-red-400/50 rounded-lg text-sm text-slate-400 hover:text-red-300 transition-all duration-300"
+                className="px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-red-400/50 rounded-lg text-sm text-slate-400 hover:text-red-300 transition-all duration-300"
               >
                 Clear
               </button>
@@ -146,13 +147,13 @@ export default function UuidGeneratorPage() {
           {uuids.map((uuid, index) => (
             <div
               key={`${uuid}-${index}`}
-              className="flex items-center gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/60 group"
+              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-900/60 rounded-lg border border-slate-700/60 group"
             >
-              <span className="text-xs text-slate-500 w-6">{index + 1}</span>
-              <code className="flex-1 font-mono text-cyan-300 text-sm sm:text-base">
+              <span className="text-xs text-slate-500 w-4 sm:w-6 flex-shrink-0">{index + 1}</span>
+              <code className="flex-1 min-w-0 font-mono text-cyan-300 text-xs sm:text-sm break-all">
                 {formatUuid(uuid)}
               </code>
-              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0">
                 <button
                   onClick={() => regenerateOne(index)}
                   className="p-1.5 text-slate-500 hover:text-cyan-400 transition-colors"

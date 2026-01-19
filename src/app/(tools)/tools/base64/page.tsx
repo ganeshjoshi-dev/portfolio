@@ -137,7 +137,7 @@ export default function Base64Page() {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Input */}
           <div className="space-y-4">
             <div className="flex items-center justify-between min-h-[36px]">
@@ -145,7 +145,7 @@ export default function Base64Page() {
                 {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
               </h3>
               {mode === 'encode' ? (
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-shrink-0">
                   <button
                     onClick={() => setInputType('text')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
@@ -153,6 +153,7 @@ export default function Base64Page() {
                         ? 'bg-cyan-400/20 text-cyan-300'
                         : 'bg-slate-800/60 text-slate-400 hover:text-slate-300'
                     }`}
+                    aria-label="Text input"
                   >
                     <FileText className="w-4 h-4" />
                   </button>
@@ -163,6 +164,7 @@ export default function Base64Page() {
                         ? 'bg-cyan-400/20 text-cyan-300'
                         : 'bg-slate-800/60 text-slate-400 hover:text-slate-300'
                     }`}
+                    aria-label="File input"
                   >
                     <ImageIcon className="w-4 h-4" />
                   </button>
