@@ -1671,9 +1671,9 @@ export default function CssToTailwindPage() {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Input */}
-        <div className="space-y-4">
+        <div className="space-y-3 lg:space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">CSS Input</h3>
             <button
@@ -1688,7 +1688,7 @@ export default function CssToTailwindPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your CSS here..."
             className="
-              w-full h-[400px] p-4 bg-slate-900/60 border border-slate-700/60
+              w-full h-[300px] lg:h-[400px] p-4 bg-slate-900/60 border border-slate-700/60
               rounded-xl text-white font-mono text-sm resize-none
               focus:border-cyan-400/50 focus:outline-none focus:ring-2
               focus:ring-cyan-400/20 transition-all duration-300
@@ -1697,9 +1697,9 @@ export default function CssToTailwindPage() {
         </div>
 
         {/* Output */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           {/* Tailwind Classes */}
-          <div className="space-y-4">
+          <div className="space-y-3 lg:space-y-4">
             <h3 className="text-sm font-medium text-slate-300">Tailwind Classes</h3>
             <CodeOutput 
               code={tailwindOutput || '// Enter CSS to convert'} 
@@ -1709,13 +1709,13 @@ export default function CssToTailwindPage() {
 
           {/* Preview */}
           {result.classes.length > 0 && (
-            <div className="space-y-4">
+            <div className="space-y-3 lg:space-y-4">
               <h3 className="text-sm font-medium text-slate-300">Class Preview</h3>
               <div className="flex flex-wrap gap-2">
                 {result.classes.map((cls, index) => (
                   <span
                     key={index}
-                    className="px-2 py-1 bg-cyan-400/10 border border-cyan-400/30 rounded text-xs text-cyan-300 font-mono"
+                    className="px-2 py-1 bg-cyan-400/10 border border-cyan-400/30 rounded text-xs text-cyan-300 font-mono break-all"
                   >
                     {cls}
                   </span>
@@ -1726,12 +1726,12 @@ export default function CssToTailwindPage() {
 
           {/* Unconverted */}
           {result.unconverted.length > 0 && (
-            <div className="space-y-4">
+            <div className="space-y-3 lg:space-y-4">
               <h3 className="text-sm font-medium text-amber-400">
                 Unconverted Properties ({result.unconverted.length})
               </h3>
-              <div className="p-4 bg-amber-400/10 border border-amber-400/30 rounded-xl">
-                <ul className="space-y-1 text-sm text-amber-300 font-mono">
+              <div className="p-3 sm:p-4 bg-amber-400/10 border border-amber-400/30 rounded-xl">
+                <ul className="space-y-1 text-sm text-amber-300 font-mono break-all">
                   {result.unconverted.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}

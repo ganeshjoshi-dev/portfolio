@@ -82,12 +82,12 @@ export default function BorderRadiusPage() {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Preview */}
-        <div className="space-y-6">
-          <div className="aspect-video bg-slate-800/40 rounded-xl border border-slate-700/60 flex items-center justify-center p-8">
+        <div className="space-y-4 lg:space-y-6">
+          <div className="aspect-video bg-slate-800/40 rounded-xl border border-slate-700/60 flex items-center justify-center p-4 sm:p-8 min-h-[200px]">
             <div
-              className="w-48 h-32 bg-gradient-to-br from-cyan-400 to-blue-500 transition-all duration-300"
+              className="w-32 h-24 sm:w-48 sm:h-32 bg-gradient-to-br from-cyan-400 to-blue-500 transition-all duration-300"
               style={{ borderRadius: cssValue }}
             />
           </div>
@@ -100,7 +100,7 @@ export default function BorderRadiusPage() {
                 <button
                   key={preset.name}
                   onClick={() => setRadius(preset.value)}
-                  className="px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
+                  className="px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
                 >
                   {preset.name}
                 </button>
@@ -110,7 +110,7 @@ export default function BorderRadiusPage() {
         </div>
 
         {/* Controls */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">Corner Radius</h3>
             <button
@@ -126,7 +126,7 @@ export default function BorderRadiusPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <SliderInput
               label="Top Left"
               value={radius.topLeft}

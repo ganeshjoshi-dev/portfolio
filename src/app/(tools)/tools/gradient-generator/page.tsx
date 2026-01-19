@@ -112,19 +112,19 @@ export default function GradientGeneratorPage() {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Preview Panel */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           {/* Gradient Preview */}
           <div
-            className="aspect-video rounded-xl border border-slate-700/60 overflow-hidden"
+            className="aspect-video rounded-xl border border-slate-700/60 overflow-hidden min-h-[200px]"
             style={{ background: gradientCSS }}
           />
 
           {/* Presets */}
           <div className="space-y-3">
             <h3 className="text-sm font-medium text-slate-300">Presets</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+            <div className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-2">
               {gradientPresets.map((preset) => (
                 <button
                   key={preset.id}
@@ -142,7 +142,7 @@ export default function GradientGeneratorPage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={randomize}
               className="
@@ -171,11 +171,11 @@ export default function GradientGeneratorPage() {
         </div>
 
         {/* Controls Panel */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           {/* Gradient Type */}
           <div className="space-y-3">
             <h3 className="text-sm font-medium text-slate-300">Gradient Type</h3>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {gradientTypes.map((type) => (
                 <button
                   key={type.id}
@@ -223,17 +223,19 @@ export default function GradientGeneratorPage() {
               </button>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
               {config.colorStops.map((stop) => (
                 <div
                   key={stop.id}
-                  className="flex items-center gap-3 p-3 bg-slate-800/40 rounded-lg border border-slate-700/60"
+                  className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 bg-slate-800/40 rounded-lg border border-slate-700/60"
                 >
-                  <ColorPicker
-                    color={stop.color}
-                    onChange={(color) => updateColorStop(stop.id, { color })}
-                  />
-                  <div className="flex-1">
+                  <div className="w-full sm:w-auto">
+                    <ColorPicker
+                      color={stop.color}
+                      onChange={(color) => updateColorStop(stop.id, { color })}
+                    />
+                  </div>
+                  <div className="flex-1 w-full">
                     <SliderInput
                       label="Position"
                       value={stop.position}
@@ -246,7 +248,7 @@ export default function GradientGeneratorPage() {
                   {config.colorStops.length > 2 && (
                     <button
                       onClick={() => removeColorStop(stop.id)}
-                      className="p-2 text-slate-500 hover:text-red-400 transition-colors"
+                      className="p-2 text-slate-500 hover:text-red-400 transition-colors self-end sm:self-center"
                       aria-label="Remove color stop"
                     >
                       <Trash2 className="w-4 h-4" />
