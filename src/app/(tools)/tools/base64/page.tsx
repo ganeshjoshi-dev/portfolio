@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Upload, ArrowRightLeft, Image as ImageIcon, FileText } from 'lucide-react';
+import { Upload, ArrowRightLeft, Image as ImageIcon, FileText, Download } from 'lucide-react';
 import { ToolLayout, TabSwitcher, CopyButton } from '@/components/tools/shared';
 import { getToolById, toolCategories } from '@/config/tools';
 
@@ -34,15 +34,27 @@ export default function Base64Page() {
       if (mode === 'encode') {
         setOutput(btoa(unescape(encodeURIComponent(value))));
       } else {
-        const decoded = decodeURIComponent(escape(atob(value)));
-        setOutput(decoded);
-
-        // Check if it's an image
+        // Check if it's an image first
         if (value.startsWith('data:image')) {
           setImagePreview(value);
+          setOutput(value); // Keep the base64 string for copying
+        } else {
+          // Handle data URLs by extracting the base64 part
+          let base64String = value;
+          if (value.includes(',')) {
+            base64String = value.split(',')[1];
+          }
+          
+          const binaryString = atob(base64String);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+          setOutput(decoded);
         }
       }
-    } catch {
+    } catch (err) {
       setError(mode === 'encode' ? 'Failed to encode' : 'Invalid Base64 string');
       setOutput('');
     }
@@ -82,6 +94,22 @@ export default function Base64Page() {
     setImagePreview(null);
   }, []);
 
+  const handleDownloadImage = useCallback(() => {
+    if (!imagePreview) return;
+
+    // Extract the image format from the data URL
+    const match = imagePreview.match(/data:image\/(\w+);base64,/);
+    const format = match ? match[1] : 'png';
+    
+    // Create a temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = imagePreview;
+    link.download = `decoded-image.${format}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, [imagePreview]);
+
   return (
     <ToolLayout
       title="Base64 Encoder/Decoder"
@@ -112,11 +140,11 @@ export default function Base64Page() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Input */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between min-h-[36px]">
               <h3 className="text-sm font-medium text-slate-300">
                 {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
               </h3>
-              {mode === 'encode' && (
+              {mode === 'encode' ? (
                 <div className="flex gap-2">
                   <button
                     onClick={() => setInputType('text')}
@@ -139,6 +167,8 @@ export default function Base64Page() {
                     <ImageIcon className="w-4 h-4" />
                   </button>
                 </div>
+              ) : (
+                <div className="h-[36px]" />
               )}
             </div>
 
@@ -178,33 +208,57 @@ export default function Base64Page() {
 
           {/* Output */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between min-h-[36px]">
               <h3 className="text-sm font-medium text-slate-300">
                 {mode === 'encode' ? 'Base64 Output' : 'Decoded Output'}
               </h3>
-              {output && <CopyButton text={output} />}
+              <div className="flex items-center gap-2">
+                {imagePreview && mode === 'decode' && (
+                  <button
+                    onClick={handleDownloadImage}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-slate-400 hover:text-cyan-300 transition-all duration-300 text-sm"
+                    aria-label="Download image"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download
+                  </button>
+                )}
+                {output ? <CopyButton text={output} /> : !imagePreview && <div className="h-[36px]" />}
+              </div>
             </div>
 
-            {imagePreview ? (
-              <div className="p-4 bg-slate-900/60 border border-slate-700/60 rounded-xl">
+            {imagePreview && mode === 'decode' ? (
+              <div className="p-4 bg-slate-900/60 border border-slate-700/60 rounded-xl h-[300px] flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="max-w-full max-h-[250px] mx-auto rounded-lg"
+                  className="max-w-full max-h-full object-contain rounded-lg"
                 />
               </div>
-            ) : null}
-
-            <textarea
-              value={output}
-              readOnly
-              placeholder="Output will appear here..."
-              className="
-                w-full h-[300px] p-4 bg-slate-900/60 border border-slate-700/60
-                rounded-xl text-white font-mono text-sm resize-none
-              "
-            />
+            ) : (
+              <>
+                {imagePreview && mode === 'encode' && (
+                  <div className="p-4 bg-slate-900/60 border border-slate-700/60 rounded-xl mb-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="max-w-full max-h-[250px] mx-auto rounded-lg"
+                    />
+                  </div>
+                )}
+                <textarea
+                  value={output}
+                  readOnly
+                  placeholder="Output will appear here..."
+                  className="
+                    w-full h-[300px] p-4 bg-slate-900/60 border border-slate-700/60
+                    rounded-xl text-white font-mono text-sm resize-none
+                  "
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
