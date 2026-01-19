@@ -62,7 +62,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             <div className="flex items-baseline space-x-6">
               {navLinks.map((link) => {
                 const isActive = 
@@ -91,13 +91,13 @@ export default function Navbar() {
               href="/contact"
               variant="secondary"
               size="md"
-              className="hidden lg:inline-flex"
+              className="hidden xl:inline-flex"
             >
               Let&apos;s Talk
             </Button>
           </div>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="sm"
@@ -132,7 +132,7 @@ export default function Navbar() {
           id="mobile-menu"
           role="region"
           aria-label="Mobile navigation"
-          className={`md:hidden ${brandTheme.transitions.base} ease-in-out ${
+          className={`lg:hidden ${brandTheme.transitions.base} ease-in-out ${
             isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
           } overflow-hidden`}
         >
