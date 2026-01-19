@@ -54,7 +54,7 @@ export default function Base64Page() {
           setOutput(decoded);
         }
       }
-    } catch (err) {
+    } catch {
       setError(mode === 'encode' ? 'Failed to encode' : 'Invalid Base64 string');
       setOutput('');
     }

@@ -14,38 +14,38 @@ const commonLetterSpacing = [-5, -2, 0, 2, 5, 10];
 
 type Unit = 'px' | 'em' | 'rem' | 'ch' | 'vw' | 'vh';
 
+// Convert value to the selected unit
+const convertToUnit = (pxValue: number, targetUnit: Unit, fontSize: number): number => {
+  switch (targetUnit) {
+    case 'px':
+      return pxValue;
+    case 'em':
+    case 'rem':
+      return pxValue / fontSize;
+    case 'ch':
+      // Approximate: 1ch ≈ 0.5em for monospace, 0.5 * fontSize
+      return pxValue / (fontSize * 0.5);
+    case 'vw':
+      // Approximate: assuming 1vw = 1% of viewport width (typically ~1920px / 100 = 19.2px)
+      return pxValue / 19.2;
+    case 'vh':
+      // Approximate: assuming 1vh = 1% of viewport height (typically ~1080px / 100 = 10.8px)
+      return pxValue / 10.8;
+    default:
+      return pxValue;
+  }
+};
+
+const formatValue = (value: number): string => {
+  return value.toFixed(4).replace(/\.?0+$/, '');
+};
+
 export default function LetterSpacingPage() {
   const [fontSize, setFontSize] = useState(16);
   const [letterSpacingPercent, setLetterSpacingPercent] = useState(0);
   const [mode, setMode] = useState<'percent-to-px' | 'px-to-percent'>('percent-to-px');
   const [pxValue, setPxValue] = useState(0);
   const [unit, setUnit] = useState<Unit>('px');
-
-  // Convert value to the selected unit
-  const convertToUnit = (pxValue: number, targetUnit: Unit): number => {
-    switch (targetUnit) {
-      case 'px':
-        return pxValue;
-      case 'em':
-      case 'rem':
-        return pxValue / fontSize;
-      case 'ch':
-        // Approximate: 1ch ≈ 0.5em for monospace, 0.5 * fontSize
-        return pxValue / (fontSize * 0.5);
-      case 'vw':
-        // Approximate: assuming 1vw = 1% of viewport width (typically ~1920px / 100 = 19.2px)
-        return pxValue / 19.2;
-      case 'vh':
-        // Approximate: assuming 1vh = 1% of viewport height (typically ~1080px / 100 = 10.8px)
-        return pxValue / 10.8;
-      default:
-        return pxValue;
-    }
-  };
-
-  const formatValue = (value: number): string => {
-    return value.toFixed(4).replace(/\.?0+$/, '');
-  };
 
   const calculatedPx = useMemo(() => {
     if (mode === 'percent-to-px') {
@@ -57,7 +57,7 @@ export default function LetterSpacingPage() {
   const result = useMemo(() => {
     if (mode === 'percent-to-px') {
       const pxResult = (fontSize * letterSpacingPercent) / 100;
-      return formatValue(convertToUnit(pxResult, unit));
+      return formatValue(convertToUnit(pxResult, unit, fontSize));
     } else {
       // px to percent
       if (fontSize === 0) return '0';
@@ -79,7 +79,7 @@ export default function LetterSpacingPage() {
     }
   };
 
-  const cssOutput = `letter-spacing: ${formatValue(convertToUnit(calculatedPx, unit))}${unit};`;
+  const cssOutput = `letter-spacing: ${formatValue(convertToUnit(calculatedPx, unit, fontSize))}${unit};`;
 
   return (
     <ToolLayout
@@ -98,7 +98,7 @@ export default function LetterSpacingPage() {
               <div className="flex items-center gap-2">
                 <input
                   type="number"
-                  value={formatValue(convertToUnit(fontSize, unit))}
+                  value={formatValue(convertToUnit(fontSize, unit, fontSize))}
                   onChange={(e) => {
                     const inputValue = Number(e.target.value) || 1;
                     // Convert back to px for internal storage
@@ -265,7 +265,7 @@ export default function LetterSpacingPage() {
             The quick brown fox jumps over the lazy dog
           </div>
           <p className="mt-2 text-xs text-slate-500 text-center">
-            Font size: {fontSize}px • Letter spacing: {formatValue(convertToUnit(calculatedPx, unit))}{unit}
+            Font size: {fontSize}px • Letter spacing: {formatValue(convertToUnit(calculatedPx, unit, fontSize))}{unit}
           </p>
         </div>
 
@@ -312,7 +312,7 @@ export default function LetterSpacingPage() {
               >
                 <div className="text-sm font-medium">{spacing > 0 ? `+${spacing}%` : `${spacing}%`}</div>
                 <div className="text-xs opacity-70 mt-1">
-                  {formatValue(convertToUnit((fontSize * spacing) / 100, unit))}{unit}
+                  {formatValue(convertToUnit((fontSize * spacing) / 100, unit, fontSize))}{unit}
                 </div>
               </button>
             ))}
