@@ -811,6 +811,7 @@ export default function SpriteCSSPage() {
                 onMouseLeave={handleMouseUp}
                 className={`relative cursor-crosshair select-none ${selectedBg.class}`}
                 style={{
+                  minWidth: '100%',
                   width: imageSize ? imageSize.width * zoom : 'auto',
                   height: imageSize ? imageSize.height * zoom : 'auto',
                 }}

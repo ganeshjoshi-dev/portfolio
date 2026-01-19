@@ -122,9 +122,9 @@ ${shadesFormatted}
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Controls */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           <div className="space-y-3">
             <label className="text-sm font-medium text-slate-300">Base Color</label>
             <ColorPicker color={baseColor} onChange={setBaseColor} />
@@ -149,11 +149,11 @@ ${shadesFormatted}
           {/* Color Preview Strip */}
           <div className="space-y-3">
             <label className="text-sm font-medium text-slate-300">Preview</label>
-            <div className="flex rounded-xl overflow-hidden">
+            <div className="flex rounded-xl overflow-hidden h-12 sm:h-16">
               {Object.entries(shades).map(([key, value]) => (
                 <div
                   key={key}
-                  className="flex-1 h-12 transition-all duration-300 hover:flex-[2] group relative"
+                  className="flex-1 transition-all duration-300 hover:flex-[2] group relative"
                   style={{ backgroundColor: value }}
                 >
                   <span className="absolute inset-0 flex items-center justify-center text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity"
@@ -170,21 +170,21 @@ ${shadesFormatted}
         {/* Shade Cards */}
         <div className="space-y-3">
           <label className="text-sm font-medium text-slate-300">Generated Shades</label>
-          <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-1">
             {Object.entries(shades).map(([key, value]) => (
               <div
                 key={key}
-                className="flex items-center gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/60 group"
+                className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-900/60 rounded-lg border border-slate-700/60 group"
               >
                 <div
-                  className="w-12 h-12 rounded-lg border border-slate-700/60"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg border border-slate-700/60 flex-shrink-0"
                   style={{ backgroundColor: value }}
                 />
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-medium text-white">{key}</div>
-                  <div className="text-xs font-mono text-slate-400">{value}</div>
+                  <div className="text-xs font-mono text-slate-400 truncate">{value}</div>
                 </div>
-                <CopyButton text={value} className="opacity-0 group-hover:opacity-100" />
+                <CopyButton text={value} className="opacity-0 group-hover:opacity-100 flex-shrink-0" />
               </div>
             ))}
           </div>

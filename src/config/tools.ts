@@ -108,13 +108,23 @@ export const tools: Tool[] = [
     keywords: ['svg', 'react', 'jsx', 'component', 'convert'],
   },
   {
-    id: 'px-to-rem',
-    name: 'Pixels to REM',
-    description: 'Convert pixel values to REM units with custom base size',
+    id: 'css-unit-converter',
+    name: 'CSS Unit Converter',
+    description: 'Convert between CSS units: px, rem, em, pt, cm, mm, in, pc, vh, vw, %',
     category: 'converters',
-    path: '/tools/px-to-rem',
+    path: '/tools/css-unit-converter',
     icon: 'Ruler',
-    keywords: ['px', 'rem', 'pixels', 'convert', 'units'],
+    keywords: ['css', 'unit', 'converter', 'px', 'rem', 'em', 'pt', 'cm', 'mm', 'in', 'pc', 'vh', 'vw', 'percent', 'pixels', 'convert'],
+  },
+  {
+    id: 'letter-spacing',
+    name: 'Letter Spacing Calculator',
+    description: 'Convert between percentage and pixel values for letter-spacing',
+    category: 'converters',
+    path: '/tools/letter-spacing',
+    icon: 'Type',
+    isNew: true,
+    keywords: ['letter-spacing', 'typography', 'font', 'spacing', 'tracking', 'convert'],
   },
 
   // Utility Tools

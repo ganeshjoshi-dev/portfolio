@@ -100,9 +100,9 @@ export default function JsonToTypeScriptPage() {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Input */}
-        <div className="space-y-4">
+        <div className="space-y-3 lg:space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">JSON Input</h3>
             {!isValidJson && input.trim() && (
@@ -114,7 +114,7 @@ export default function JsonToTypeScriptPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your JSON here..."
             className="
-              w-full h-[400px] p-4 bg-slate-900/60 border border-slate-700/60
+              w-full h-[300px] lg:h-[400px] p-4 bg-slate-900/60 border border-slate-700/60
               rounded-xl text-white font-mono text-sm resize-none
               focus:border-cyan-400/50 focus:outline-none focus:ring-2
               focus:ring-cyan-400/20 transition-all duration-300
@@ -123,7 +123,7 @@ export default function JsonToTypeScriptPage() {
         </div>
 
         {/* Output */}
-        <div className="space-y-4">
+        <div className="space-y-3 lg:space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <h3 className="text-sm font-medium text-slate-300">TypeScript Output</h3>
             <TabSwitcher
@@ -136,7 +136,7 @@ export default function JsonToTypeScriptPage() {
             />
           </div>
 
-          <div className="mb-4">
+          <div className="mb-3 lg:mb-4">
             <label className="block text-xs text-slate-400 mb-2">Root Name</label>
             <input
               type="text"

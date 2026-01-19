@@ -94,12 +94,12 @@ export default function ShadowGeneratorPage() {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Preview */}
-        <div className="space-y-6">
-          <div className="aspect-video bg-slate-800/40 rounded-xl border border-slate-700/60 flex items-center justify-center p-8">
+        <div className="space-y-4 lg:space-y-6">
+          <div className="aspect-video bg-slate-800/40 rounded-xl border border-slate-700/60 flex items-center justify-center p-4 sm:p-8 min-h-[200px]">
             <div
-              className="w-48 h-32 bg-slate-700 rounded-xl transition-shadow duration-300"
+              className="w-32 h-24 sm:w-48 sm:h-32 bg-slate-700 rounded-xl transition-shadow duration-300"
               style={{ boxShadow: shadowCSS }}
             />
           </div>
@@ -112,7 +112,7 @@ export default function ShadowGeneratorPage() {
                 <button
                   key={preset.name}
                   onClick={() => applyPreset(preset)}
-                  className="px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
+                  className="px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
                 >
                   {preset.name}
                 </button>
@@ -122,7 +122,7 @@ export default function ShadowGeneratorPage() {
         </div>
 
         {/* Controls */}
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">Shadow Layers</h3>
             <button
@@ -134,11 +134,11 @@ export default function ShadowGeneratorPage() {
             </button>
           </div>
 
-          <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+          <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1">
             {shadows.map((shadow, index) => (
               <div
                 key={shadow.id}
-                className="p-4 bg-slate-800/40 rounded-lg border border-slate-700/60 space-y-4"
+                className="p-3 sm:p-4 bg-slate-800/40 rounded-lg border border-slate-700/60 space-y-4"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-slate-300">Layer {index + 1}</span>
@@ -152,16 +152,20 @@ export default function ShadowGeneratorPage() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <SliderInput label="X Offset" value={shadow.x} min={-50} max={50} unit="px" onChange={(x) => updateLayer(shadow.id, { x })} />
                   <SliderInput label="Y Offset" value={shadow.y} min={-50} max={50} unit="px" onChange={(y) => updateLayer(shadow.id, { y })} />
                   <SliderInput label="Blur" value={shadow.blur} min={0} max={100} unit="px" onChange={(blur) => updateLayer(shadow.id, { blur })} />
                   <SliderInput label="Spread" value={shadow.spread} min={-50} max={50} unit="px" onChange={(spread) => updateLayer(shadow.id, { spread })} />
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <ColorPicker color={shadow.color} onChange={(color) => updateLayer(shadow.id, { color })} label="Color" />
-                  <SliderInput label="Opacity" value={shadow.opacity} min={0} max={100} unit="%" onChange={(opacity) => updateLayer(shadow.id, { opacity })} />
+                <div className="flex flex-col sm:flex-row items-start sm:items-end gap-3 sm:gap-4">
+                  <div className="w-full sm:flex-1">
+                    <ColorPicker color={shadow.color} onChange={(color) => updateLayer(shadow.id, { color })} label="Color" />
+                  </div>
+                  <div className="w-full sm:flex-1">
+                    <SliderInput label="Opacity" value={shadow.opacity} min={0} max={100} unit="%" onChange={(opacity) => updateLayer(shadow.id, { opacity })} />
+                  </div>
                 </div>
 
                 <label className="flex items-center gap-2 text-sm text-slate-300">
