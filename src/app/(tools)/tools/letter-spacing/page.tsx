@@ -90,8 +90,8 @@ export default function LetterSpacingPage() {
     >
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Font Size & Output Unit */}
-        <div className="p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Font Size */}
             <div>
               <label className="block text-sm text-slate-400 mb-3">Font Size</label>
@@ -126,13 +126,13 @@ export default function LetterSpacingPage() {
                   min={0.1}
                   step={unit === 'px' ? '1' : '0.1'}
                   className="
-                    flex-1 px-4 py-3 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white text-xl font-mono text-center
+                    flex-1 min-w-0 px-3 sm:px-4 py-3 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-lg sm:text-xl font-mono text-center
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300
                   "
                 />
-                <span className="text-slate-400 text-lg">{unit}</span>
+                <span className="text-slate-400 text-base sm:text-lg flex-shrink-0">{unit}</span>
               </div>
               <p className="mt-2 text-xs text-slate-500">
                 The font size used in your design
@@ -146,8 +146,8 @@ export default function LetterSpacingPage() {
                 value={unit}
                 onChange={(e) => setUnit(e.target.value as Unit)}
                 className="
-                  w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60
-                  rounded-lg text-white text-base
+                  w-full px-3 sm:px-4 py-3 bg-slate-800/60 border border-slate-700/60
+                  rounded-lg text-white text-sm sm:text-base
                   focus:border-cyan-400/50 focus:outline-none
                   transition-all duration-300
                 "
@@ -169,7 +169,7 @@ export default function LetterSpacingPage() {
         {/* Converter */}
         <div className="flex flex-col lg:flex-row items-center gap-4">
           {/* Input */}
-          <div className="flex-1 w-full p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <div className="flex-1 w-full p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
             <label className="block text-sm text-slate-400 mb-3">
               {mode === 'percent-to-px' ? 'Letter Spacing (%)' : 'Letter Spacing (px)'}
             </label>
@@ -181,13 +181,13 @@ export default function LetterSpacingPage() {
                   onChange={(e) => setLetterSpacingPercent(Number(e.target.value) || 0)}
                   step="0.1"
                   className="
-                    flex-1 px-4 py-3 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white text-xl font-mono text-center
+                    flex-1 min-w-0 px-3 sm:px-4 py-3 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-lg sm:text-xl font-mono text-center
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300
                   "
                 />
-                <span className="text-slate-400 text-lg">%</span>
+                <span className="text-slate-400 text-base sm:text-lg flex-shrink-0">%</span>
               </div>
             ) : (
               <div className="flex items-center gap-2">
@@ -197,13 +197,13 @@ export default function LetterSpacingPage() {
                   onChange={(e) => setPxValue(Number(e.target.value) || 0)}
                   step="0.01"
                   className="
-                    flex-1 px-4 py-3 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white text-xl font-mono text-center
+                    flex-1 min-w-0 px-3 sm:px-4 py-3 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-lg sm:text-xl font-mono text-center
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300
                   "
                 />
-                <span className="text-slate-400 text-lg">px</span>
+                <span className="text-slate-400 text-base sm:text-lg flex-shrink-0">px</span>
               </div>
             )}
           </div>
@@ -215,7 +215,7 @@ export default function LetterSpacingPage() {
               p-4 bg-slate-800/60 border border-slate-700/60
               hover:border-cyan-400/50 rounded-xl
               text-slate-400 hover:text-cyan-300
-              transition-all duration-300
+              transition-all duration-300 flex-shrink-0
             "
             aria-label="Toggle conversion direction"
           >
@@ -223,15 +223,15 @@ export default function LetterSpacingPage() {
           </button>
 
           {/* Output */}
-          <div className="flex-1 w-full p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <div className="flex-1 w-full p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
             <label className="block text-sm text-slate-400 mb-3">
               {mode === 'percent-to-px' ? `Letter Spacing (${unit})` : 'Letter Spacing (%)'}
             </label>
             <div className="flex items-center gap-2">
-              <div className="flex-1 px-4 py-3 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-cyan-300 text-xl font-mono text-center">
+              <div className="flex-1 min-w-0 px-3 sm:px-4 py-3 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-cyan-300 text-lg sm:text-xl font-mono text-center break-all">
                 {result}
               </div>
-              <span className="text-slate-400 text-lg">
+              <span className="text-slate-400 text-base sm:text-lg flex-shrink-0">
                 {mode === 'percent-to-px' ? unit : '%'}
               </span>
             </div>
@@ -250,12 +250,12 @@ export default function LetterSpacingPage() {
         </div>
 
         {/* Live Preview */}
-        <div className="p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+        <div className="p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
           <h3 className="text-sm font-medium text-slate-300 mb-4">Live Preview</h3>
           <div
             className="
-              p-6 bg-slate-800/40 rounded-lg border border-slate-700/40
-              text-white text-center
+              p-4 sm:p-6 bg-slate-800/40 rounded-lg border border-slate-700/40
+              text-white text-center break-words
             "
             style={{
               fontSize: `${fontSize}px`,
@@ -264,7 +264,7 @@ export default function LetterSpacingPage() {
           >
             The quick brown fox jumps over the lazy dog
           </div>
-          <p className="mt-2 text-xs text-slate-500 text-center">
+          <p className="mt-2 text-xs text-slate-500 text-center break-words">
             Font size: {fontSize}px • Letter spacing: {formatValue(convertToUnit(calculatedPx, unit, fontSize))}{unit}
           </p>
         </div>

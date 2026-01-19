@@ -85,8 +85,8 @@ export default function PxToRemPage() {
         <div className="space-y-4">
           {/* Base Size Configuration - Compact inline version */}
           {showBaseSize && (
-            <div className="flex items-center justify-between p-4 bg-slate-900/60 rounded-lg border border-slate-700/60">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-slate-900/60 rounded-lg border border-slate-700/60">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <label className="text-sm text-slate-400 whitespace-nowrap">
                   Base Font Size:
                 </label>
@@ -95,7 +95,7 @@ export default function PxToRemPage() {
                   value={baseSize}
                   onChange={(e) => setBaseSize(e.target.value)}
                   className="
-                    w-20 px-3 py-1.5 bg-slate-800/60 border border-slate-700/60
+                    w-20 px-2 sm:px-3 py-1.5 bg-slate-800/60 border border-slate-700/60
                     rounded-lg text-white font-mono text-sm
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300
@@ -103,9 +103,9 @@ export default function PxToRemPage() {
                   min="1"
                   step="0.1"
                 />
-                <span className="text-slate-400 text-sm">px</span>
+                <span className="text-slate-400 text-sm flex-shrink-0">px</span>
               </div>
-              <p className="text-xs text-slate-500 hidden sm:block">
+              <p className="text-xs text-slate-500">
                 Default: 16px
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function PxToRemPage() {
 
           <div className="flex flex-col lg:flex-row items-stretch gap-4">
             {/* Input */}
-            <div className="flex-1 p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+            <div className="flex-1 p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
               <label className="block text-sm text-slate-400 mb-3">From</label>
               <div className="space-y-3">
                 <input
@@ -121,8 +121,8 @@ export default function PxToRemPage() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   className="
-                    w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white text-2xl font-mono text-center
+                    w-full px-3 sm:px-4 py-3 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-xl sm:text-2xl font-mono text-center
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300
                   "
@@ -133,8 +133,8 @@ export default function PxToRemPage() {
                   value={inputUnit}
                   onChange={(e) => setInputUnit(e.target.value as Unit)}
                   className="
-                    w-full px-4 py-2 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white font-medium
+                    w-full px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-sm sm:text-base font-medium
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300 cursor-pointer
                   "
@@ -156,7 +156,7 @@ export default function PxToRemPage() {
                   p-4 bg-slate-800/60 border border-slate-700/60
                   hover:border-cyan-400/50 rounded-xl
                   text-slate-400 hover:text-cyan-300
-                  transition-all duration-300
+                  transition-all duration-300 flex-shrink-0
                   lg:rotate-0 rotate-90
                 "
                 aria-label="Swap units"
@@ -166,18 +166,18 @@ export default function PxToRemPage() {
             </div>
 
             {/* Output */}
-            <div className="flex-1 p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
+            <div className="flex-1 p-4 sm:p-6 bg-slate-900/60 rounded-xl border border-slate-700/60">
               <label className="block text-sm text-slate-400 mb-3">To</label>
               <div className="space-y-3">
-                <div className="px-4 py-3 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-cyan-300 text-2xl font-mono text-center min-h-[52px] flex items-center justify-center">
+                <div className="px-3 sm:px-4 py-3 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-cyan-300 text-xl sm:text-2xl font-mono text-center min-h-[52px] flex items-center justify-center break-all">
                   {result}
                 </div>
                 <select
                   value={outputUnit}
                   onChange={(e) => setOutputUnit(e.target.value as Unit)}
                   className="
-                    w-full px-4 py-2 bg-slate-800/60 border border-slate-700/60
-                    rounded-lg text-white font-medium
+                    w-full px-3 sm:px-4 py-2 bg-slate-800/60 border border-slate-700/60
+                    rounded-lg text-white text-sm sm:text-base font-medium
                     focus:border-cyan-400/50 focus:outline-none
                     transition-all duration-300 cursor-pointer
                   "
