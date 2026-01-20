@@ -13,9 +13,16 @@ function ToolsHubContent() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Initialize state from URL params
+  // Initialize state from URL params with runtime validation
   const initialQuery = searchParams.get('q') || '';
-  const initialCategory = (searchParams.get('category') as ToolCategory | 'all') || 'all';
+  const categoryParam = searchParams.get('category');
+  
+  // Validate category parameter at runtime
+  const validCategories: (ToolCategory | 'all')[] = ['all', 'css', 'converters', 'utilities', 'tailwind'];
+  const initialCategory: ToolCategory | 'all' = 
+    categoryParam && validCategories.includes(categoryParam as ToolCategory | 'all')
+      ? (categoryParam as ToolCategory | 'all')
+      : 'all';
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [activeCategory, setActiveCategory] = useState<ToolCategory | 'all'>(initialCategory);
@@ -135,7 +142,14 @@ function ToolsHubContent() {
           ) : (
             <div className="text-center py-16">
               <p className="text-slate-500 text-lg">
-                No tools found matching &quot;{searchQuery}&quot;
+                {searchQuery && activeCategory !== 'all' 
+                  ? `No tools found matching "${searchQuery}" in ${toolCategories[activeCategory as ToolCategory]?.name || 'this category'}`
+                  : searchQuery 
+                    ? `No tools found matching "${searchQuery}"`
+                    : activeCategory !== 'all'
+                      ? `No tools found in ${toolCategories[activeCategory as ToolCategory]?.name || 'this category'}`
+                      : 'No tools found'
+                }
               </p>
               <button
                 onClick={() => {

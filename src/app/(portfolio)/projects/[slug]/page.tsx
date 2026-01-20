@@ -83,6 +83,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             { label: 'Projects', href: '/projects' },
             { label: project.title },
           ]}
+          currentPageUrl={`${siteConfig.url}/projects/${project.slug}`}
         />
 
         <Button
