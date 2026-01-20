@@ -117,14 +117,14 @@ export const tools: Tool[] = [
     keywords: ['css', 'unit', 'converter', 'px', 'rem', 'em', 'pt', 'cm', 'mm', 'in', 'pc', 'vh', 'vw', 'percent', 'pixels', 'convert'],
   },
   {
-    id: 'letter-spacing',
-    name: 'Letter Spacing Calculator',
+    id: 'css-letter-spacing',
+    name: 'CSS Letter Spacing Calculator',
     description: 'Convert between percentage and pixel values for letter-spacing',
     category: 'converters',
-    path: '/tools/letter-spacing',
+    path: '/tools/css-letter-spacing',
     icon: 'Type',
     isNew: true,
-    keywords: ['letter-spacing', 'typography', 'font', 'spacing', 'tracking', 'convert'],
+    keywords: ['css', 'letter-spacing', 'typography', 'font', 'spacing', 'tracking', 'convert'],
   },
 
   // Utility Tools

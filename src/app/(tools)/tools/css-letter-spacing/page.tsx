@@ -6,7 +6,7 @@ import { ToolLayout, CopyButton } from '@/components/tools/shared';
 import { getToolById, toolCategories } from '@/config/tools';
 
 // Get tool config for structured data
-const tool = getToolById('letter-spacing')!;
+const tool = getToolById('css-letter-spacing')!;
 const category = toolCategories[tool.category];
 
 const commonFontSizes = [12, 14, 16, 18, 20, 24, 32, 48];
@@ -83,7 +83,7 @@ export default function LetterSpacingPage() {
 
   return (
     <ToolLayout
-      title="Letter Spacing Calculator"
+      title="CSS Letter Spacing Calculator"
       description="Convert between percentage and CSS unit values for letter-spacing. Supports px, em, rem, ch, vw, and vh units."
       tool={tool}
       category={category}

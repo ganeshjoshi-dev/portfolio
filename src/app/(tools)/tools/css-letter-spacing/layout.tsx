@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getToolById } from '@/config/tools';
 import { generateToolMetadata } from '@/lib/utils/tool-seo';
 
-const tool = getToolById('letter-spacing')!;
+const tool = getToolById('css-letter-spacing')!;
 
 export const metadata: Metadata = generateToolMetadata(tool);
 
