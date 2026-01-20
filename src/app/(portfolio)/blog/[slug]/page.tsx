@@ -101,6 +101,7 @@ export default async function BlogPostPage({ params }: Props) {
             { label: 'Blog', href: '/blog' },
             { label: post.title },
           ]}
+          currentPageUrl={`${siteConfig.url}/blog/${post.slug}`}
         />
 
         <Button
