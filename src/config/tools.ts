@@ -129,6 +129,29 @@ export const tools: Tool[] = [
 
   // Utility Tools
   {
+    id: 'image-compressor',
+    name: 'Image Compressor',
+    description: 'Compress JPEG, PNG, WebP, and AVIF images up to 80% smaller with smart optimization',
+    category: 'utilities',
+    path: '/tools/image-compressor',
+    icon: 'ImageDown',
+    isNew: true,
+    keywords: [
+      'compress image',
+      'reduce image size',
+      'image optimizer',
+      'jpeg compression',
+      'png compression',
+      'webp',
+      'avif',
+      'batch compress',
+      'image converter',
+      'reduce file size',
+      'optimize images',
+      'compress photos',
+    ],
+  },
+  {
     id: 'regex-tester',
     name: 'Regex Tester',
     description: 'Test regular expressions with live matching and explanations',

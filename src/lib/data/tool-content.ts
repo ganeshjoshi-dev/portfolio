@@ -13,6 +13,34 @@ export interface ToolContent {
 }
 
 export const toolContent: Record<string, ToolContent> = {
+  'image-compressor': {
+    howToUse: {
+      title: 'How to Compress Images',
+      steps: [
+        {
+          title: 'Upload Your Images',
+          description: 'Drag and drop images onto the upload zone or click to select files. You can upload up to 20 images at once (max 10MB each). Supported formats: JPEG, PNG, WebP, and AVIF.',
+        },
+        {
+          title: 'Adjust Compression Settings',
+          description: 'Use the quality slider to control compression level (0.1-1.0). Higher values preserve more quality but result in larger files. A quality of 0.8 provides excellent results for most images.',
+        },
+        {
+          title: 'Choose Format Conversion (Optional)',
+          description: 'Enable "Convert images automatically" to change image formats. WebP offers 25-35% smaller files than JPEG. AVIF provides even better compression but has limited browser support.',
+        },
+        {
+          title: 'Compress Your Images',
+          description: 'Click "Compress All" to start processing. Watch the progress bar and see before/after previews for each image. Compression happens in your browser - images never leave your device.',
+        },
+        {
+          title: 'Download Compressed Images',
+          description: 'Download individual images using the download button on each card, or click "Download All" to get a ZIP file with all compressed images.',
+        },
+      ],
+    },
+    relatedTools: ['base64', 'color-palette', 'sprite-css'],
+  },
   'gradient-generator': {
     howToUse: {
       title: 'How to Create CSS Gradients',

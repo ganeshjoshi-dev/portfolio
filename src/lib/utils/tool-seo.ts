@@ -292,6 +292,54 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
       },
     ],
   },
+  'image-compressor': {
+    title: 'Image Compressor - Compress JPEG, PNG, WebP, AVIF Online Free',
+    metaDescription: 'Free online image compressor. Reduce image file sizes by up to 80% with smart compression. Convert between JPEG, PNG, WebP, and AVIF formats. Batch processing supported.',
+    longTailKeywords: [
+      'image compressor online',
+      'compress image free',
+      'reduce image size online',
+      'jpeg compressor online',
+      'png optimizer',
+      'webp converter',
+      'avif converter',
+      'batch image compression',
+      'compress photos online',
+      'reduce photo size',
+      'image size reducer',
+      'optimize images for web',
+      'compress images without losing quality',
+      'bulk image compressor',
+      'photo optimizer',
+    ],
+    faqs: [
+      {
+        question: 'How does the image compressor reduce file sizes?',
+        answer: 'Our tool uses smart lossy compression algorithms to reduce image file sizes while maintaining visual quality. It selectively reduces color information and removes unnecessary metadata. The compression happens entirely in your browser using advanced image processing libraries, achieving up to 80% size reduction for most images.',
+      },
+      {
+        question: 'What image formats are supported?',
+        answer: 'We support JPEG, PNG, WebP, and AVIF formats. You can upload images in any of these formats and optionally convert them to a different format for better compression. WebP and AVIF typically provide the smallest file sizes while maintaining quality.',
+      },
+      {
+        question: 'Is my data safe? Where are images processed?',
+        answer: 'Your images are completely safe and private. All compression happens locally in your browser - your images never leave your device or get uploaded to any server. This ensures maximum privacy and security for your photos and images.',
+      },
+      {
+        question: 'What is the difference between JPEG, PNG, WebP, and AVIF?',
+        answer: 'JPEG is best for photos with good compression but no transparency support. PNG offers lossless compression and transparency but larger file sizes. WebP provides better compression than both JPEG and PNG with transparency support. AVIF offers the best compression ratios (often 50% smaller than JPEG) but has limited browser support.',
+      },
+      {
+        question: 'Can I compress multiple images at once?',
+        answer: 'Yes! You can upload and compress up to 20 images simultaneously. Each image can be up to 10MB in size, with a 50MB total limit for batch processing. After compression, download all images individually or as a ZIP file.',
+      },
+      {
+        question: 'How much can I reduce my image size?',
+        answer: 'Compression results vary by image type and content. Photos typically compress 60-80% with quality 0.8 setting. Graphics and screenshots may compress 40-60%. Converting PNG to WebP or AVIF often achieves 70-85% size reduction. You can adjust the quality slider to find the perfect balance between file size and visual quality.',
+      },
+    ],
+    alternateNames: ['Image Optimizer', 'Photo Compressor', 'Picture Size Reducer'],
+  },
   'regex-tester': {
     title: 'Regex Tester Online - Regular Expression Tester & Debugger',
     metaDescription: 'Test and debug regular expressions online with live matching and highlighting. Includes pattern explanations and common regex examples.',
