@@ -15,4 +15,7 @@ export { default as ProjectCard } from './ProjectCard';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export type { BreadcrumbsProps, BreadcrumbItem } from './Breadcrumbs';
 
+export { default as Accordion } from './Accordion';
+export type { AccordionProps, AccordionItemType } from './Accordion';
+
 export { default as ErrorBoundary } from './ErrorBoundary';

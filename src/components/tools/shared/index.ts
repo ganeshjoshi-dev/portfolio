@@ -5,4 +5,10 @@ export { default as SliderInput } from './SliderInput';
 export { default as ColorPicker } from './ColorPicker';
 export { default as ToolLayout } from './ToolLayout';
 export { default as ToolCard } from './ToolCard';
+export { default as HowToUse } from './HowToUse';
+export { default as FAQ } from './FAQ';
+export { default as RelatedTools } from './RelatedTools';
 export { ToolStructuredData } from '../ToolStructuredData';
+
+export type { HowToStep } from './HowToUse';
+export type { FAQItem } from './FAQ';
