@@ -20,10 +20,9 @@ interface AccordionItemProps {
   item: AccordionItem;
   isExpanded: boolean;
   onToggle: () => void;
-  index: number;
 }
 
-function AccordionItemComponent({ item, isExpanded, onToggle, index }: AccordionItemProps) {
+function AccordionItemComponent({ item, isExpanded, onToggle }: AccordionItemProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(0);
 
@@ -126,13 +125,12 @@ export default function Accordion({ items, allowMultiple = false, className = ''
 
   return (
     <div className={`space-y-3 ${className}`}>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <AccordionItemComponent
           key={item.id}
           item={item}
           isExpanded={expandedItems.has(item.id)}
           onToggle={() => toggleItem(item.id)}
-          index={index}
         />
       ))}
     </div>
