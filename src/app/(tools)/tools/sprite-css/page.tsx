@@ -374,6 +374,8 @@ export default function SpriteCSSPage() {
       setSvgElements([]);
       setShowSpritePanel(false);
       setIsDetecting(false);
+      setPixelData(null);
+      setImageSize(null);
 
       // Check if it's an SVG
       if (file.type === 'image/svg+xml') {

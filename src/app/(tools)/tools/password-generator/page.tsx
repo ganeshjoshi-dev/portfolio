@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { RefreshCw, Copy } from 'lucide-react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
 import { getToolById, toolCategories } from '@/config/tools';
@@ -134,7 +134,7 @@ export default function PasswordGeneratorPage() {
   }, []);
 
   // Regenerate when options change
-  useMemo(() => {
+  useEffect(() => {
     setPasswords((prev) => prev.map(() => generatePassword(options)));
   }, [options]);
 
