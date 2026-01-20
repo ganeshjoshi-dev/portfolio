@@ -1,5 +1,4 @@
 import { CompressionOptions, ImageFormat } from '@/lib/tools/image';
-import { SliderInput } from '@/components/tools/shared';
 import { Settings2 } from 'lucide-react';
 
 interface CompressionSettingsProps {
@@ -16,7 +15,16 @@ const formatOptions: { value: ImageFormat; label: string; description: string }[
 
 export default function CompressionSettings({ options, onChange }: CompressionSettingsProps) {
   const handleQualityChange = (quality: number) => {
-    onChange({ ...options, quality });
+    // Clamp quality between 0.1 and 1.0
+    const clampedQuality = Math.min(1.0, Math.max(0.1, quality));
+    onChange({ ...options, quality: clampedQuality });
+  };
+
+  const handleQualityInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    if (!isNaN(value)) {
+      handleQualityChange(value);
+    }
   };
 
   const handleAutoConvertToggle = () => {
@@ -42,15 +50,55 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
         <h3 className="text-lg font-medium text-white">Compression Settings</h3>
       </div>
 
-      {/* Quality Slider */}
+      {/* Quality Control */}
       <div className="space-y-3">
-        <SliderInput
-          label="Quality"
-          value={options.quality}
+        <div className="flex items-center justify-between gap-4">
+          <label className="text-sm font-medium text-slate-300 flex-shrink-0">Quality</label>
+          <input
+            type="number"
+            min={0.1}
+            max={1.0}
+            step={0.05}
+            value={options.quality.toFixed(2)}
+            onChange={handleQualityInputChange}
+            className="
+              w-20 px-3 py-1.5 text-sm font-mono text-cyan-400 bg-slate-800/60
+              border border-slate-700/60 rounded-lg
+              focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent
+              transition-all duration-200
+              hover:border-cyan-400/50
+            "
+            aria-label="Quality value"
+          />
+        </div>
+        <input
+          type="range"
           min={0.1}
           max={1.0}
           step={0.05}
-          onChange={handleQualityChange}
+          value={options.quality}
+          onChange={(e) => handleQualityChange(Number(e.target.value))}
+          className="
+            w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer
+            [&::-webkit-slider-thumb]:appearance-none
+            [&::-webkit-slider-thumb]:w-4
+            [&::-webkit-slider-thumb]:h-4
+            [&::-webkit-slider-thumb]:rounded-full
+            [&::-webkit-slider-thumb]:bg-cyan-400
+            [&::-webkit-slider-thumb]:cursor-pointer
+            [&::-webkit-slider-thumb]:transition-transform
+            [&::-webkit-slider-thumb]:duration-150
+            [&::-webkit-slider-thumb]:hover:scale-110
+            [&::-moz-range-thumb]:w-4
+            [&::-moz-range-thumb]:h-4
+            [&::-moz-range-thumb]:rounded-full
+            [&::-moz-range-thumb]:bg-cyan-400
+            [&::-moz-range-thumb]:border-0
+            [&::-moz-range-thumb]:cursor-pointer
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
+            focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
+          "
+          aria-label="Quality slider"
         />
         <div className="flex justify-between text-xs text-slate-400 px-1">
           <span>Smaller file</span>
