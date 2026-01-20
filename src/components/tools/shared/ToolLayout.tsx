@@ -3,6 +3,10 @@ import { ArrowLeft } from 'lucide-react';
 import { Tool, ToolCategoryConfig } from '@/types/tools';
 import { ToolStructuredData } from '@/components/tools/ToolStructuredData';
 import { Breadcrumbs } from '@/components/ui';
+import { getToolContent } from '@/lib/data/tool-content';
+import { toolSEOData } from '@/lib/utils/tool-seo';
+import FAQ from './FAQ';
+import RelatedTools from './RelatedTools';
 
 interface ToolLayoutProps {
   children: React.ReactNode;
@@ -14,6 +18,8 @@ interface ToolLayoutProps {
   tool?: Tool;
   /** Category config for breadcrumb structured data */
   category?: ToolCategoryConfig;
+  /** Show content sections (How to Use, FAQ, Related Tools) */
+  showContentSections?: boolean;
 }
 
 export default function ToolLayout({
@@ -24,12 +30,17 @@ export default function ToolLayout({
   backLabel = 'All Tools',
   tool,
   category,
+  showContentSections = true,
 }: ToolLayoutProps) {
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: 'Tools', href: '/tools' },
     { label: title },
   ];
+
+  // Get content for this tool
+  const toolContent = tool ? getToolContent(tool.id) : undefined;
+  const toolSEO = tool ? toolSEOData[tool.id] : undefined;
 
   return (
     <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
@@ -68,6 +79,20 @@ export default function ToolLayout({
         <div className="space-y-6">
           {children}
         </div>
+
+        {/* FAQ Section */}
+        {showContentSections && toolSEO?.faqs && toolSEO.faqs.length > 0 && (
+          <div className="mt-12 sm:mt-16">
+            <FAQ faqs={toolSEO.faqs} includeSchema={false} />
+          </div>
+        )}
+
+        {/* Related Tools Section */}
+        {showContentSections && toolContent?.relatedTools && toolContent.relatedTools.length > 0 && (
+          <div className="mt-12 sm:mt-16">
+            <RelatedTools toolIds={toolContent.relatedTools} />
+          </div>
+        )}
       </div>
     </main>
   );
