@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { Search, Sparkles } from 'lucide-react';
 import { tools, toolCategories, getToolsByCategory, searchTools } from '@/config/tools';
 import { ToolCard } from '@/components/tools/shared';
@@ -148,6 +149,214 @@ function ToolsHubContent() {
             </div>
           )}
         </section>
+
+        {/* Popular Tool Combinations */}
+        {!searchQuery && activeCategory === 'all' && (
+          <section className="mt-12 sm:mt-16">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">
+              Popular Tool Combinations
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Design to Code Workflow */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Design to Code
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Create beautiful styles and convert them to production-ready code
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/gradient-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Gradient Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/shadow-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Shadow Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/css-to-tailwind"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>CSS to Tailwind</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Type Safety Workflow */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Type-Safe Development
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Generate TypeScript types for your data and components
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/json-to-typescript"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>JSON to TypeScript</span>
+                  </Link>
+                  <Link
+                    href="/tools/svg-to-react"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>SVG to React</span>
+                  </Link>
+                  <Link
+                    href="/tools/diff-checker"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Diff Checker</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Content Creation Workflow */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Content Creation
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Generate placeholder content and unique identifiers
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/lorem-ipsum"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Lorem Ipsum Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/slug-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Slug Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/uuid-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>UUID Generator</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Tailwind Workflow */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Tailwind Mastery
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Complete toolkit for working with Tailwind CSS
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/tailwind-colors"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Tailwind Color Shades</span>
+                  </Link>
+                  <Link
+                    href="/tools/css-to-tailwind"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>CSS to Tailwind</span>
+                  </Link>
+                  <Link
+                    href="/tools/tailwind-class-sorter"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Class Sorter</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* CSS Styling Workflow */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  CSS Styling Toolkit
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Professional CSS effects and visual design
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/color-palette"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Color Palette Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/gradient-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Gradient Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/border-radius"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Border Radius Generator</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Developer Utilities */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Developer Utilities
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Essential tools for everyday development tasks
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/base64"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Base64 Encoder/Decoder</span>
+                  </Link>
+                  <Link
+                    href="/tools/regex-tester"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Regex Tester</span>
+                  </Link>
+                  <Link
+                    href="/tools/diff-checker"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Diff Checker</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Coming Soon */}
         <section className="mt-12 sm:mt-16 text-center">
