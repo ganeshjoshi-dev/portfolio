@@ -550,6 +550,267 @@ export const toolContent: Record<string, ToolContent> = {
     },
     relatedTools: ['css-to-tailwind', 'tailwind-colors', 'gradient-generator'],
   },
+
+  'qr-code': {
+    howToUse: {
+      title: 'How to Generate QR Codes',
+      steps: [
+        {
+          title: 'Enter Your Content',
+          description: 'Type or paste the URL, text, or data you want to encode in the QR code. This could be a website URL, contact information, WiFi credentials, or any text.',
+        },
+        {
+          title: 'Customize Appearance',
+          description: 'Adjust the size, foreground color, and background color to match your brand. Use the color presets for quick styling or enter custom hex colors.',
+        },
+        {
+          title: 'Set Error Correction Level',
+          description: 'Choose between L (7%), M (15%), Q (25%), or H (30%) error correction. Higher levels allow the QR code to be read even if partially damaged or obscured.',
+        },
+        {
+          title: 'Preview Your QR Code',
+          description: 'See your QR code update in real-time as you make changes. The preview shows exactly how your QR code will look when downloaded.',
+        },
+        {
+          title: 'Download QR Code',
+          description: 'Download as PNG for digital use or SVG for print materials. SVG format scales infinitely without losing quality, perfect for large prints.',
+        },
+      ],
+    },
+    relatedTools: ['base64', 'uuid-generator', 'placeholder-image'],
+  },
+
+  'password-generator': {
+    howToUse: {
+      title: 'How to Generate Secure Passwords',
+      steps: [
+        {
+          title: 'Set Password Length',
+          description: 'Use the slider to choose password length (8-64 characters). Longer passwords are more secure. We recommend at least 12 characters for most accounts.',
+        },
+        {
+          title: 'Select Character Types',
+          description: 'Check the boxes for uppercase letters, lowercase letters, numbers, and symbols. More character types increase password strength and entropy.',
+        },
+        {
+          title: 'Check Password Strength',
+          description: 'View the strength meter showing your password quality. Aim for "Good" or "Strong" ratings. The color-coded meter provides instant feedback.',
+        },
+        {
+          title: 'Generate Multiple Passwords',
+          description: 'Use the quick generate buttons to create 1, 5, 10, 25, or 50 passwords at once. Perfect for setting up multiple accounts or team members.',
+        },
+        {
+          title: 'Copy and Use Safely',
+          description: 'Click the copy button to copy individual passwords or use "Copy All" for bulk operations. Passwords are generated using cryptographically secure methods.',
+        },
+      ],
+    },
+    relatedTools: ['hash-generator', 'uuid-generator', 'base64'],
+  },
+
+  'word-counter': {
+    howToUse: {
+      title: 'How to Use Word Counter',
+      steps: [
+        {
+          title: 'Paste Your Text',
+          description: 'Copy and paste your text into the input area. The tool supports any text format including essays, articles, blog posts, and social media content.',
+        },
+        {
+          title: 'View Real-Time Statistics',
+          description: 'See word count, character count (with and without spaces), sentence count, and paragraph count update instantly as you type or edit.',
+        },
+        {
+          title: 'Check Reading Time',
+          description: 'View estimated reading time based on average reading speed (225 words per minute) and speaking time (150 words per minute).',
+        },
+        {
+          title: 'Monitor Character Limits',
+          description: 'Check your text against common platform character limits including Twitter, Instagram, LinkedIn, and meta descriptions for SEO.',
+        },
+        {
+          title: 'Optimize Content Length',
+          description: 'Use the statistics to ensure your content meets platform requirements or target word counts for essays, articles, and assignments.',
+        },
+      ],
+    },
+    relatedTools: ['lorem-ipsum', 'markdown-to-html', 'diff-checker'],
+  },
+
+  'hash-generator': {
+    howToUse: {
+      title: 'How to Generate Hashes',
+      steps: [
+        {
+          title: 'Choose Input Method',
+          description: 'Select between text input or file upload. Text mode is perfect for hashing strings, while file mode allows you to verify file integrity.',
+        },
+        {
+          title: 'Enter Data to Hash',
+          description: 'Type or paste your text in the input field, or upload a text file. The tool will process your input and generate hashes using multiple algorithms.',
+        },
+        {
+          title: 'View All Hash Types',
+          description: 'See MD5, SHA-1, SHA-256, and SHA-512 hashes generated simultaneously. Each algorithm has different security levels and use cases.',
+        },
+        {
+          title: 'Copy Hash Values',
+          description: 'Click the copy button next to any hash to copy it to your clipboard. Use these hashes for checksums, data integrity verification, or as unique identifiers.',
+        },
+        {
+          title: 'Choose Right Algorithm',
+          description: 'Use SHA-256 or SHA-512 for security purposes. MD5 and SHA-1 are suitable for checksums but not recommended for cryptographic applications.',
+        },
+      ],
+    },
+    relatedTools: ['password-generator', 'base64', 'uuid-generator'],
+  },
+
+  'timestamp-converter': {
+    howToUse: {
+      title: 'How to Convert Timestamps',
+      steps: [
+        {
+          title: 'View Current Timestamp',
+          description: 'See the current Unix timestamp in both seconds and milliseconds, along with various date format representations that update in real-time.',
+        },
+        {
+          title: 'Choose Unit Type',
+          description: 'Toggle between seconds and milliseconds based on your needs. Seconds are common in Unix systems, while milliseconds are used in JavaScript.',
+        },
+        {
+          title: 'Convert Timestamp to Date',
+          description: 'Enter a Unix timestamp to see it converted to ISO 8601, UTC, local time, and other human-readable formats instantly.',
+        },
+        {
+          title: 'Convert Date to Timestamp',
+          description: 'Use the datetime picker to select a date and time, then see the corresponding Unix timestamp in your chosen unit (seconds or milliseconds).',
+        },
+        {
+          title: 'Copy Any Format',
+          description: 'Click the copy button next to any timestamp or date format to use it in your application, database queries, or API requests.',
+        },
+      ],
+    },
+    relatedTools: ['uuid-generator', 'hash-generator', 'base64'],
+  },
+
+  'placeholder-image': {
+    howToUse: {
+      title: 'How to Generate Placeholder Images',
+      steps: [
+        {
+          title: 'Set Image Dimensions',
+          description: 'Use the sliders or input fields to set custom width and height in pixels. Or choose from preset sizes like Square, Banner, Hero, or Mobile.',
+        },
+        {
+          title: 'Customize Colors',
+          description: 'Select background and text colors using the color pickers or enter hex codes manually. Use color presets for quick styling options.',
+        },
+        {
+          title: 'Add Custom Text',
+          description: 'Enter optional custom text to display on the placeholder. Leave empty to show default dimensions (e.g., "600 × 400").',
+        },
+        {
+          title: 'Choose Format',
+          description: 'Select PNG for images with potential transparency, JPEG for smaller file sizes, or WebP for best compression with quality.',
+        },
+        {
+          title: 'Download or Copy',
+          description: 'Download the generated image or copy the data URL to use directly in HTML/CSS. Data URLs are perfect for quick prototyping.',
+        },
+      ],
+    },
+    relatedTools: ['image-compressor', 'qr-code', 'base64'],
+  },
+
+  'markdown-to-html': {
+    howToUse: {
+      title: 'How to Convert Markdown to HTML',
+      steps: [
+        {
+          title: 'Paste Markdown Content',
+          description: 'Copy your Markdown text from README files, documentation, or blog posts and paste it into the input area. Supports GitHub-flavored Markdown.',
+        },
+        {
+          title: 'View Live Preview',
+          description: 'Switch to Preview mode to see how your Markdown will render with proper styling, including headers, lists, code blocks, and tables.',
+        },
+        {
+          title: 'Check HTML Output',
+          description: 'Switch to HTML mode to see the generated HTML code. This is the actual markup that you can use in your web projects.',
+        },
+        {
+          title: 'Use Markdown Features',
+          description: 'Take advantage of headers, bold/italic text, links, images, code blocks with syntax highlighting, tables, blockquotes, and task lists.',
+        },
+        {
+          title: 'Copy HTML Code',
+          description: 'Click the copy button to copy the generated HTML. Paste it into your CMS, static site generator, or any HTML document.',
+        },
+      ],
+    },
+    relatedTools: ['code-formatter', 'diff-checker', 'base64'],
+  },
+
+  'code-minifier': {
+    howToUse: {
+      title: 'How to Minify Code',
+      steps: [
+        {
+          title: 'Select Code Language',
+          description: 'Choose between HTML, CSS, or JavaScript tabs based on the code you want to minify. Each language has optimized minification settings.',
+        },
+        {
+          title: 'Paste Your Code',
+          description: 'Copy code from your project files and paste it into the input area. The tool handles code of any size, from snippets to full files.',
+        },
+        {
+          title: 'View File Size Reduction',
+          description: 'See original size, minified size, bytes saved, and percentage reduction in real-time. Track how much smaller your code becomes.',
+        },
+        {
+          title: 'Review Minified Output',
+          description: 'Check the minified code in the output panel. Whitespace, comments, and unnecessary characters are removed while preserving functionality.',
+        },
+        {
+          title: 'Copy Minified Code',
+          description: 'Click copy to get the minified code. Use it in production to reduce file sizes, improve load times, and optimize bandwidth usage.',
+        },
+      ],
+    },
+    relatedTools: ['code-formatter', 'css-to-tailwind', 'image-compressor'],
+  },
+
+  'code-formatter': {
+    howToUse: {
+      title: 'How to Format Code',
+      steps: [
+        {
+          title: 'Choose Language',
+          description: 'Select JavaScript, HTML, CSS, or JSON from the tabs. Each language is formatted according to industry-standard style guides and best practices.',
+        },
+        {
+          title: 'Adjust Format Settings',
+          description: 'Set indentation size (2, 4, or 8 spaces) and choose between spaces or tabs. These settings control how your code will be formatted.',
+        },
+        {
+          title: 'Paste Unformatted Code',
+          description: 'Copy messy, unformatted code and paste it into the input area. The tool handles code with inconsistent spacing, missing indentation, and style issues.',
+        },
+        {
+          title: 'View Formatted Output',
+          description: 'See your code automatically formatted with consistent indentation, proper spacing, and standardized style. Powered by Prettier for professional results.',
+        },
+        {
+          title: 'Copy Formatted Code',
+          description: 'Click copy to get the beautifully formatted code. Use it in your projects for better readability and team consistency.',
+        },
+      ],
+    },
+    relatedTools: ['code-minifier', 'tailwind-class-sorter', 'diff-checker'],
+  },
 };
 
 /**

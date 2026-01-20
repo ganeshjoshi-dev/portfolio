@@ -713,6 +713,350 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
       },
     ],
   },
+  'code-formatter': {
+    title: 'Code Formatter - Format HTML, CSS, JavaScript, JSON Online',
+    metaDescription: 'Free online code formatter powered by Prettier. Format and beautify HTML, CSS, JavaScript, and JSON with customizable indentation and style options.',
+    longTailKeywords: [
+      'code formatter online',
+      'beautify javascript',
+      'format html online',
+      'css formatter',
+      'json formatter',
+      'prettier online',
+      'code beautifier',
+      'javascript formatter',
+      'format code online',
+      'code indentation tool',
+    ],
+    faqs: [
+      {
+        question: 'Is this code formatter free?',
+        answer: 'Yes, completely free with no sign-up required. Format unlimited code for your projects.',
+      },
+      {
+        question: 'Is my code stored on the server?',
+        answer: 'No, all formatting happens in your browser using Prettier. Your code never leaves your device.',
+      },
+      {
+        question: 'How do I format code with this tool?',
+        answer: 'Select your language (JavaScript, HTML, CSS, or JSON), adjust indentation size and choose between spaces or tabs, paste your unformatted code into the input area, and watch it automatically format with consistent spacing and style. Click copy to get the beautifully formatted code.',
+      },
+      {
+        question: 'What formatting rules are applied?',
+        answer: 'We use industry-standard Prettier rules: single quotes, semicolons, 80-character line width, ES5 trailing commas, bracket spacing, and always-parentheses for arrow functions.',
+      },
+      {
+        question: 'Can I customize the formatting settings?',
+        answer: 'Yes! You can adjust indentation size (2, 4, or 8 spaces) and choose between spaces or tabs. Other settings follow Prettier best practices for consistency.',
+      },
+    ],
+    alternateNames: ['Code Beautifier', 'Prettier Online', 'Code Indenter'],
+  },
+  'code-minifier': {
+    title: 'Code Minifier - Minify HTML, CSS, JavaScript Online',
+    metaDescription: 'Free online code minifier. Reduce file sizes by removing whitespace and comments from HTML, CSS, and JavaScript. See size reduction stats.',
+    longTailKeywords: [
+      'code minifier online',
+      'minify javascript',
+      'minify html',
+      'minify css',
+      'js minifier',
+      'css compressor',
+      'html compressor',
+      'reduce code size',
+      'compress javascript',
+      'code optimizer',
+    ],
+    faqs: [
+      {
+        question: 'Is this code minifier free?',
+        answer: 'Yes, completely free with no sign-up. Minify unlimited files for production use.',
+      },
+      {
+        question: 'Is my code stored on the server?',
+        answer: 'No, all minification happens in your browser. Your code never leaves your device.',
+      },
+      {
+        question: 'How do I minify code?',
+        answer: 'Select your code language (HTML, CSS, or JavaScript), paste your code into the input area, view file size reduction stats (original size, minified size, bytes saved, percentage reduction), and copy the minified code for use in production.',
+      },
+      {
+        question: 'How much file size can I save?',
+        answer: 'Results vary by code style. Typically, you can save 30-60% for well-formatted code with comments. Heavily commented code may see 70%+ reduction.',
+      },
+      {
+        question: 'Will minification break my code?',
+        answer: 'No, minification only removes whitespace and comments while preserving functionality. However, always test minified code before deploying to production.',
+      },
+    ],
+    alternateNames: ['Code Compressor', 'JS Minifier', 'CSS Minifier'],
+  },
+  'hash-generator': {
+    title: 'Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Online',
+    metaDescription: 'Generate cryptographic hashes online. Create MD5, SHA-1, SHA-256, and SHA-512 hashes from text or files for checksums and verification.',
+    longTailKeywords: [
+      'hash generator online',
+      'md5 generator',
+      'sha256 generator',
+      'sha512 generator',
+      'generate hash online',
+      'checksum generator',
+      'file hash calculator',
+      'text to hash',
+      'cryptographic hash',
+      'hash calculator',
+    ],
+    faqs: [
+      {
+        question: 'Is this hash generator free?',
+        answer: 'Yes, completely free with no sign-up. Generate unlimited hashes for verification and security purposes.',
+      },
+      {
+        question: 'Is my data stored on the server?',
+        answer: 'No, all hash generation happens in your browser. Your text and files never leave your device.',
+      },
+      {
+        question: 'How do I generate hashes?',
+        answer: 'Choose between text input or file upload, enter your data or upload a file, view all hash types generated simultaneously (MD5, SHA-1, SHA-256, SHA-512), and click copy to get any hash value for use in your project.',
+      },
+      {
+        question: 'Which hash algorithm should I use?',
+        answer: 'For security purposes, use SHA-256 or SHA-512. MD5 and SHA-1 are suitable for checksums and non-cryptographic uses but not recommended for password hashing or security.',
+      },
+      {
+        question: 'Can I hash files?',
+        answer: 'Yes! Upload any text file to generate hashes. This is perfect for verifying file integrity and creating checksums.',
+      },
+    ],
+    alternateNames: ['Checksum Generator', 'SHA256 Generator', 'MD5 Calculator'],
+  },
+  'markdown-to-html': {
+    title: 'Markdown to HTML Converter - Convert MD to HTML Online',
+    metaDescription: 'Convert Markdown to HTML online with live preview. Supports GitHub-flavored Markdown including tables, code blocks, and task lists.',
+    longTailKeywords: [
+      'markdown to html',
+      'markdown to html converter',
+      'md to html',
+      'convert markdown to html',
+      'markdown parser online',
+      'github markdown to html',
+      'markdown preview',
+      'markdown renderer',
+      'readme to html',
+    ],
+    faqs: [
+      {
+        question: 'Is this Markdown to HTML converter free?',
+        answer: 'Yes, completely free with no sign-up. Convert unlimited Markdown files for your projects.',
+      },
+      {
+        question: 'Is my Markdown stored on the server?',
+        answer: 'No, all conversion happens in your browser. Your Markdown content never leaves your device.',
+      },
+      {
+        question: 'How do I convert Markdown to HTML?',
+        answer: 'Paste your Markdown text from README files, documentation, or blog posts, switch to Preview mode to see how it renders with styling, check the HTML mode to see the generated markup, and copy the HTML code for use in your web projects.',
+      },
+      {
+        question: 'What Markdown features are supported?',
+        answer: 'We support GitHub-flavored Markdown including headers, bold/italic text, links, images, code blocks with syntax highlighting, tables, blockquotes, ordered/unordered lists, and task lists.',
+      },
+      {
+        question: 'Can I use this for blog posts?',
+        answer: 'Absolutely! Convert your Markdown blog posts to HTML for use in CMSs, static site generators, or any web platform.',
+      },
+    ],
+    alternateNames: ['MD to HTML', 'Markdown Parser', 'Markdown Renderer'],
+  },
+  'password-generator': {
+    title: 'Password Generator - Generate Strong Random Passwords Online',
+    metaDescription: 'Generate strong, secure passwords with our free tool. Create random passwords with custom length and character types. Bulk generation supported.',
+    longTailKeywords: [
+      'password generator',
+      'random password generator',
+      'strong password generator',
+      'secure password creator',
+      'generate password online',
+      'bulk password generator',
+      'random password maker',
+      'password strength checker',
+      'safe password generator',
+    ],
+    faqs: [
+      {
+        question: 'Is this password generator free?',
+        answer: 'Yes, completely free with no sign-up. Generate unlimited secure passwords for all your accounts.',
+      },
+      {
+        question: 'Are the generated passwords secure?',
+        answer: 'Yes, passwords are generated using cryptographically secure random methods. They never leave your browser and are not stored anywhere.',
+      },
+      {
+        question: 'How do I generate strong passwords?',
+        answer: 'Use the slider to set password length (12+ characters recommended), check boxes for character types (uppercase, lowercase, numbers, symbols), view the strength meter for quality feedback, generate single or bulk passwords (1, 5, 10, 25, or 50 at once), and copy individual passwords or all at once.',
+      },
+      {
+        question: 'How long should my password be?',
+        answer: 'We recommend at least 12 characters for most accounts, 16+ for sensitive accounts like email or banking. Longer passwords with more character types are exponentially more secure.',
+      },
+      {
+        question: 'Can I generate passwords in bulk?',
+        answer: 'Yes! Use the quick generate buttons to create 5, 10, 25, or 50 passwords at once. Perfect for setting up multiple accounts or team members.',
+      },
+    ],
+    alternateNames: ['Random Password Creator', 'Secure Password Maker', 'Strong Password Tool'],
+  },
+  'placeholder-image': {
+    title: 'Placeholder Image Generator - Create Custom Placeholder Images',
+    metaDescription: 'Generate custom placeholder images online. Set dimensions, colors, and text. Export as PNG, JPEG, or WebP. Perfect for mockups and prototypes.',
+    longTailKeywords: [
+      'placeholder image generator',
+      'dummy image generator',
+      'placeholder image maker',
+      'generate placeholder image',
+      'custom placeholder image',
+      'image placeholder creator',
+      'mockup image generator',
+      'placeholder png generator',
+    ],
+    faqs: [
+      {
+        question: 'Is this placeholder image generator free?',
+        answer: 'Yes, completely free with no sign-up. Generate unlimited placeholder images for your designs and prototypes.',
+      },
+      {
+        question: 'Is my data stored on the server?',
+        answer: 'No, all image generation happens in your browser. Images are created locally and never uploaded anywhere.',
+      },
+      {
+        question: 'How do I generate placeholder images?',
+        answer: 'Set custom width and height using sliders or input fields, or choose from preset sizes (Square, Banner, Hero, Mobile), customize background and text colors with the color pickers, add optional custom text to display on the image, select your format (PNG, JPEG, or WebP), and download the image or copy the data URL.',
+      },
+      {
+        question: 'Which format should I use?',
+        answer: 'Use PNG for images with potential transparency, JPEG for smaller file sizes (best for photos), or WebP for best compression with quality. Data URLs are perfect for quick prototyping in HTML/CSS.',
+      },
+      {
+        question: 'Can I use custom text on the placeholder?',
+        answer: 'Yes! Enter any text you want to display. Leave it empty to show default dimensions (e.g., "600 × 400").',
+      },
+    ],
+    alternateNames: ['Dummy Image Generator', 'Placeholder Maker', 'Mockup Image Tool'],
+  },
+  'qr-code': {
+    title: 'QR Code Generator - Create Custom QR Codes Online Free',
+    metaDescription: 'Generate custom QR codes online. Create QR codes for URLs, text, WiFi, and more. Customize colors and download as PNG or SVG.',
+    longTailKeywords: [
+      'qr code generator',
+      'qr code maker',
+      'create qr code',
+      'custom qr code',
+      'qr code creator online',
+      'generate qr code free',
+      'qr code for url',
+      'svg qr code generator',
+      'colored qr code',
+    ],
+    faqs: [
+      {
+        question: 'Is this QR code generator free?',
+        answer: 'Yes, completely free with no sign-up. Generate unlimited QR codes for personal and commercial use.',
+      },
+      {
+        question: 'Is my data stored on the server?',
+        answer: 'No, all QR code generation happens in your browser. Your data never leaves your device.',
+      },
+      {
+        question: 'How do I create a QR code?',
+        answer: 'Enter the URL, text, or data you want to encode (website URLs, contact info, WiFi credentials), customize the appearance (size, colors), set error correction level (higher levels allow the QR code to be read even if partially damaged), preview your QR code in real-time, and download as PNG for digital use or SVG for print materials.',
+      },
+      {
+        question: 'What error correction level should I use?',
+        answer: 'Use L (7%) for digital displays, M (15%) for most uses, Q (25%) if the code might be partially covered, and H (30%) for codes that may be damaged or have a logo overlay.',
+      },
+      {
+        question: 'Can I customize QR code colors?',
+        answer: 'Yes! Change both foreground and background colors to match your brand. Ensure good contrast for reliable scanning.',
+      },
+    ],
+    alternateNames: ['QR Code Maker', 'QR Generator', 'Custom QR Creator'],
+  },
+  'timestamp-converter': {
+    title: 'Unix Timestamp Converter - Convert Timestamp to Date Online',
+    metaDescription: 'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds and milliseconds. Multiple date format outputs.',
+    longTailKeywords: [
+      'timestamp converter',
+      'unix timestamp converter',
+      'timestamp to date',
+      'date to timestamp',
+      'epoch converter',
+      'unix time converter',
+      'convert timestamp online',
+      'timestamp calculator',
+      'epoch time converter',
+    ],
+    faqs: [
+      {
+        question: 'Is this timestamp converter free?',
+        answer: 'Yes, completely free with no sign-up. Convert unlimited timestamps for your development needs.',
+      },
+      {
+        question: 'Is my data stored on the server?',
+        answer: 'No, all conversions happen in your browser. Your timestamps and dates never leave your device.',
+      },
+      {
+        question: 'How do I convert timestamps?',
+        answer: 'View the current Unix timestamp in seconds and milliseconds with live date representations, toggle between seconds and milliseconds based on your needs, enter a Unix timestamp to see it converted to ISO 8601, UTC, local time, and other formats, or use the datetime picker to select a date and see the corresponding Unix timestamp.',
+      },
+      {
+        question: 'What is the difference between seconds and milliseconds?',
+        answer: 'Unix timestamps in seconds are common in Unix/Linux systems. JavaScript and many APIs use milliseconds (1000× larger). The tool handles both formats.',
+      },
+      {
+        question: 'Can I copy specific date formats?',
+        answer: 'Yes! Click the copy button next to any timestamp or date format to use it in your application, database queries, or API requests.',
+      },
+    ],
+    alternateNames: ['Epoch Converter', 'Unix Time Converter', 'Timestamp Calculator'],
+  },
+  'word-counter': {
+    title: 'Word Counter - Count Words, Characters, Reading Time Online',
+    metaDescription: 'Free online word counter. Count words, characters, sentences, paragraphs, and reading time. Check text against platform character limits.',
+    longTailKeywords: [
+      'word counter',
+      'word counter online',
+      'character counter',
+      'word count tool',
+      'reading time calculator',
+      'text statistics',
+      'count words in text',
+      'character count checker',
+      'word frequency counter',
+    ],
+    faqs: [
+      {
+        question: 'Is this word counter free?',
+        answer: 'Yes, completely free with no sign-up. Count words and characters for unlimited text and documents.',
+      },
+      {
+        question: 'Is my text stored on the server?',
+        answer: 'No, all counting happens in your browser. Your text never leaves your device.',
+      },
+      {
+        question: 'How do I use the word counter?',
+        answer: 'Paste your text into the input area (supports essays, articles, blog posts, social media content), view real-time statistics (word count, character count with/without spaces, sentence and paragraph count), check estimated reading time and speaking time, and monitor your text against common platform character limits (Twitter, Instagram, LinkedIn, meta descriptions).',
+      },
+      {
+        question: 'How is reading time calculated?',
+        answer: 'Reading time is based on average reading speed of 225 words per minute. Speaking time uses 150 words per minute. Actual times vary by content complexity and individual reading speed.',
+      },
+      {
+        question: 'What character limits are checked?',
+        answer: 'We check against Twitter (280), Instagram caption (2200), LinkedIn post (3000), meta descriptions (160), and title tags (60) to help you optimize content for different platforms.',
+      },
+    ],
+    alternateNames: ['Character Counter', 'Text Statistics Tool', 'Reading Time Calculator'],
+  },
 };
 
 /**
