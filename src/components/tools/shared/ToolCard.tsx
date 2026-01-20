@@ -55,6 +55,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link
       href={tool.path}
+      scroll={true}
       className="
         group block p-6 bg-slate-900/60 backdrop-blur-sm rounded-xl
         border border-slate-700/60 hover:border-cyan-400/50
