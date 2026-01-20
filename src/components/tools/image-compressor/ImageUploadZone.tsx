@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Upload, Image as ImageIcon } from 'lucide-react';
+import { Upload } from 'lucide-react';
 
 interface ImageUploadZoneProps {
   onFilesAdded: (files: File[]) => void;

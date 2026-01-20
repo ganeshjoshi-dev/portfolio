@@ -12,7 +12,13 @@ export async function compressImage(
   options: CompressionOptions
 ): Promise<CompressionResult> {
   try {
-    const compressionOptions: any = {
+    const compressionOptions: {
+      maxSizeMB: number;
+      useWebWorker: boolean;
+      initialQuality: number;
+      fileType?: string;
+      exifOrientation?: number;
+    } = {
       maxSizeMB: options.maxSizeMB || 10,
       useWebWorker: true,
       initialQuality: options.quality,
@@ -23,9 +29,9 @@ export async function compressImage(
       compressionOptions.fileType = `image/${options.targetFormat}`;
     }
 
-    // Preserve EXIF data if requested
+    // Preserve EXIF data if requested (exifOrientation defaults to 1 when not rotated)
     if (options.preserveExif) {
-      compressionOptions.exifOrientation = true;
+      compressionOptions.exifOrientation = 1;
     }
 
     const compressedFile = await imageCompression(file, compressionOptions);

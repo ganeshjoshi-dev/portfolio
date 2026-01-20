@@ -51,7 +51,6 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
           max={1.0}
           step={0.05}
           onChange={handleQualityChange}
-          showValue
         />
         <div className="flex justify-between text-xs text-slate-400 px-1">
           <span>Smaller file</span>
