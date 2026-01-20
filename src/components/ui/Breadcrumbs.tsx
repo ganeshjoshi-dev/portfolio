@@ -10,13 +10,31 @@ export interface BreadcrumbItem {
 export interface BreadcrumbsProps {
   items: BreadcrumbItem[];
   includeSchema?: boolean;
+  currentPageUrl?: string; // Full URL of the current page for schema
 }
 
-export default function Breadcrumbs({ items, includeSchema = true }: BreadcrumbsProps) {
-  const schemaItems = items.map((item) => ({
-    name: item.label,
-    item: item.href ? `${siteConfig.url}${item.href}` : `${siteConfig.url}`,
-  }));
+export default function Breadcrumbs({ items, includeSchema = true, currentPageUrl }: BreadcrumbsProps) {
+  const schemaItems = items.map((item, index) => {
+    const isLast = index === items.length - 1;
+    
+    // Determine the URL for schema
+    let itemUrl: string;
+    if (item.href) {
+      // Item has explicit href
+      itemUrl = `${siteConfig.url}${item.href}`;
+    } else if (isLast && currentPageUrl) {
+      // Last item without href - use currentPageUrl if provided
+      itemUrl = currentPageUrl;
+    } else {
+      // Fallback to base URL (should rarely happen)
+      itemUrl = `${siteConfig.url}`;
+    }
+    
+    return {
+      name: item.label,
+      item: itemUrl,
+    };
+  });
 
   const schemaData = generateBreadcrumbSchema(schemaItems);
 
