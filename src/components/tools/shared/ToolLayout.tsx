@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Tool, ToolCategoryConfig } from '@/types/tools';
@@ -41,6 +44,11 @@ export default function ToolLayout({
   // Get content for this tool
   const toolContent = tool ? getToolContent(tool.id) : undefined;
   const toolSEO = tool ? toolSEOData[tool.id] : undefined;
+
+  // Scroll to top when the component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   return (
     <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
