@@ -27,16 +27,39 @@ function ImagePreviewCard({ image, onDownload, onRemove }: ImagePreviewCardProps
           'bg-slate-800/60 text-slate-400'
         }
       `}>
-        <div className="flex items-center gap-2">
-          {image.status === 'pending' && <Clock className="w-3 h-3" />}
-          {image.status === 'processing' && <Loader2 className="w-3 h-3 animate-spin" />}
-          {image.status === 'completed' && <Check className="w-3 h-3" />}
-          {image.status === 'error' && <X className="w-3 h-3" />}
-          <span className="truncate max-w-[200px]">{image.file.name}</span>
+        <div className="flex items-center gap-2 min-w-0">
+          {image.status === 'pending' && <Clock className="w-3 h-3 flex-shrink-0" />}
+          {image.status === 'processing' && <Loader2 className="w-3 h-3 animate-spin flex-shrink-0" />}
+          {image.status === 'completed' && <Check className="w-3 h-3 flex-shrink-0" />}
+          {image.status === 'error' && <X className="w-3 h-3 flex-shrink-0" />}
+          <span className="truncate">{image.file.name}</span>
         </div>
-        <span className="uppercase text-[10px] px-2 py-0.5 bg-slate-700/40 rounded">
-          {image.targetFormat || image.format}
-        </span>
+        <div className="flex items-center gap-1 flex-shrink-0">
+          <span className="uppercase text-[10px] px-2 py-0.5 bg-slate-700/40 rounded">
+            {image.format}
+          </span>
+          {image.status === 'completed' && image.actualFormat ? (
+            // Show actual output format after compression
+            <>
+              <span className="text-slate-500">→</span>
+              <span className={`uppercase text-[10px] px-2 py-0.5 rounded ${
+                image.actualFormat !== image.format 
+                  ? 'bg-emerald-400/20 text-emerald-300' 
+                  : 'bg-slate-700/40 text-slate-400'
+              }`}>
+                {image.actualFormat}
+              </span>
+            </>
+          ) : image.targetFormat && image.targetFormat !== image.format ? (
+            // Show target format before compression
+            <>
+              <span className="text-slate-500">→</span>
+              <span className="uppercase text-[10px] px-2 py-0.5 bg-cyan-400/20 text-cyan-300 rounded">
+                {image.targetFormat}
+              </span>
+            </>
+          ) : null}
+        </div>
       </div>
 
       {/* Image Comparison */}

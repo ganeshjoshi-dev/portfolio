@@ -161,16 +161,19 @@ export function getFileExtension(format: ImageFormat): string {
  * Create a download filename for a compressed image
  * @param originalName - Original filename
  * @param format - Target format
+ * @param wasConverted - Whether the format was converted
  * @returns New filename
  */
 export function createDownloadFilename(
   originalName: string,
-  format: ImageFormat
+  format: ImageFormat,
+  wasConverted: boolean = false
 ): string {
   // Remove extension from original name
   const nameWithoutExt = originalName.replace(/\.[^/.]+$/, '');
   const extension = getFileExtension(format);
-  return `${nameWithoutExt}-compressed.${extension}`;
+  const suffix = wasConverted ? '-compressed-converted' : '-compressed';
+  return `${nameWithoutExt}${suffix}.${extension}`;
 }
 
 /**
