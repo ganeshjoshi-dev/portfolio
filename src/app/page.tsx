@@ -4,6 +4,14 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 /* import TestimonialsSection from "@/components/sections/TestimonialsSection"; */
 import CTASection from "@/components/sections/CTASection";
+import { siteConfig } from "@/lib/utils/seo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: siteConfig.url,
+  }
+};
 
 export default function Page() {
   return (
