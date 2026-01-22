@@ -28,17 +28,19 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
   };
 
   const handleAutoConvertToggle = () => {
+    const newAutoConvert = !options.autoConvert;
     onChange({ 
       ...options, 
-      autoConvert: !options.autoConvert,
-      targetFormat: options.autoConvert ? undefined : options.targetFormat,
+      autoConvert: newAutoConvert,
+      // Set default format to WebP when enabling auto-convert, clear when disabling
+      targetFormat: newAutoConvert ? (options.targetFormat || 'webp') : undefined,
     });
   };
 
   const handleFormatChange = (format: ImageFormat) => {
     onChange({ 
       ...options, 
-      targetFormat: options.targetFormat === format ? undefined : format,
+      targetFormat: format,
     });
   };
 
@@ -140,10 +142,17 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
 
         {/* Format Options */}
         {options.autoConvert && (
-          <div className="space-y-2 pl-4 border-l-2 border-slate-700/60">
-            <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">
-              Target Format
-            </p>
+          <div className="space-y-3 pl-4 border-l-2 border-cyan-400/30">
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">
+                Target Format
+              </p>
+              {options.targetFormat && (
+                <span className="text-xs text-cyan-400 font-medium">
+                  Selected
+                </span>
+              )}
+            </div>
             <div className="grid grid-cols-2 gap-2">
               {formatOptions.map((format) => (
                 <button
@@ -178,6 +187,18 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
                 </button>
               ))}
             </div>
+            <div className="p-2 bg-cyan-400/5 rounded-lg border border-cyan-400/20">
+              <p className="text-xs text-cyan-300/80">
+                💡 Images will be converted during compression
+              </p>
+            </div>
+            {options.targetFormat === 'avif' && (
+              <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20">
+                <p className="text-xs text-amber-300/90">
+                  ⚠️ AVIF has limited browser support. Consider WebP for better compatibility.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -188,13 +209,25 @@ export default function CompressionSettings({ options, onChange }: CompressionSe
           <div className="flex-shrink-0 w-1 h-full bg-cyan-400/50 rounded-full" />
           <div className="space-y-1">
             <p className="text-sm font-medium text-slate-300">
-              Tips for best results:
+              💡 Format Guide:
             </p>
-            <ul className="text-xs text-slate-400 space-y-1 list-disc list-inside">
-              <li>Quality 0.8 provides the best balance for most images</li>
-              <li>WebP offers 25-35% smaller files than JPEG</li>
-              <li>Use PNG only if you need lossless quality</li>
-              <li>AVIF provides the smallest files but limited browser support</li>
+            <ul className="text-xs text-slate-400 space-y-1.5">
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 font-medium min-w-[50px]">JPEG:</span>
+                <span>Best for photos, no transparency</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 font-medium min-w-[50px]">PNG:</span>
+                <span>Lossless quality, supports transparency</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 font-medium min-w-[50px]">WebP:</span>
+                <span>25-35% smaller than JPEG, modern browsers</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 font-medium min-w-[50px]">AVIF:</span>
+                <span>Best compression, limited browser support</span>
+              </li>
             </ul>
           </div>
         </div>

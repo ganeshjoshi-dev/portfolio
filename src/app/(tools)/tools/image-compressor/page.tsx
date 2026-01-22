@@ -38,6 +38,26 @@ export default function ImageCompressorPage() {
   const [errors, setErrors] = useState<string[]>([]);
   const [isCompressing, setIsCompressing] = useState(false);
 
+  // Update target format for pending images when settings change
+  const handleOptionsChange = useCallback((newOptions: CompressionOptions) => {
+    setOptions(newOptions);
+    
+    // Update targetFormat for all pending images
+    setImages((prev) =>
+      prev.map((img) => {
+        if (img.status === 'pending') {
+          return {
+            ...img,
+            targetFormat: newOptions.autoConvert && newOptions.targetFormat 
+              ? newOptions.targetFormat 
+              : undefined,
+          };
+        }
+        return img;
+      })
+    );
+  }, []);
+
   const handleFilesAdded = useCallback(async (files: File[]) => {
     setErrors([]);
     
@@ -53,14 +73,17 @@ export default function ImageCompressorPage() {
     const newImages: ImageFile[] = await Promise.all(
       validation.valid.map(async (file) => {
         const preview = await createPreview(file);
+        const format = getFormatFromMimeType(file.type);
+        
         return {
           id: generateId(),
           file,
           preview,
           originalSize: file.size,
-          format: getFormatFromMimeType(file.type),
+          format,
           status: 'pending' as const,
-          targetFormat: options.autoConvert ? options.targetFormat : undefined,
+          // Only set targetFormat if autoConvert is enabled AND a format is selected
+          targetFormat: options.autoConvert && options.targetFormat ? options.targetFormat : undefined,
         };
       })
     );
@@ -84,16 +107,19 @@ export default function ImageCompressorPage() {
           )
         );
 
-        // Compress the image
+        // Compress the image - use the image's targetFormat, not global options
         const compressionOptions: CompressionOptions = {
           ...options,
-          targetFormat: options.autoConvert ? options.targetFormat : undefined,
+          targetFormat: image.targetFormat, // Use the specific image's target format
         };
 
         const result = await compressImage(image.file, compressionOptions);
 
         // Calculate compression ratio
         const ratio = calculateCompressionRatio(image.originalSize, result.size);
+
+        // Get actual output format from the blob
+        const actualFormat = getFormatFromMimeType(result.blob.type);
 
         // Update with compressed result
         setImages((prev) =>
@@ -106,6 +132,7 @@ export default function ImageCompressorPage() {
                   compressedPreview: result.preview,
                   compressedSize: result.size,
                   compressionRatio: ratio,
+                  actualFormat: actualFormat,
                 }
               : img
           )
@@ -132,9 +159,13 @@ export default function ImageCompressorPage() {
   const handleDownloadSingle = useCallback((image: ImageFile) => {
     if (!image.compressedBlob) return;
 
+    // Use actual format if available, otherwise fall back to target or original
+    const finalFormat = image.actualFormat || image.targetFormat || image.format;
+    const wasConverted = image.actualFormat !== undefined && image.actualFormat !== image.format;
     const filename = createDownloadFilename(
       image.file.name,
-      image.targetFormat || image.format
+      finalFormat,
+      wasConverted
     );
     downloadBlob(image.compressedBlob, filename);
   }, []);
@@ -155,9 +186,13 @@ export default function ImageCompressorPage() {
     
     completedImages.forEach((image) => {
       if (image.compressedBlob) {
+        // Use actual format if available, otherwise fall back to target or original
+        const finalFormat = image.actualFormat || image.targetFormat || image.format;
+        const wasConverted = image.actualFormat !== undefined && image.actualFormat !== image.format;
         const filename = createDownloadFilename(
           image.file.name,
-          image.targetFormat || image.format
+          finalFormat,
+          wasConverted
         );
         zip.file(filename, image.compressedBlob);
       }
@@ -209,6 +244,27 @@ export default function ImageCompressorPage() {
           </div>
         )}
 
+        {/* Format Conversion Info */}
+        {images.length > 0 && options.autoConvert && options.targetFormat && (
+          <div className="p-4 bg-cyan-400/10 border border-cyan-400/20 rounded-lg">
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 text-cyan-400">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-cyan-300 mb-1">
+                  Format Conversion Enabled
+                </p>
+                <p className="text-xs text-cyan-400/80">
+                  All images will be converted to <span className="font-semibold uppercase">{options.targetFormat}</span> format during compression.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Upload Zone */}
         {images.length === 0 && (
           <ImageUploadZone onFilesAdded={handleFilesAdded} disabled={isCompressing} />
@@ -221,7 +277,7 @@ export default function ImageCompressorPage() {
               {/* Settings Panel */}
               <div className="lg:col-span-1">
                 <div className="sticky top-24 space-y-6">
-                  <CompressionSettings options={options} onChange={setOptions} />
+                  <CompressionSettings options={options} onChange={handleOptionsChange} />
                   
                   {/* Add More Images */}
                   <div className="p-4 bg-slate-900/40 border border-slate-700/60 rounded-xl">

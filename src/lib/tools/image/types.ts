@@ -21,6 +21,7 @@ export interface ImageFile {
   compressedBlob?: Blob;
   compressedPreview?: string;
   targetFormat?: ImageFormat;
+  actualFormat?: ImageFormat; // The actual format after compression
 }
 
 export interface ValidationResult {

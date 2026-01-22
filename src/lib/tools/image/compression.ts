@@ -1,5 +1,6 @@
 import imageCompression from 'browser-image-compression';
 import { CompressionOptions, CompressionResult, ImageFormat } from './types';
+import { isFormatSupported, getFallbackFormat } from './conversion';
 
 /**
  * Compress an image file using browser-image-compression library
@@ -24,9 +25,17 @@ export async function compressImage(
       initialQuality: options.quality,
     };
 
-    // Add target format if specified
+    // Add target format if specified and check browser support
     if (options.targetFormat) {
-      compressionOptions.fileType = `image/${options.targetFormat}`;
+      let targetFormat = options.targetFormat;
+      
+      // Check if format is supported, use fallback if not
+      if (!isFormatSupported(targetFormat)) {
+        targetFormat = getFallbackFormat(targetFormat);
+        console.warn(`Target format ${options.targetFormat} not supported, using ${targetFormat} instead`);
+      }
+      
+      compressionOptions.fileType = `image/${targetFormat}`;
     }
 
     // Preserve EXIF data if requested (exifOrientation defaults to 1 when not rotated)
