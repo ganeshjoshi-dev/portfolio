@@ -811,6 +811,34 @@ export const toolContent: Record<string, ToolContent> = {
     },
     relatedTools: ['code-minifier', 'tailwind-class-sorter', 'diff-checker'],
   },
+  'css-animations': {
+    howToUse: {
+      title: 'How to Create CSS Animations',
+      steps: [
+        {
+          title: 'Choose an Animation',
+          description: 'Browse the animation library and select from 35+ presets across 8 categories including fade, slide, scale, rotate, bounce, shake, attention, and special effects.',
+        },
+        {
+          title: 'Preview Live',
+          description: 'Watch your selected animation in real-time with play, pause, and reset controls. The preview updates instantly as you make changes.',
+        },
+        {
+          title: 'Customize Properties',
+          description: 'Fine-tune animation duration, delay, timing function, iteration count, direction, and fill mode using intuitive controls and sliders.',
+        },
+        {
+          title: 'Choose Output Format',
+          description: 'Select your preferred format: pure CSS with @keyframes, Tailwind config, or ready-to-use HTML class examples.',
+        },
+        {
+          title: 'Copy and Use',
+          description: 'Click the copy button to get your generated code and paste it directly into your project. Works with any CSS framework or vanilla HTML/CSS.',
+        },
+      ],
+    },
+    relatedTools: ['gradient-generator', 'shadow-generator', 'tailwind-colors'],
+  },
 };
 
 /**

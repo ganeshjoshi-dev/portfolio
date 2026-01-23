@@ -1057,6 +1057,44 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
     ],
     alternateNames: ['Character Counter', 'Text Statistics Tool', 'Reading Time Calculator'],
   },
+  'css-animations': {
+    title: 'CSS Animation Generator | Create Custom Keyframe Animations',
+    metaDescription: 'Generate professional CSS animations with live preview. Choose from 35+ presets, customize properties, and export to CSS, Tailwind, or HTML classes. Free animation generator tool.',
+    longTailKeywords: [
+      'css animation generator online',
+      'create css keyframes',
+      'tailwind animation generator',
+      'css animation maker',
+      'keyframe animation tool',
+      'custom css animations',
+      'web animation generator',
+      'css effects generator',
+      'animate css generator',
+      'css transition maker',
+    ],
+    faqs: [
+      {
+        question: 'How do I use the generated CSS animations?',
+        answer: 'Copy the generated CSS code and paste it into your stylesheet. The code includes @keyframes definition and a class you can apply to any HTML element. For Tailwind, add the configuration to your tailwind.config.js file.',
+      },
+      {
+        question: 'Can I customize the animation speed and timing?',
+        answer: 'Yes! Use the duration slider to control animation speed (0.1s to 5s), timing function dropdown for easing curves, and delay slider to add a pause before the animation starts.',
+      },
+      {
+        question: 'What is the difference between iteration count and direction?',
+        answer: 'Iteration count controls how many times the animation repeats (1, 2, 3, or infinite). Direction controls playback order: normal plays forward, reverse plays backward, alternate switches direction each iteration.',
+      },
+      {
+        question: 'Do these animations work on all browsers?',
+        answer: 'Yes, CSS animations are supported in all modern browsers including Chrome, Firefox, Safari, and Edge. The generated code uses standard CSS animation properties without vendor prefixes.',
+      },
+      {
+        question: 'Can I use these animations with Tailwind CSS?',
+        answer: 'Absolutely! Choose the Tailwind output format to get keyframes and animation configuration ready for your tailwind.config.js file. You can also use the HTML classes format for quick implementation.',
+      },
+    ],
+  },
 };
 
 /**
