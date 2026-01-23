@@ -377,6 +377,27 @@ export const tools: Tool[] = [
       'beautify code',
     ],
   },
+  {
+    id: 'css-animations',
+    name: 'CSS Animation Generator',
+    description: 'Create and customize popular CSS animations with live preview. Export to CSS, Tailwind, or copy-paste classes with full control over duration, timing, and effects.',
+    category: 'css',
+    path: '/tools/css-animations',
+    icon: 'Sparkles',
+    isNew: true,
+    keywords: [
+      'animation',
+      'css',
+      'keyframes',
+      'animate',
+      'transition',
+      'motion',
+      'effects',
+      'tailwind animation',
+      'css effects',
+      'web animation',
+    ],
+  },
 ];
 
 // Helper functions
