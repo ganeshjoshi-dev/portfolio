@@ -11,7 +11,6 @@ import {
   animationPresets,
   animationCategories,
   timingFunctions,
-  getPresetById,
 } from '@/lib/tools/animations/presets';
 import type { AnimationConfig, AnimationCategory, AnimationPreset } from '@/lib/tools/animations/types';
 import {

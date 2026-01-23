@@ -1,4 +1,4 @@
-import { AnimationConfig, Keyframe } from './types';
+import { AnimationConfig } from './types';
 
 /**
  * Convert keyframes to CSS @keyframes syntax
