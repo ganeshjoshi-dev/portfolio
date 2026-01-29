@@ -58,9 +58,9 @@ const brandTheme = {
       },
     },
 
-    // Form input styles
+    // Form input styles (ring-offset prevents focus ring from looking cropped at rounded corners)
     input: {
-      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50',
+      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 focus:ring-offset-2 focus:ring-offset-slate-900',
       error: 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50',
       label: 'block text-sm font-medium text-gray-300 mb-1',
       errorText: 'text-sm text-red-400 mt-1',
@@ -69,13 +69,13 @@ const brandTheme = {
 
     // Select styles
     select: {
-      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 appearance-none cursor-pointer',
+      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 appearance-none cursor-pointer',
       error: 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50',
     },
 
     // Textarea styles
     textarea: {
-      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 resize-none',
+      base: 'w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-700/50 text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 resize-none',
       error: 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50',
     },
 
