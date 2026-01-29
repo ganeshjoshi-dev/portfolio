@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
-import { Upload, ZoomIn, ZoomOut, RotateCcw, Image as ImageIcon, Wand2, Grid3X3, Layers, Loader2 } from 'lucide-react';
+import { Upload, ZoomIn, ZoomOut, RotateCcw, Image as ImageIcon, Wand2, Grid3X3, Layers, Loader2, SlidersHorizontal } from 'lucide-react';
 import { ToolLayout, CodeOutput, TabSwitcher } from '@/components/tools/shared';
 import { getToolById, toolCategories } from '@/config/tools';
 
@@ -40,6 +40,7 @@ interface SVGElement {
 
 const backgroundColors = [
   { id: 'transparent', label: 'Transparent', class: 'checkerboard-bg' },
+  { id: 'transparent-light', label: 'Transparent (Light)', class: 'checkerboard-bg-light' },
   { id: 'white', label: 'White', class: 'bg-white' },
   { id: 'black', label: 'Black', class: 'bg-black' },
   { id: 'slate', label: 'Slate', class: 'bg-slate-600' },
@@ -350,12 +351,36 @@ export default function SpriteCSSPage() {
   const [gapTolerance, setGapTolerance] = useState(5);
   const [isDetecting, setIsDetecting] = useState(false);
   const [detectProgress, setDetectProgress] = useState(0);
+  const [bgOpacity, setBgOpacity] = useState(100);
+  const [showBgOpacityPopover, setShowBgOpacityPopover] = useState(false);
+  const [showGapPopover, setShowGapPopover] = useState(false);
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const hiddenCanvasRef = useRef<HTMLCanvasElement>(null);
   const cancelDetectionRef = useRef<(() => void) | null>(null);
+  const bgOpacityPopoverRef = useRef<HTMLDivElement>(null);
+  const gapPopoverRef = useRef<HTMLDivElement>(null);
+
+  // Close toolbar popovers on outside click
+  useEffect(() => {
+    if (!showBgOpacityPopover && !showGapPopover) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const clickedInBg = bgOpacityPopoverRef.current?.contains(target);
+      const clickedInGap = gapPopoverRef.current?.contains(target);
+
+      if (!clickedInBg && !clickedInGap) {
+        setShowBgOpacityPopover(false);
+        setShowGapPopover(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showBgOpacityPopover, showGapPopover]);
 
   // Handle file drop/upload
   const handleFile = useCallback((file: File) => {
@@ -532,6 +557,19 @@ export default function SpriteCSSPage() {
     setStartPoint(null);
   }, []);
 
+  // Ensure scroll wheel/touchpad scrolling only moves the image area (not the page)
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+
+    // Always prevent page scroll while cursor is over the image area
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Manually scroll the image container
+    container.scrollTop += e.deltaY;
+    container.scrollLeft += e.deltaX;
+  }, []);
+
   // Zoom controls
   const handleZoomIn = useCallback(() => setZoom((prev) => Math.min(prev + 0.25, 4)), []);
   const handleZoomOut = useCallback(() => setZoom((prev) => Math.max(prev - 0.25, 0.25)), []);
@@ -626,7 +664,7 @@ export default function SpriteCSSPage() {
 
       <div className="space-y-6">
         {/* Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-slate-800/40 rounded-xl border border-slate-700/60">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-slate-800/40 rounded-xl border border-slate-700/60">
           <div className="flex items-center gap-2">
             {/* Upload button */}
             {imageUrl && (
@@ -672,7 +710,7 @@ export default function SpriteCSSPage() {
             </button>
           </div>
 
-          <div className="flex items-center gap-4 flex-wrap">
+          <div className="flex items-center gap-x-3 gap-y-2 flex-wrap md:flex-nowrap">
             {/* Smart Select Toggle */}
             <button
               onClick={() => setSmartSelect(!smartSelect)}
@@ -690,22 +728,39 @@ export default function SpriteCSSPage() {
 
             {/* Gap Tolerance Slider */}
             {imageUrl && pixelData && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-slate-400">Gap:</span>
-                <input
-                  type="range"
-                  min="1"
-                  max="15"
-                  value={gapTolerance}
-                  onChange={(e) => setGapTolerance(Number(e.target.value))}
-                  className="w-20 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer
-                    [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
-                    [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-cyan-400 [&::-webkit-slider-thumb]:cursor-pointer
-                    [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full 
-                    [&::-moz-range-thumb]:bg-cyan-400 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0"
-                  title="Gap tolerance for connecting nearby sprite parts"
-                />
-                <span className="text-sm text-slate-400 min-w-[2rem]">{gapTolerance}px</span>
+              <div className="relative" ref={gapPopoverRef}>
+                <button
+                  type="button"
+                  onClick={() => setShowGapPopover((prev) => !prev)}
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs sm:text-sm text-slate-400 border border-slate-600/70 bg-slate-800/80 hover:text-cyan-300 hover:border-cyan-400/60 transition-colors"
+                  title="Adjust gap tolerance for sprite detection"
+                >
+                  <SlidersHorizontal className="w-3 h-3" />
+                  <span className="hidden sm:inline whitespace-nowrap">Gap</span>
+                  <span className="sm:hidden whitespace-nowrap">{gapTolerance}px</span>
+                </button>
+
+                {showGapPopover && (
+                  <div className="absolute right-0 mt-2 z-20 px-3 py-2 rounded-lg bg-slate-900/95 border border-slate-700/80 shadow-lg flex items-center gap-2">
+                    <span className="text-xs text-slate-400 whitespace-nowrap">Gap</span>
+                    <input
+                      type="range"
+                      min="1"
+                      max="50"
+                      value={gapTolerance}
+                      onChange={(e) => setGapTolerance(Number(e.target.value))}
+                      className="w-28 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer
+                        [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+                        [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-cyan-400 [&::-webkit-slider-thumb]:cursor-pointer
+                        [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full 
+                        [&::-moz-range-thumb]:bg-cyan-400 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0"
+                      title="Gap tolerance for connecting nearby sprite parts"
+                    />
+                    <span className="text-xs text-slate-300 min-w-[3rem] text-right tabular-nums">
+                      {gapTolerance}px
+                    </span>
+                  </div>
+                )}
               </div>
             )}
 
@@ -752,23 +807,64 @@ export default function SpriteCSSPage() {
             )}
 
             {/* Background Color Selector */}
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-slate-400">Background:</span>
-              <div className="flex gap-1">
-                {backgroundColors.map((bg) => (
-                  <button
-                    key={bg.id}
-                    onClick={() => setBgColor(bg.id)}
-                    className={`w-6 h-6 rounded border-2 transition-all duration-300 ${bg.class} ${
-                      bgColor === bg.id
-                        ? 'border-cyan-400 ring-2 ring-cyan-400/30'
-                        : 'border-slate-600 hover:border-slate-500'
-                    }`}
-                    title={bg.label}
-                  />
-                ))}
+            {imageUrl && (
+              <div className="flex items-center gap-x-3 gap-y-2 flex-wrap md:flex-nowrap">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-slate-400">Background:</span>
+                  <div className="flex gap-1">
+                    {backgroundColors.map((bg) => (
+                      <button
+                        key={bg.id}
+                        onClick={() => setBgColor(bg.id)}
+                        className={`w-6 h-6 rounded border-2 transition-all duration-300 ${bg.class} ${
+                          bgColor === bg.id
+                            ? 'border-cyan-400 ring-2 ring-cyan-400/30'
+                            : 'border-slate-600 hover:border-slate-500'
+                        }`}
+                        title={bg.label}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Background Opacity (only applies to transparent backgrounds) */}
+                {(bgColor === 'transparent' || bgColor === 'transparent-light') && (
+                  <div className="relative" ref={bgOpacityPopoverRef}>
+                    <button
+                      type="button"
+                      onClick={() => setShowBgOpacityPopover((prev) => !prev)}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs sm:text-sm text-slate-400 border border-slate-600/70 bg-slate-800/80 hover:text-cyan-300 hover:border-cyan-400/60 transition-colors"
+                      title="Adjust checkerboard background opacity"
+                    >
+                      <SlidersHorizontal className="w-3 h-3" />
+                      <span className="hidden sm:inline whitespace-nowrap">BG opacity</span>
+                      <span className="sm:hidden whitespace-nowrap">{bgOpacity}%</span>
+                    </button>
+
+                    {showBgOpacityPopover && (
+                      <div className="absolute right-0 mt-2 z-20 px-3 py-2 rounded-lg bg-slate-900/95 border border-slate-700/80 shadow-lg flex items-center gap-2">
+                        <span className="text-xs text-slate-400 whitespace-nowrap">BG opacity</span>
+                        <input
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={bgOpacity}
+                          onChange={(e) => setBgOpacity(Number(e.target.value))}
+                          className="w-28 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer
+                            [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+                            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-cyan-400 [&::-webkit-slider-thumb]:cursor-pointer
+                            [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full 
+                            [&::-moz-range-thumb]:bg-cyan-400 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0"
+                        />
+                        <span className="text-xs text-slate-300 min-w-[3rem] text-right tabular-nums">
+                          {bgOpacity}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -779,6 +875,7 @@ export default function SpriteCSSPage() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
+            onWheelCapture={handleWheel}
             className={`
               relative rounded-xl border-2 border-dashed transition-all duration-300 overflow-auto
               ${imageUrl ? 'max-h-[50vh] min-h-[300px]' : 'min-h-[400px]'}
@@ -816,6 +913,7 @@ export default function SpriteCSSPage() {
                   minWidth: '100%',
                   width: imageSize ? imageSize.width * zoom : 'auto',
                   height: imageSize ? imageSize.height * zoom : 'auto',
+                  ['--checkerboard-opacity' as `--${string}`]: `${bgOpacity / 100}`,
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
