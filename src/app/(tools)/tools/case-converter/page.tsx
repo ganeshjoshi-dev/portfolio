@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
 import { getToolById, toolCategories } from '@/config/tools';
+import Textarea from '@/components/ui/Textarea';
 
 const tool = getToolById('case-converter')!;
 const category = toolCategories[tool.category];
@@ -106,25 +107,21 @@ export default function CaseConverterPage() {
       tool={tool}
       category={category}
     >
-      <div className="max-w-4xl mx-auto w-full space-y-6 px-1 sm:px-0 overflow-x-hidden">
-        <div>
-          <label
-            htmlFor="case-input"
-            className="block text-sm font-medium text-slate-300 mb-2"
-          >
-            Enter or paste your text
-          </label>
-          <textarea
+      <div className="max-w-4xl mx-auto w-full space-y-6 px-1 sm:px-0">
+        <div className="p-[5px] -m-[5px] sm:mx-0">
+          <Textarea
+            label="Enter or paste your text"
             id="case-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Type or paste text here..."
-            className="w-full h-40 px-4 py-3 bg-slate-900/60 border border-slate-700/60 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300 resize-none font-mono text-sm"
             spellCheck={false}
+            className="[&_label]:text-slate-300 [&_label]:mb-2"
+            textareaClassName="h-40 rounded-xl bg-slate-900/60 border-slate-700/60 text-slate-100 placeholder-slate-500 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 focus:border-transparent transition-all duration-300"
           />
         </div>
 
-        <div>
+        <div className="mt-8">
           <span className="block text-sm font-medium text-slate-300 mb-2">
             Convert to
           </span>
@@ -161,13 +158,15 @@ export default function CaseConverterPage() {
               />
             )}
           </div>
-          <textarea
-            id="case-output"
-            readOnly
-            value={output}
-            className="w-full h-40 px-4 py-3 bg-slate-900/60 border border-slate-700/60 rounded-xl text-slate-100 focus:outline-none font-mono text-sm resize-none"
-            aria-label="Converted text output"
-          />
+          <div className="p-[5px] -m-[5px] sm:mx-0">
+            <Textarea
+              id="case-output"
+              readOnly
+              value={output}
+              aria-label="Converted text output"
+              textareaClassName="h-40 rounded-xl bg-slate-900/60 border-slate-700/60 text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 resize-none"
+            />
+          </div>
         </div>
 
         <p className="text-xs text-slate-500">
