@@ -1095,6 +1095,181 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
       },
     ],
   },
+  'case-converter': {
+    title: 'Case Converter - Change Text Case Online (Upper, Lower, Title, Camel, Snake)',
+    metaDescription: 'Free case converter. Convert text to uppercase, lowercase, title case, sentence case, camelCase, snake_case, and kebab-case. All processing in your browser - privacy first.',
+    longTailKeywords: [
+      'case converter online',
+      'text case converter',
+      'uppercase lowercase converter',
+      'title case converter',
+      'camelCase converter',
+      'snake_case converter',
+      'kebab-case converter',
+      'convert text case online',
+      'change case of text',
+      'text case tool',
+    ],
+    faqs: [
+      {
+        question: 'Is this case converter free?',
+        answer: 'Yes, completely free with no sign-up. Convert text to any case format instantly in your browser.',
+      },
+      {
+        question: 'Is my text sent to a server?',
+        answer: 'No. All conversion happens in your browser. Your text never leaves your device or gets uploaded anywhere.',
+      },
+      {
+        question: 'What case types are supported?',
+        answer: 'We support UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, and Swap Case (inverse). Each converts your text according to standard naming conventions.',
+      },
+      {
+        question: 'What is the difference between camelCase and snake_case?',
+        answer: 'camelCase joins words with no spaces and capitalizes each word except the first (e.g. myVariableName). snake_case uses underscores between words, all lowercase (e.g. my_variable_name).',
+      },
+    ],
+    alternateNames: ['Text Case Tool', 'Case Changer', 'String Case Converter'],
+  },
+  'cron-generator': {
+    title: 'Cron Expression Generator - Visual Builder & Next Run Times',
+    metaDescription: 'Free cron expression generator. Build cron expressions visually, see human-readable description and next run times. No server required - all in your browser.',
+    longTailKeywords: [
+      'cron generator online',
+      'crontab builder',
+      'cron expression generator',
+      'cron schedule builder',
+      'next run time cron',
+      'cron expression validator',
+      'cron job builder',
+      'create cron expression',
+      'cron syntax generator',
+      'cron 5 field generator',
+    ],
+    faqs: [
+      {
+        question: 'Is this cron generator free?',
+        answer: 'Yes, completely free. Build and validate cron expressions with no sign-up. All processing runs in your browser.',
+      },
+      {
+        question: 'What are the 5 fields in a cron expression?',
+        answer: 'The five fields are: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-7, where 0 and 7 are Sunday). Use * for "every" or specific values/ranges.',
+      },
+      {
+        question: 'Are next run times in my timezone?',
+        answer: 'Yes. Next run times are shown in your local browser timezone. The tool uses your device clock to calculate the next 5 run times.',
+      },
+      {
+        question: 'Can I paste an existing cron expression?',
+        answer: 'Yes. Paste any 5-field cron expression into the input and click Apply to see the human-readable description and next run times. Invalid expressions show a clear error.',
+      },
+    ],
+    alternateNames: ['Crontab Builder', 'Cron Schedule Generator', 'Cron Expression Builder'],
+  },
+  'favicon-generator': {
+    title: 'Favicon Generator - Create Favicons in Multiple Sizes',
+    metaDescription: 'Free favicon generator. Upload an image and generate favicons in 16x16, 32x32, 48x48, and 180x180. Download as PNG or ZIP. All processing in your browser.',
+    longTailKeywords: [
+      'favicon generator online',
+      'create favicon from image',
+      'favicon maker',
+      'apple touch icon generator',
+      'favicon sizes 16 32 48',
+      'generate favicon png',
+      'favicon creator',
+      'website favicon generator',
+      'multi size favicon',
+      'favicon zip download',
+    ],
+    faqs: [
+      {
+        question: 'Is this favicon generator free?',
+        answer: 'Yes, completely free. Generate favicons in standard sizes with no sign-up. All processing happens in your browser.',
+      },
+      {
+        question: 'What image formats can I use?',
+        answer: 'You can upload JPEG, PNG, WebP, or GIF images. Maximum file size is 5MB. The tool outputs PNG favicons in the sizes you select.',
+      },
+      {
+        question: 'What sizes should I generate for my website?',
+        answer: 'Common sizes are 16×16 (browser tab), 32×32 (bookmarks), 48×48 (Windows), and 180×180 (Apple touch icon). You can select one or more and download all as a ZIP file.',
+      },
+      {
+        question: 'Is my image uploaded to a server?',
+        answer: 'No. Your image is processed only in your browser. It never leaves your device or gets sent to any server.',
+      },
+    ],
+    alternateNames: ['Favicon Maker', 'Favicon Creator', 'Apple Touch Icon Generator'],
+  },
+  'image-resizer': {
+    title: 'Image Resizer - Resize and Crop Images Online',
+    metaDescription: 'Free image resizer. Resize images by pixels or scale. Lock aspect ratio, optional center crop. All processing in your browser - privacy first.',
+    longTailKeywords: [
+      'image resizer online',
+      'resize image free',
+      'resize image by pixels',
+      'crop image online',
+      'image dimensions changer',
+      'resize photo online',
+      'scale image percentage',
+      'aspect ratio lock resize',
+      'center crop image',
+      'bulk image resize',
+    ],
+    faqs: [
+      {
+        question: 'Is this image resizer free?',
+        answer: 'Yes, completely free. Resize and crop images with no sign-up. All processing happens in your browser.',
+      },
+      {
+        question: 'Is my image uploaded to a server?',
+        answer: 'No. Your image is processed only in your browser. It never leaves your device or gets sent to any server.',
+      },
+      {
+        question: 'What is center crop?',
+        answer: 'Center crop crops the image to the exact dimensions you specify, keeping the center of the image. Useful for creating square thumbnails from rectangular photos.',
+      },
+      {
+        question: 'What file formats are supported?',
+        answer: 'We support JPEG, PNG, WebP, and GIF. Maximum file size is 10MB. Output format matches your input (or PNG/JPEG as appropriate).',
+      },
+    ],
+    alternateNames: ['Image Size Changer', 'Photo Resizer', 'Image Dimension Tool'],
+  },
+  'pdf-merger': {
+    title: 'PDF Merger - Merge PDFs Online Free',
+    metaDescription: 'Free PDF merger. Combine multiple PDFs into one file. Drag to reorder, merge and download. All processing in your browser - your files never leave your device.',
+    longTailKeywords: [
+      'merge pdf online free',
+      'combine pdf files',
+      'pdf merger online',
+      'join pdf files',
+      'merge pdf no upload',
+      'pdf combiner',
+      'merge multiple pdfs',
+      'reorder pdf pages',
+      'combine pdf in browser',
+      'pdf joiner free',
+    ],
+    faqs: [
+      {
+        question: 'Is this PDF merger free?',
+        answer: 'Yes, completely free. Merge up to 20 PDFs (20MB each, 50MB total) with no sign-up. All processing happens in your browser.',
+      },
+      {
+        question: 'Are my PDFs uploaded to a server?',
+        answer: 'No. Your PDFs never leave your device. Merging happens entirely in your browser - no uploads, no server processing.',
+      },
+      {
+        question: 'How do I reorder pages before merging?',
+        answer: 'Use drag and drop on the file list to change the order, or use the up/down arrow buttons. The merged PDF will follow the order shown in the list.',
+      },
+      {
+        question: 'Why did merging fail?',
+        answer: 'Merging can fail if a PDF is corrupted, password-protected, or in an unsupported format. Try opening the PDF in a viewer first to confirm it is valid.',
+      },
+    ],
+    alternateNames: ['PDF Combiner', 'Join PDF', 'Merge PDF Files Online'],
+  },
 };
 
 /**

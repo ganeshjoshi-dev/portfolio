@@ -839,6 +839,110 @@ export const toolContent: Record<string, ToolContent> = {
     },
     relatedTools: ['gradient-generator', 'shadow-generator', 'tailwind-colors'],
   },
+  'case-converter': {
+    howToUse: {
+      title: 'How to Use Case Converter',
+      steps: [
+        {
+          title: 'Enter or Paste Text',
+          description: 'Type or paste your text into the input area. The tool works with any length of text.',
+        },
+        {
+          title: 'Choose Case Type',
+          description: 'Select the case you want: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, or Swap Case.',
+        },
+        {
+          title: 'Copy the Result',
+          description: 'The converted text appears in real time. Click the copy button to copy the result. All processing happens in your browser - your text never leaves your device.',
+        },
+      ],
+    },
+    relatedTools: ['word-counter', 'slug-generator', 'regex-tester'],
+  },
+  'cron-generator': {
+    howToUse: {
+      title: 'How to Use Cron Expression Generator',
+      steps: [
+        {
+          title: 'Choose a Preset or Paste Expression',
+          description: 'Click a preset (e.g. "Every day at 9:00 AM", "Weekdays at 5:00 PM") or paste your own 5-field cron expression (minute hour day month weekday).',
+        },
+        {
+          title: 'View Description and Next Runs',
+          description: 'The tool shows a human-readable description of the schedule and the next 5 run times in your local timezone.',
+        },
+        {
+          title: 'Copy the Expression',
+          description: 'Click the copy button to copy the cron expression for use in crontab, CI/CD, or schedulers. All processing runs in your browser.',
+        },
+      ],
+    },
+    relatedTools: ['timestamp-converter', 'regex-tester', 'code-formatter'],
+  },
+  'favicon-generator': {
+    howToUse: {
+      title: 'How to Use Favicon Generator',
+      steps: [
+        {
+          title: 'Upload an Image',
+          description: 'Drop an image or click to select. Supported formats: JPEG, PNG, WebP, GIF. Maximum file size is 5MB.',
+        },
+        {
+          title: 'Choose Sizes',
+          description: 'Select which sizes to generate: 16×16, 32×32, 48×48, and 180×180 (Apple touch icon). You can select one or more.',
+        },
+        {
+          title: 'Download',
+          description: 'Click "Download all as ZIP" to get all selected sizes in one file, or download individual PNGs. All processing happens in your browser.',
+        },
+      ],
+    },
+    relatedTools: ['image-compressor', 'image-resizer', 'placeholder-image'],
+  },
+  'image-resizer': {
+    howToUse: {
+      title: 'How to Use Image Resizer',
+      steps: [
+        {
+          title: 'Upload an Image',
+          description: 'Drop an image or click to select. Supported formats: JPEG, PNG, WebP, GIF. Maximum 10MB.',
+        },
+        {
+          title: 'Set Dimensions or Scale',
+          description: 'Enter width and height in pixels, or use the scale slider to resize by percentage. Enable "Lock aspect ratio" to keep proportions.',
+        },
+        {
+          title: 'Optional: Center Crop',
+          description: 'Enable "Center crop to exact size" to crop the image to the exact dimensions (useful for thumbnails).',
+        },
+        {
+          title: 'Download',
+          description: 'Click Download to save the resized image. All processing happens in your browser - your image never leaves your device.',
+        },
+      ],
+    },
+    relatedTools: ['image-compressor', 'favicon-generator', 'placeholder-image'],
+  },
+  'pdf-merger': {
+    howToUse: {
+      title: 'How to Use PDF Merger',
+      steps: [
+        {
+          title: 'Upload PDFs',
+          description: 'Drop PDF files onto the upload zone or click to select. You can add up to 20 files (max 20MB each, 50MB total).',
+        },
+        {
+          title: 'Reorder',
+          description: 'Drag and drop items in the list to change the order, or use the up/down arrows. The merged PDF will follow this order.',
+        },
+        {
+          title: 'Merge & Download',
+          description: 'Click "Merge & download" to combine all PDFs into one file. Processing happens in your browser - your files never leave your device.',
+        },
+      ],
+    },
+    relatedTools: ['image-compressor', 'code-formatter', 'base64'],
+  },
 };
 
 /**

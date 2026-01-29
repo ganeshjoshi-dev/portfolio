@@ -42,7 +42,7 @@ Build a professional CSS Animation Generator that allows developers to preview, 
 
 ## Architecture
 
-The tool will follow the existing pattern established by other tools like [`gradient-generator`](src/app/\(tools)/tools/gradient-generator/page.tsx) and [`shadow-generator`](src/app/\(tools)/tools/shadow-generator/page.tsx).
+The tool will follow the existing pattern established by other tools like [`gradient-generator`](src/app/\\(tools)/tools/gradient-generator/page.tsx) and [`shadow-generator`](src/app/\\(tools)/tools/shadow-generator/page.tsx).
 
 ```mermaid
 graph TD
@@ -71,8 +71,8 @@ graph TD
 
 ### 1. Core Tool Files
 
-- **[`src/app/(tools)/tools/css-animations/page.tsx`](src/app/\(tools)/tools/css-animations/page.tsx)** - Main tool page component
-- **[`src/app/(tools)/tools/css-animations/layout.tsx`](src/app/\(tools)/tools/css-animations/layout.tsx)** - Metadata and SEO
+- **[`src/app/(tools)/tools/css-animations/page.tsx`](src/app/\\(tools)/tools/css-animations/page.tsx)** - Main tool page component
+- **[`src/app/(tools)/tools/css-animations/layout.tsx`](src/app/\\(tools)/tools/css-animations/layout.tsx)** - Metadata and SEO
 
 ### 2. Animation Library & Logic
 
