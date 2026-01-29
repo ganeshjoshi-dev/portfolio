@@ -1,8 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { projects } from '@/lib/data/projects';
 
-export const runtime = 'edge';
-
 export const alt = 'Project by Ganesh Joshi';
 export const size = {
   width: 1200,
