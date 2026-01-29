@@ -41,8 +41,6 @@ export default function PdfMergerPage() {
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const totalSize = entries.reduce((sum, e) => sum + e.size, 0);
-
   const validateAndAdd = useCallback((files: File[]) => {
     setError(null);
     const toAdd: PdfEntry[] = [];
