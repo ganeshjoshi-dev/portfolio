@@ -1,9 +1,12 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { getGameById } from '@/config/games';
 import { GameLayout } from '@/components/games/shared';
 import { Button } from '@/components/ui';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const SWIPE_THRESHOLD = 30;
 
 const SIZE = 4;
 type Grid = (number | null)[][];
@@ -148,6 +151,8 @@ export default function Game2048Page({ slug }: { slug: string }) {
   const moveUp = useCallback(() => tryMove(slideUp), [tryMove]);
   const moveDown = useCallback(() => tryMove(slideDown), [tryMove]);
 
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       switch (e.key) {
@@ -172,6 +177,33 @@ export default function Game2048Page({ slug }: { slug: string }) {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [moveLeft, moveRight, moveUp, moveDown]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (t) touchStartRef.current = { x: t.clientX, y: t.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const start = touchStartRef.current;
+      touchStartRef.current = null;
+      const t = e.changedTouches[0];
+      if (!start || !t) return;
+      const dx = t.clientX - start.x;
+      const dy = t.clientY - start.y;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      if (absX < SWIPE_THRESHOLD && absY < SWIPE_THRESHOLD) return;
+      if (absX >= absY) {
+        if (dx > 0) moveRight();
+        else moveLeft();
+      } else {
+        if (dy > 0) moveDown();
+        else moveUp();
+      }
+    },
+    [moveLeft, moveRight, moveUp, moveDown]
+  );
 
   const reset = useCallback(() => {
     const g = emptyGrid();
@@ -220,13 +252,15 @@ export default function Game2048Page({ slug }: { slug: string }) {
 
         <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0">
           <div
-            className="grid gap-1.5 sm:gap-2 md:gap-2.5 p-1.5 sm:p-2 md:p-3 w-full max-w-[20rem] aspect-square rounded-xl bg-slate-800/60 border border-slate-700/60"
+            className="grid gap-1.5 sm:gap-2 md:gap-2.5 p-1.5 sm:p-2 md:p-3 w-full max-w-[20rem] aspect-square rounded-xl bg-slate-800/60 border border-slate-700/60 touch-manipulation select-none"
             style={{
               gridTemplateColumns: `repeat(${SIZE}, minmax(0, 1fr))`,
               gridTemplateRows: `repeat(${SIZE}, minmax(0, 1fr))`,
             }}
             role="grid"
             aria-label="2048 board"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             {grid.flat().map((value, index) => (
               <div
@@ -240,8 +274,56 @@ export default function Game2048Page({ slug }: { slug: string }) {
               </div>
             ))}
           </div>
+          {/* On-screen controls for touch devices */}
+          <div
+            className="grid grid-cols-3 gap-1 w-[8rem] sm:w-[9rem] place-items-center"
+            role="group"
+            aria-label="Direction controls"
+          >
+            <div />
+            <button
+              type="button"
+              onClick={moveUp}
+              disabled={!!gameOver}
+              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              aria-label="Slide up"
+            >
+              <ChevronUp className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+            </button>
+            <div />
+            <button
+              type="button"
+              onClick={moveLeft}
+              disabled={!!gameOver}
+              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              aria-label="Slide left"
+            >
+              <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+            </button>
+            <div className="w-12 h-12 sm:w-14 sm:h-14" aria-hidden />
+            <button
+              type="button"
+              onClick={moveRight}
+              disabled={!!gameOver}
+              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              aria-label="Slide right"
+            >
+              <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+            </button>
+            <div />
+            <button
+              type="button"
+              onClick={moveDown}
+              disabled={!!gameOver}
+              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              aria-label="Slide down"
+            >
+              <ChevronDown className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+            </button>
+            <div />
+          </div>
           <p className="text-sm text-slate-500 text-center">
-            Use arrow keys to slide tiles. Combine numbers to reach 2048.
+            Swipe or use arrow keys to slide. Tap the buttons above on touch devices.
           </p>
         </div>
       </div>

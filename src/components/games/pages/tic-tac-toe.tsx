@@ -284,7 +284,7 @@ export default function TicTacToePage({ slug }: { slug: string }) {
                       hover:border-cyan-400/50 hover:bg-slate-800/80
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
                       disabled:pointer-events-none disabled:opacity-90
-                      transition-all duration-300
+                      transition-all duration-300 touch-manipulation
                     "
                     aria-label={`Cell ${index + 1}, ${value ?? 'empty'}`}
                   >

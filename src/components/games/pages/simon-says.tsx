@@ -171,7 +171,7 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
               disabled={phase !== 'input'}
               className="
                 absolute top-0 left-0 w-1/2 h-1/2 rounded-tl-full border-r-2 border-b-2 border-slate-700/50
-                transition-all duration-150
+                transition-all duration-150 touch-manipulation
                 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
                 disabled:pointer-events-none disabled:opacity-90
               "
@@ -188,7 +188,7 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
               disabled={phase !== 'input'}
               className="
                 absolute top-0 right-0 w-1/2 h-1/2 rounded-tr-full border-l-2 border-b-2 border-slate-700/50
-                transition-all duration-150
+                transition-all duration-150 touch-manipulation
                 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
                 disabled:pointer-events-none disabled:opacity-90
               "
@@ -205,7 +205,7 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
               disabled={phase !== 'input'}
               className="
                 absolute bottom-0 left-0 w-1/2 h-1/2 rounded-bl-full border-r-2 border-t-2 border-slate-700/50
-                transition-all duration-150
+                transition-all duration-150 touch-manipulation
                 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
                 disabled:pointer-events-none disabled:opacity-90
               "
@@ -222,7 +222,7 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
               disabled={phase !== 'input'}
               className="
                 absolute bottom-0 right-0 w-1/2 h-1/2 rounded-br-full border-l-2 border-t-2 border-slate-700/50
-                transition-all duration-150
+                transition-all duration-150 touch-manipulation
                 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
                 disabled:pointer-events-none disabled:opacity-90
               "

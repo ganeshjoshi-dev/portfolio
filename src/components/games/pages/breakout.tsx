@@ -321,8 +321,8 @@ export default function BreakoutPage({ slug }: { slug: string }) {
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0">
-          <div className="relative w-full max-w-[400px] touch-none">
+        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0 min-w-0">
+          <div className="relative w-full max-w-full sm:max-w-[400px] touch-none">
             <div
               className="relative rounded-lg overflow-hidden border-2 border-slate-700/60"
               style={{ aspectRatio: `${CANVAS_WIDTH} / ${CANVAS_HEIGHT}` }}

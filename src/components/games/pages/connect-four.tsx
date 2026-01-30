@@ -283,7 +283,7 @@ export default function ConnectFourPage({ slug }: { slug: string }) {
                       type="button"
                       onClick={() => makeMove(col)}
                       disabled={gameOver || (mode === 'ai' && !isRedTurn)}
-                      className="flex flex-col gap-1 p-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:pointer-events-none disabled:opacity-80 transition-colors"
+                      className="flex flex-col gap-1 p-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:pointer-events-none disabled:opacity-80 transition-colors touch-manipulation"
                       aria-label={`Column ${col + 1}`}
                     >
                       {Array.from({ length: ROWS }, (_, row) => (

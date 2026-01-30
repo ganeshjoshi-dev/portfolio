@@ -359,7 +359,7 @@ export default function MemoryPage({ slug }: { slug: string }) {
                 relative rounded-lg sm:rounded-xl border-2 overflow-hidden
                 flex items-center justify-center min-h-0
                 text-lg sm:text-2xl md:text-3xl lg:text-4xl
-                transition-all duration-300
+                transition-all duration-300 touch-manipulation
                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
                 disabled:pointer-events-none
                 aspect-square

@@ -92,7 +92,7 @@ export default function RockPaperScissorsPage({ slug }: { slug: string }) {
                   rounded-2xl border-2 border-slate-700/60 bg-slate-800/60
                   hover:border-cyan-400/50 hover:bg-slate-800/80
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
-                  transition-all duration-300
+                  transition-all duration-300 touch-manipulation
                 "
                 aria-label={CHOICE_LABELS[choice]}
               >

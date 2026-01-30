@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { getGameById } from '@/config/games';
 import { GameLayout } from '@/components/games/shared';
 import { Button } from '@/components/ui';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const COLS = 20;
 const ROWS = 16;
@@ -158,7 +159,7 @@ export default function SnakePage({ slug }: { slug: string }) {
 
         <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0">
           <div
-            className="w-full max-w-[320px] aspect-[5/4] border-2 border-slate-700/60 rounded-lg overflow-hidden bg-slate-900/80"
+            className="w-full max-w-[320px] aspect-[5/4] border-2 border-slate-700/60 rounded-lg overflow-hidden bg-slate-900/80 touch-none select-none"
             role="img"
             aria-label="Snake game board"
           >
@@ -190,8 +191,54 @@ export default function SnakePage({ slug }: { slug: string }) {
               />
             </svg>
           </div>
+          {/* On-screen direction pad for touch devices */}
+          {isPlaying && (
+            <div
+              className="grid grid-cols-3 gap-1 w-[8rem] sm:w-[9rem] place-items-center"
+              role="group"
+              aria-label="Direction controls"
+            >
+              <div />
+              <button
+                type="button"
+                onClick={() => setNextDirection((d) => (d !== 'down' ? 'up' : d))}
+                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                aria-label="Move up"
+              >
+                <ChevronUp className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+              </button>
+              <div />
+              <button
+                type="button"
+                onClick={() => setNextDirection((d) => (d !== 'right' ? 'left' : d))}
+                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                aria-label="Move left"
+              >
+                <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+              </button>
+              <div className="w-12 h-12 sm:w-14 sm:h-14" aria-hidden />
+              <button
+                type="button"
+                onClick={() => setNextDirection((d) => (d !== 'left' ? 'right' : d))}
+                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                aria-label="Move right"
+              >
+                <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+              </button>
+              <div />
+              <button
+                type="button"
+                onClick={() => setNextDirection((d) => (d !== 'up' ? 'down' : d))}
+                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                aria-label="Move down"
+              >
+                <ChevronDown className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
+              </button>
+              <div />
+            </div>
+          )}
           <p className="text-sm text-slate-500 text-center">
-            Use arrow keys to move. Don&apos;t hit the walls or yourself.
+            Use arrow keys or tap the direction buttons to move. Don&apos;t hit the walls or yourself.
           </p>
         </div>
       </div>
