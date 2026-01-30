@@ -35,6 +35,8 @@ export default function SnakePage({ slug }: { slug: string }) {
   const [snake, setSnake] = useState<Point[]>(() => [
     { x: Math.floor(COLS / 2), y: Math.floor(ROWS / 2) },
   ]);
+  // direction state drives game loop; setter used, value only for consistency
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [direction, setDirection] = useState<Direction>('right');
   const [nextDirection, setNextDirection] = useState<Direction>('right');
   const [food, setFood] = useState<Point>(() => randomFood([{ x: Math.floor(COLS / 2), y: Math.floor(ROWS / 2) }]));
@@ -62,7 +64,7 @@ export default function SnakePage({ slug }: { slug: string }) {
     if (!isPlaying || gameOver) return;
 
     const tick = () => {
-      setDirection((d) => nextDirection);
+      setDirection(() => nextDirection);
       setSnake((prev) => {
         const head = prev[0];
         const dir = nextDirection;

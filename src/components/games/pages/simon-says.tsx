@@ -37,6 +37,8 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
   const showIndexRef = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Reserved for future reset button
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const reset = useCallback(() => {
     setSequence([]);
     setPlayerInput([]);

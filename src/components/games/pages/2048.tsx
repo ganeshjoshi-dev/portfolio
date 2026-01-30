@@ -57,16 +57,6 @@ function slideLeft(grid: Grid): { grid: Grid; score: number } {
   return { grid: newGrid, score: totalScore };
 }
 
-function rotate90(grid: Grid): Grid {
-  const next = emptyGrid();
-  for (let r = 0; r < SIZE; r++) {
-    for (let c = 0; c < SIZE; c++) {
-      next[c][SIZE - 1 - r] = grid[r][c];
-    }
-  }
-  return next;
-}
-
 function flipHorizontal(grid: Grid): Grid {
   return grid.map((row) => [...row].reverse());
 }

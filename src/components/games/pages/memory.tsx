@@ -158,6 +158,7 @@ export default function MemoryPage({ slug }: { slug: string }) {
     isComplete,
     timeUp,
     moves,
+    timer,
     timer.seconds,
     settings.timerMode,
     stats.bestMoves,
