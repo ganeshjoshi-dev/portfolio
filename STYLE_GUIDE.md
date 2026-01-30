@@ -2,7 +2,7 @@
 
 ## Color Theme
 
-This project follows a modern, dark-themed design system with cyan accents, as defined in `src/styles/theme.js`. 
+This project follows a modern, dark-themed design system with cyan accents. Theme values live in `src/styles/brand-theme.js` (component strings) and `src/app/styles/globals.css` (`:root` and `@theme inline` for Tailwind utilities like `text-accent`, `bg-accent`). The project uses Tailwind v4 with a CSS-first config; there is no `tailwind.config.js`. 
 
 ### Brand Colors
 - Primary (Cyan): `text-cyan-400` or `bg-cyan-400` (#06b6d4)
@@ -67,26 +67,26 @@ hover:scale-105
 ## Usage Guidelines
 
 1. **Component Styling**
-   - Use the theme colors instead of direct Tailwind color classes
-   - Example: 
+   - Theme colors are available in two ways:
+     - **Component strings:** Import `brandTheme` from `src/styles/brand-theme.js` and use values like `brandTheme.components.logo.brand`, `brandTheme.components.button.primary`, etc.
+     - **Tailwind utilities:** Use classes that map to CSS variables in `src/app/styles/globals.css` (e.g. `text-accent`, `bg-accent`, `hover:text-accent`) or the documented Tailwind classes below (e.g. `text-cyan-400`).
+   - Prefer static class names so Tailwind can detect them at build time. Avoid dynamic class names like `` `hover:${brandTheme.colors.text.accent}` ``.
+   - Example:
      ```jsx
-     // Instead of
-     <button className="text-cyan-400">
-     
-     // Use
-     <button className="text-primary">
+     <button className="text-cyan-400 hover:text-accent">Action</button>
+     <span className={brandTheme.components.logo.brand}>Brand</span>
      ```
 
 2. **Dark Mode**
-   - The theme automatically handles dark mode through CSS variables
-   - Use the appropriate light/dark variants when needed
+   - The theme automatically handles dark mode through CSS variables in `globals.css`.
+   - Use the appropriate light/dark variants when needed.
 
 3. **Maintaining Consistency**
-   - All new colors should be added to `src/styles/theme.js`
-   - Update this style guide when adding new theme values
+   - Add new design tokens to `src/app/styles/globals.css` (`:root` and `@theme inline`) or component strings in `src/styles/brand-theme.js`.
+   - Update this style guide when adding new theme values.
 
 4. **Using with AI Tools**
    When working with AI tools like GitHub Copilot, mention:
-   - "Use the theme colors from src/styles/theme.js"
+   - "Use the theme from src/styles/brand-theme.js and globals.css"
    - "Follow the style guide in STYLE_GUIDE.md"
-   - "Use themed Tailwind classes instead of direct color classes"
+   - "Use static Tailwind classes (e.g. text-cyan-400, text-accent) or brandTheme component strings"
