@@ -1,4 +1,29 @@
 import { Button } from '@/components/ui';
+import { Metadata } from 'next';
+import { siteConfig } from '@/lib/utils/seo';
+
+export const metadata: Metadata = {
+  title: 'Page Not Found | Ganesh Joshi',
+  description: "The page you're looking for doesn't exist or has been moved.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Page Not Found | Ganesh Joshi',
+    description: "The page you're looking for doesn't exist or has been moved.",
+    url: `${siteConfig.url}/404`,
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Page Not Found | Ganesh Joshi',
+    description: "The page you're looking for doesn't exist or has been moved.",
+    images: [siteConfig.ogImage],
+  },
+};
 
 export default function NotFound() {
   return (

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/utils/seo";
 import { projects } from "@/lib/data/projects";
 import { tools } from "@/config/tools";
+import { games } from "@/config/games";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -32,12 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
-    {
-      url: `${siteConfig.url}/blog`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
     // Tools hub page - high priority for tool discovery
     {
       url: `${siteConfig.url}/tools`,
@@ -45,15 +40,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.95,
     },
+    // Games hub page
+    {
+      url: `${siteConfig.url}/games`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ];
 
-  // Project routes
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${siteConfig.url}/projects/${project.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  // Project routes - use actual project dates
+  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => {
+    // Convert "YYYY-MM" format to Date object (use first day of month)
+    const projectDate = project.date.includes('-') 
+      ? new Date(`${project.date}-01`)
+      : new Date(project.date);
+    
+    return {
+      url: `${siteConfig.url}/projects/${project.slug}`,
+      lastModified: projectDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
 
   // Individual tool routes - high priority for search visibility
   const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({
@@ -64,5 +73,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: tool.isNew ? 0.9 : 0.85,
   }));
 
-  return [...mainRoutes, ...projectRoutes, ...toolRoutes];
+  // Individual game routes
+  const gameRoutes: MetadataRoute.Sitemap = games.map((game) => ({
+    url: `${siteConfig.url}${game.path}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: game.isNew ? 0.85 : 0.8,
+  }));
+
+  return [...mainRoutes, ...projectRoutes, ...toolRoutes, ...gameRoutes];
 }

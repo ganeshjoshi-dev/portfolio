@@ -1,3 +1,6 @@
+/**
+ * Reserved for a future testimonials section. Currently unused (TestimonialsSection was removed).
+ */
 export interface Testimonial {
   quote: string;
   author: string;

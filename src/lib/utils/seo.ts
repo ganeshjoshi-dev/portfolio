@@ -13,7 +13,8 @@ export const siteConfig = {
   description:
     "Full Stack Developer specializing in eCommerce, modern web tech, and user-centric design. Adobe Certified Expert building fast, scalable web experiences.",
   url: "https://ganeshjoshi.dev",
-  ogImage: "/images/og-image.jpg",
+  /** Default OG image: dynamic image from app/opengraph-image.tsx (served at /opengraph-image) */
+  ogImage: "/opengraph-image",
   keywords: [
     "Full Stack Developer",
     "Next.js",
@@ -50,6 +51,18 @@ export const siteConfig = {
     "Base64 encoder",
     "color palette generator",
     "shadow generator",
+  ],
+  // Games-specific SEO
+  gamesTitle: "Free Browser Games | Ganesh Joshi",
+  gamesDescription:
+    "Free online browser games. Play memory, puzzle, and arcade games — no sign-up, no ads. Built as portfolio projects.",
+  gamesKeywords: [
+    "free browser games",
+    "online games",
+    "memory game",
+    "card matching game",
+    "browser games",
+    "puzzle games",
   ],
 };
 
