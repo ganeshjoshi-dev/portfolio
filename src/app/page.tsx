@@ -2,16 +2,14 @@ import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-/* import TestimonialsSection from "@/components/sections/TestimonialsSection"; */
 import CTASection from "@/components/sections/CTASection";
-import { siteConfig } from "@/lib/utils/seo";
-import { Metadata } from "next";
+import { siteConfig, generatePageMetadata } from "@/lib/utils/seo";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: siteConfig.url,
-  }
-};
+export const metadata = generatePageMetadata({
+  title: siteConfig.title,
+  description: siteConfig.description,
+  path: "/",
+});
 
 export default function Page() {
   return (
@@ -26,9 +24,6 @@ export default function Page() {
       <section id="skills">
         <SkillsSection />
       </section>
-     {/*  <section id="testimonials">
-        <TestimonialsSection />
-      </section> */}
       <section id="contact">
         <CTASection />
       </section>

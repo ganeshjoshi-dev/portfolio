@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${siteConfig.url}/og/tools.png`,
+        url: `${siteConfig.url}/tools/opengraph-image`,
         width: 1200,
         height: 630,
         alt: 'GJ Dev Tools - Free Developer Tools',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.toolsTitle,
     description: siteConfig.toolsDescription,
-    images: [`${siteConfig.url}/og/tools.png`],
+    images: [`${siteConfig.url}/tools/opengraph-image`],
   },
   robots: {
     index: true,

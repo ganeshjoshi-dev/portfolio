@@ -42,14 +42,17 @@ export default function CodeOutput({
       {/* Code Content */}
       <div className="overflow-x-auto">
         <pre className="p-4 text-sm font-mono">
-          <code className="text-slate-300">
+          <code className="text-slate-300 block">
             {showLineNumbers
               ? lines.map((line, index) => (
-                  <div key={index} className="flex">
-                    <span className="select-none text-slate-600 w-8 text-right pr-4">
+                  <div key={index} className="flex items-start gap-3">
+                    <span
+                      className="select-none text-slate-500 shrink-0 w-6 tabular-nums text-right"
+                      aria-hidden
+                    >
                       {index + 1}
                     </span>
-                    <span>{line}</span>
+                    <span className="break-all">{line || ' '}</span>
                   </div>
                 ))
               : code}

@@ -25,6 +25,9 @@ export interface ToolPageProps {
   };
 }
 
+/** Props for tool page components rendered by tools/[slug]. */
+export type ToolPageComponent = import('react').ComponentType<{ slug: string }>;
+
 // Shared types for tool components
 export interface CodeOutputProps {
   code: string;

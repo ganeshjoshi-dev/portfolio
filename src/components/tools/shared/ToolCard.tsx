@@ -18,6 +18,16 @@ import {
   ArrowLeftRight,
   Wrench,
   Wind,
+  Key,
+  Contrast,
+  Shield,
+  ImageDown,
+  Minimize2,
+  Sparkles,
+  QrCode,
+  Lock,
+  Hash,
+  Clock,
   LucideIcon,
 } from 'lucide-react';
 import { Tool } from '@/types/tools';
@@ -43,6 +53,16 @@ const iconMap: Record<string, LucideIcon> = {
   ArrowLeftRight,
   Wrench,
   Wind,
+  Key,
+  Contrast,
+  Shield,
+  ImageDown,
+  Minimize2,
+  Sparkles,
+  QrCode,
+  Lock,
+  Hash,
+  Clock,
 };
 
 interface ToolCardProps {

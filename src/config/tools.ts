@@ -482,6 +482,115 @@ export const tools: Tool[] = [
       'web animation',
     ],
   },
+  // New high-traffic tools
+  {
+    id: 'json-formatter',
+    name: 'JSON Formatter & Validator',
+    description: 'Format and validate JSON with syntax highlighting. Minify, prettify, sort keys. All processing in your browser.',
+    category: 'converters',
+    path: '/tools/json-formatter',
+    icon: 'FileJson',
+    isNew: true,
+    keywords: [
+      'json formatter',
+      'json validator',
+      'format json online',
+      'json prettifier',
+      'json beautifier',
+      'validate json',
+      'json syntax checker',
+    ],
+  },
+  {
+    id: 'jwt-decoder',
+    name: 'JWT Decoder',
+    description: 'Decode JWT header and payload. View claims, expiration, issuer. All processing in your browser.',
+    category: 'utilities',
+    path: '/tools/jwt-decoder',
+    icon: 'Key',
+    isNew: true,
+    keywords: [
+      'jwt decoder',
+      'jwt decode',
+      'jwt token decoder',
+      'decode jwt',
+      'jwt debugger',
+      'jwt payload viewer',
+      'jwt header decoder',
+    ],
+  },
+  {
+    id: 'url-encoder',
+    name: 'URL Encoder/Decoder',
+    description: 'Encode and decode URL components and full URLs. Parse query strings and path segments.',
+    category: 'utilities',
+    path: '/tools/url-encoder',
+    icon: 'Link',
+    isNew: true,
+    keywords: [
+      'url encoder',
+      'url decoder',
+      'url encode online',
+      'percent encoding',
+      'url encode decode',
+      'uri encoder',
+      'url parameter encoder',
+    ],
+  },
+  {
+    id: 'contrast-checker',
+    name: 'Contrast Checker',
+    description: 'Check WCAG contrast ratios for accessibility. Real-time preview and pass/fail for AA and AAA.',
+    category: 'css',
+    path: '/tools/contrast-checker',
+    icon: 'Contrast',
+    isNew: true,
+    keywords: [
+      'contrast checker',
+      'wcag contrast',
+      'color contrast checker',
+      'accessibility checker',
+      'contrast ratio calculator',
+      'aa contrast checker',
+      'aaa contrast',
+    ],
+  },
+  {
+    id: 'meta-tags',
+    name: 'Meta Tag Generator',
+    description: 'Generate meta tags for SEO and social sharing. Open Graph, Twitter Cards, and structured data.',
+    category: 'utilities',
+    path: '/tools/meta-tags',
+    icon: 'FileCode',
+    isNew: true,
+    keywords: [
+      'meta tag generator',
+      'open graph generator',
+      'twitter card generator',
+      'seo meta tags',
+      'og tags generator',
+      'meta tags creator',
+      'social media meta tags',
+    ],
+  },
+  {
+    id: 'escape-unescape',
+    name: 'Escape/Unescape',
+    description: 'Escape and unescape text for JSON, HTML, and URL. Handle special characters correctly.',
+    category: 'utilities',
+    path: '/tools/escape-unescape',
+    icon: 'Shield',
+    isNew: true,
+    keywords: [
+      'escape unescape',
+      'html escape',
+      'json escape',
+      'url escape',
+      'html encoder',
+      'string escape',
+      'escape special characters',
+    ],
+  },
 ];
 
 // Helper functions
@@ -491,6 +600,11 @@ export function getToolsByCategory(category: ToolCategory): Tool[] {
 
 export function getToolById(id: string): Tool | undefined {
   return tools.find((tool) => tool.id === id);
+}
+
+/** Resolve tool by URL slug (slug === tool.id). Use in tools/[slug] route. */
+export function getToolBySlug(slug: string): Tool | undefined {
+  return getToolById(slug);
 }
 
 export function getToolByPath(path: string): Tool | undefined {

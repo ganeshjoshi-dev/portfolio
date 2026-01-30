@@ -8,7 +8,6 @@ import { Button } from "@/components/ui";
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
@@ -16,16 +15,13 @@ export default function Navbar() {
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
     { name: "Tools", href: "/tools" },
+    { name: "Games", href: "/games" },
     { name: "Contact", href: "/contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(progress);
-      setIsScrolled(scrollTop > 10);
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -44,16 +40,12 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div
-        className="absolute left-0 top-0 h-1 bg-cyan-400/60 transition-all duration-150"
-        style={{ width: `${scrollProgress}%` }}
-      />
       <div className={brandTheme.components.container.base}>
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className={`${brandTheme.components.logo.base} text-white hover:${brandTheme.colors.text.accent} ${brandTheme.transitions.base} flex align-middle items-center gap-4`}
+              className={`${brandTheme.components.logo.base} text-white hover:text-accent ${brandTheme.transitions.base} flex align-middle items-center gap-4`}
             >
               <div className="logo-name">
                 <span className={brandTheme.components.logo.brand}>Ganesh</span>{" "}

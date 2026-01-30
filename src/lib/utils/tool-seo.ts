@@ -1270,6 +1270,174 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
     ],
     alternateNames: ['PDF Combiner', 'Join PDF', 'Merge PDF Files Online'],
   },
+  'json-formatter': {
+    title: 'JSON Formatter & Validator - Format and Validate JSON Online',
+    metaDescription: 'Free JSON formatter and validator. Format, minify, and validate JSON with syntax highlighting. Sort keys and fix errors. All processing in your browser.',
+    longTailKeywords: [
+      'json formatter',
+      'json validator',
+      'format json online',
+      'json prettifier',
+      'json beautifier',
+      'validate json',
+      'json syntax checker',
+    ],
+    faqs: [
+      {
+        question: 'Is this JSON formatter free?',
+        answer: 'Yes, completely free with no sign-up. Format and validate unlimited JSON in your browser.',
+      },
+      {
+        question: 'Is my JSON sent to a server?',
+        answer: 'No. All formatting and validation happens in your browser. Your data never leaves your device.',
+      },
+      {
+        question: 'How do I fix invalid JSON?',
+        answer: 'The tool shows the error message and, when possible, line and column. Fix the syntax (missing comma, quote, or bracket) and the output will update.',
+      },
+    ],
+    alternateNames: ['JSON Validator', 'JSON Prettifier', 'JSON Beautifier'],
+  },
+  'jwt-decoder': {
+    title: 'JWT Decoder - Decode JWT Header and Payload Online',
+    metaDescription: 'Decode JWT tokens online. View header, payload, expiration, and claims. All processing in your browser - no server, no signature verification.',
+    longTailKeywords: [
+      'jwt decoder',
+      'jwt decode',
+      'jwt token decoder',
+      'decode jwt',
+      'jwt debugger',
+      'jwt payload viewer',
+      'jwt header decoder',
+    ],
+    faqs: [
+      {
+        question: 'Is this JWT decoder free?',
+        answer: 'Yes, completely free. Decode JWTs in your browser with no sign-up.',
+      },
+      {
+        question: 'Does it verify the JWT signature?',
+        answer: 'No. Signature verification would require your secret. This tool only decodes the base64 header and payload for debugging.',
+      },
+      {
+        question: 'Is my JWT sent to a server?',
+        answer: 'No. Decoding runs entirely in your browser. Your token never leaves your device.',
+      },
+    ],
+    alternateNames: ['JWT Debugger', 'JWT Payload Viewer'],
+  },
+  'url-encoder': {
+    title: 'URL Encoder/Decoder - Encode and Decode URLs Online',
+    metaDescription: 'Free URL encoder and decoder. Encode/decode URL components and parse full URLs. Query strings and path segments. All in your browser.',
+    longTailKeywords: [
+      'url encoder',
+      'url decoder',
+      'url encode online',
+      'percent encoding',
+      'url encode decode',
+      'uri encoder',
+      'url parameter encoder',
+    ],
+    faqs: [
+      {
+        question: 'Is this URL encoder free?',
+        answer: 'Yes, completely free. Encode and decode URLs with no sign-up.',
+      },
+      {
+        question: 'When should I use encode vs decode?',
+        answer: 'Use Encode for query values and path segments (encodeURIComponent). Use Decode to turn percent-encoded strings back to plain text. Use Parse to break a full URL into parts.',
+      },
+      {
+        question: 'Is my data sent to a server?',
+        answer: 'No. All encoding, decoding, and parsing happens in your browser.',
+      },
+    ],
+    alternateNames: ['URI Encoder', 'Percent Encoder', 'URL Decoder'],
+  },
+  'contrast-checker': {
+    title: 'Contrast Checker - WCAG Color Contrast Calculator',
+    metaDescription: 'Check WCAG contrast ratios for accessibility. Real-time preview and pass/fail for AA and AAA. All processing in your browser.',
+    longTailKeywords: [
+      'contrast checker',
+      'wcag contrast',
+      'color contrast checker',
+      'accessibility checker',
+      'contrast ratio calculator',
+      'aa contrast checker',
+      'aaa contrast',
+    ],
+    faqs: [
+      {
+        question: 'Is this contrast checker free?',
+        answer: 'Yes, completely free. Check unlimited color combinations in your browser.',
+      },
+      {
+        question: 'What is AA vs AAA?',
+        answer: 'AA is the minimum recommended level (4.5:1 for normal text, 3:1 for large). AAA is stricter (7:1 normal, 4.5:1 large) for critical or long-form content.',
+      },
+      {
+        question: 'Is my data sent to a server?',
+        answer: 'No. Contrast is calculated in your browser from the colors you pick.',
+      },
+    ],
+    alternateNames: ['WCAG Contrast', 'Color Contrast Calculator', 'Accessibility Contrast'],
+  },
+  'meta-tags': {
+    title: 'Meta Tag Generator - Open Graph & Twitter Cards',
+    metaDescription: 'Generate meta tags for SEO and social sharing. Open Graph, Twitter Cards, and JSON-LD. Copy full HTML or by section. All in your browser.',
+    longTailKeywords: [
+      'meta tag generator',
+      'open graph generator',
+      'twitter card generator',
+      'seo meta tags',
+      'og tags generator',
+      'meta tags creator',
+      'social media meta tags',
+    ],
+    faqs: [
+      {
+        question: 'Is this meta tag generator free?',
+        answer: 'Yes, completely free. Generate meta tags with no sign-up.',
+      },
+      {
+        question: 'What image size should I use for Open Graph?',
+        answer: '1200×630 pixels is recommended for best display on Facebook, LinkedIn, and Twitter.',
+      },
+      {
+        question: 'Do I need both Open Graph and Twitter tags?',
+        answer: 'Twitter can fall back to Open Graph, but adding Twitter-specific tags gives you control over how your link appears on Twitter.',
+      },
+    ],
+    alternateNames: ['OG Tag Generator', 'Twitter Card Generator', 'SEO Meta Generator'],
+  },
+  'escape-unescape': {
+    title: 'Escape/Unescape - JSON, HTML, URL Online',
+    metaDescription: 'Escape and unescape text for JSON, HTML, and URL. Handle special characters correctly. All processing in your browser.',
+    longTailKeywords: [
+      'escape unescape',
+      'html escape',
+      'json escape',
+      'url escape',
+      'html encoder',
+      'string escape',
+      'escape special characters',
+    ],
+    faqs: [
+      {
+        question: 'Is this escape tool free?',
+        answer: 'Yes, completely free. Escape and unescape text with no sign-up.',
+      },
+      {
+        question: 'When do I need to escape?',
+        answer: 'Escape when embedding text inside JSON strings, HTML attributes or content, or URL query/path segments to avoid syntax errors or security issues.',
+      },
+      {
+        question: 'Is my text sent to a server?',
+        answer: 'No. All escaping and unescaping happens in your browser.',
+      },
+    ],
+    alternateNames: ['HTML Encoder', 'JSON Escape', 'URL Escape'],
+  },
 };
 
 /**
@@ -1306,7 +1474,7 @@ export function generateToolMetadata(tool: Tool): Metadata {
       type: 'website',
       images: [
         {
-          url: `${siteConfig.url}/og/tools/${tool.id}.png`,
+          url: `${siteConfig.url}/tools/opengraph-image`,
           width: 1200,
           height: 630,
           alt: title,
@@ -1317,7 +1485,7 @@ export function generateToolMetadata(tool: Tool): Metadata {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${siteConfig.url}/og/tools/${tool.id}.png`],
+      images: [`${siteConfig.url}/tools/opengraph-image`],
     },
     robots: {
       index: true,
