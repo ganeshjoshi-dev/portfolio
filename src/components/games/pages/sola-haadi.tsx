@@ -462,6 +462,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const [capturesByP2, setCapturesByP2] = useState(0);
   const [moveHistory, setMoveHistory] = useState<MoveHistoryEntry[]>([]);
   const [showBoardRefModal, setShowBoardRefModal] = useState(false);
+  const [focusedPoint, setFocusedPoint] = useState<number | null>(null);
 
   const displayNameP1 = (playerNameP1?.trim() || 'Player 1');
   const displayNameP2 = (playerNameP2?.trim() || 'Player 2');
@@ -1196,23 +1197,6 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                   {/* Selection and valid targets */}
                   {selected !== null && (
                     <g style={{ pointerEvents: 'none' }}>
-                      {/* Selected piece: soft glow + clear ring (circular, no square) */}
-                      <circle
-                        cx={POINT_COORDS[selected].x}
-                        cy={POINT_COORDS[selected].y}
-                        r={NODE_R + 3}
-                        fill="white"
-                        fillOpacity="0.12"
-                      />
-                      <circle
-                        cx={POINT_COORDS[selected].x}
-                        cy={POINT_COORDS[selected].y}
-                        r={NODE_R + 1.2}
-                        fill="none"
-                        stroke="white"
-                        strokeWidth="1.8"
-                        strokeOpacity="0.95"
-                      />
                       {validTargets.map((to) => (
                         <circle
                           key={to}
@@ -1224,6 +1208,21 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                           className="text-green-400"
                         />
                       ))}
+                    </g>
+                  )}
+                  {/* Keyboard focus ring (visible when focus is set to none globally) */}
+                  {focusedPoint !== null && (
+                    <g style={{ pointerEvents: 'none' }}>
+                      <circle
+                        cx={POINT_COORDS[focusedPoint].x}
+                        cy={POINT_COORDS[focusedPoint].y}
+                        r={NODE_R + 1}
+                        fill="none"
+                        stroke="rgb(251, 191, 36)"
+                        strokeWidth="1.5"
+                        strokeOpacity="0.95"
+                        strokeDasharray="3 2"
+                      />
                     </g>
                   )}
                   {/* Hit areas */}
@@ -1248,6 +1247,8 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                             ? 'Valid move'
                             : 'Empty'
                       }
+                      onFocus={() => setFocusedPoint(i)}
+                      onBlur={() => setFocusedPoint(null)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
