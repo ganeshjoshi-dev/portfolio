@@ -250,9 +250,9 @@ export default function Game2048Page({ slug }: { slug: string }) {
           </Button>
         </div>
 
-        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0">
+        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0 min-w-0">
           <div
-            className="grid gap-1.5 sm:gap-2 md:gap-2.5 p-1.5 sm:p-2 md:p-3 w-full max-w-[20rem] aspect-square rounded-xl bg-slate-800/60 border border-slate-700/60 touch-manipulation select-none"
+            className="grid gap-1 sm:gap-1.5 sm:gap-2 md:gap-2.5 p-1.5 sm:p-2 md:p-3 w-full max-w-[min(20rem,100%-1rem)] aspect-square rounded-xl bg-slate-800/60 border border-slate-700/60 touch-manipulation select-none"
             style={{
               gridTemplateColumns: `repeat(${SIZE}, minmax(0, 1fr))`,
               gridTemplateRows: `repeat(${SIZE}, minmax(0, 1fr))`,
@@ -266,7 +266,7 @@ export default function Game2048Page({ slug }: { slug: string }) {
               <div
                 key={index}
                 className={`
-                  flex items-center justify-center min-h-0 rounded-md sm:rounded-lg text-base sm:text-lg md:text-xl font-bold
+                  flex items-center justify-center min-h-0 rounded-md sm:rounded-lg text-sm sm:text-base md:text-lg lg:text-xl font-bold
                   ${value === null ? 'bg-slate-700/40' : tileColors[value] ?? 'bg-slate-600 text-white'}
                 `}
               >
@@ -276,7 +276,7 @@ export default function Game2048Page({ slug }: { slug: string }) {
           </div>
           {/* On-screen controls for touch devices */}
           <div
-            className="grid grid-cols-3 gap-1 w-[8rem] sm:w-[9rem] place-items-center"
+            className="grid grid-cols-3 gap-1.5 sm:gap-2 w-[min(10rem,90vw)] max-w-[10rem] place-items-center"
             role="group"
             aria-label="Direction controls"
           >
@@ -285,7 +285,7 @@ export default function Game2048Page({ slug }: { slug: string }) {
               type="button"
               onClick={moveUp}
               disabled={!!gameOver}
-              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
               aria-label="Slide up"
             >
               <ChevronUp className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
@@ -295,17 +295,17 @@ export default function Game2048Page({ slug }: { slug: string }) {
               type="button"
               onClick={moveLeft}
               disabled={!!gameOver}
-              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
               aria-label="Slide left"
             >
               <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
             </button>
-            <div className="w-12 h-12 sm:w-14 sm:h-14" aria-hidden />
+            <div className="min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16" aria-hidden />
             <button
               type="button"
               onClick={moveRight}
               disabled={!!gameOver}
-              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
               aria-label="Slide right"
             >
               <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
@@ -315,7 +315,7 @@ export default function Game2048Page({ slug }: { slug: string }) {
               type="button"
               onClick={moveDown}
               disabled={!!gameOver}
-              className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
+              className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50 disabled:pointer-events-none touch-manipulation transition-colors"
               aria-label="Slide down"
             >
               <ChevronDown className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />

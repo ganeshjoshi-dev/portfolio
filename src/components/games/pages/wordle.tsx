@@ -174,9 +174,9 @@ export default function WordlePage({ slug }: { slug: string }) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-4 sm:gap-6 w-full px-1 sm:px-0">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 w-full px-1 sm:px-0 min-w-0">
           <div
-            className="grid gap-1 sm:gap-1.5 sm:gap-2 w-full max-w-[20rem] mx-auto aspect-[5/6]"
+            className="grid gap-0.5 sm:gap-1 md:gap-2 w-full max-w-[min(20rem,100%-1rem)] mx-auto aspect-[5/6]"
             style={{
               gridTemplateRows: `repeat(${ROWS}, 1fr)`,
               gridTemplateColumns: `repeat(${COLS}, 1fr)`,
@@ -200,7 +200,7 @@ export default function WordlePage({ slug }: { slug: string }) {
                 <div
                   key={index}
                   className={`
-                    flex items-center justify-center min-h-0 rounded border-2 text-lg sm:text-xl md:text-2xl font-bold
+                    flex items-center justify-center min-h-0 rounded border-2 text-base sm:text-lg md:text-xl lg:text-2xl font-bold
                     ${
                       status === 'correct'
                         ? 'bg-emerald-600 border-emerald-500 text-white'
@@ -218,11 +218,11 @@ export default function WordlePage({ slug }: { slug: string }) {
             })}
           </div>
 
-          <div className="flex flex-col gap-1.5 sm:gap-2 w-full max-w-[28rem] px-1 sm:px-0" role="group" aria-label="Keyboard">
+          <div className="flex flex-col gap-1 sm:gap-2 w-full max-w-[min(28rem,100%-0.5rem)] px-0 min-w-0 overflow-x-auto" role="group" aria-label="Keyboard">
             {ROW_KEYS.map((row, rowIndex) => (
               <div
                 key={rowIndex}
-                className="flex justify-center gap-0.5 sm:gap-1 md:gap-1.5 flex-wrap"
+                className="flex flex-nowrap justify-center gap-0.5 sm:gap-1 md:gap-1.5"
               >
                 {row.map((key) => (
                   <button
@@ -235,13 +235,13 @@ export default function WordlePage({ slug }: { slug: string }) {
                     }}
                     disabled={!!gameOver}
                     className={`
-                      min-w-[1.75rem] sm:min-w-[2rem] md:min-w-[2.25rem] h-9 sm:h-10 md:h-12 rounded
+                      flex-1 min-w-0 min-h-[2.75rem] sm:min-h-[3rem] md:min-h-[3rem] h-11 sm:h-12 md:h-12 rounded
                       text-xs sm:text-sm font-medium
                       bg-slate-700/80 border border-slate-600
                       hover:bg-slate-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
                       disabled:opacity-50 disabled:pointer-events-none
                       transition-all duration-200 touch-manipulation
-                      ${key.length > 1 ? 'px-1.5 sm:px-2 md:px-3' : ''}
+                      ${key.length > 1 ? 'flex-[1.5] min-w-[2rem] px-1 sm:px-2 md:px-3' : 'min-w-[1.5rem]'}
                     `}
                   >
                     {key === 'Backspace' ? '⌫' : key}

@@ -98,16 +98,16 @@ export default function HangmanPage({ slug }: { slug: string }) {
           </div>
         ) : (
           <>
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="text-slate-400 text-sm sm:text-base">
-                Category: <span className="text-cyan-300">{getCategoryDisplayName(category)}</span>
-                {' · '}
-                Wrong: <span className={wrongCount >= MAX_WRONG - 1 ? 'text-red-400' : ''}>{wrongCount}/{MAX_WRONG}</span>
+            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 min-w-0">
+              <p className="text-slate-400 text-xs sm:text-sm md:text-base min-w-0">
+                <span className="whitespace-nowrap">Category: <span className="text-cyan-300">{getCategoryDisplayName(category)}</span></span>
+                <span className="hidden sm:inline"> · </span>
+                <span className="whitespace-nowrap">Wrong: <span className={wrongCount >= MAX_WRONG - 1 ? 'text-red-400' : ''}>{wrongCount}/{MAX_WRONG}</span></span>
                 {won && (
-                  <span className="ml-2 text-cyan-300 font-medium">You won!</span>
+                  <span className="ml-1 sm:ml-2 text-cyan-300 font-medium">You won!</span>
                 )}
                 {lost && (
-                  <span className="ml-2 text-red-400 font-medium">Game over</span>
+                  <span className="ml-1 sm:ml-2 text-red-400 font-medium">Game over</span>
                 )}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -130,9 +130,9 @@ export default function HangmanPage({ slug }: { slug: string }) {
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-4 sm:gap-6 w-full px-1 sm:px-0">
+            <div className="flex flex-col items-center gap-4 sm:gap-6 w-full px-1 sm:px-0 min-w-0">
               <div
-                className="flex items-center justify-center w-full max-w-[7rem] sm:max-w-[8rem] text-slate-600 flex-shrink-0"
+                className="flex items-center justify-center w-full max-w-[min(8rem,25vw)] sm:max-w-[8rem] text-slate-600 flex-shrink-0"
                 aria-hidden
               >
                 <svg
@@ -250,7 +250,7 @@ export default function HangmanPage({ slug }: { slug: string }) {
               )}
 
               <div
-                className="flex flex-wrap justify-center gap-1.5 sm:gap-2 w-full max-w-lg px-1"
+                className="flex flex-wrap justify-center gap-1 sm:gap-1.5 sm:gap-2 w-full max-w-[min(32rem,100%-0.5rem)] px-0 min-w-0"
                 role="group"
                 aria-label="Letter keyboard"
               >
@@ -264,7 +264,7 @@ export default function HangmanPage({ slug }: { slug: string }) {
                       onClick={() => handleLetter(letter)}
                       disabled={gameOver || used}
                       className={`
-                        w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium touch-manipulation
+                        min-w-[2.25rem] min-h-[2.25rem] w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium touch-manipulation
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
                         disabled:pointer-events-none transition-all duration-200
                         ${

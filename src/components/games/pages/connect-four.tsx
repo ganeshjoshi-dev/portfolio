@@ -246,8 +246,8 @@ export default function ConnectFourPage({ slug }: { slug: string }) {
           </div>
         ) : (
           <>
-            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">
-              <p className="text-slate-400 text-sm sm:text-base">
+            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 min-w-0">
+              <p className="text-slate-400 text-xs sm:text-sm md:text-base min-w-0">
                 {gameOver
                   ? winner === 'draw'
                     ? "It's a draw!"
@@ -270,33 +270,33 @@ export default function ConnectFourPage({ slug }: { slug: string }) {
               </div>
             </div>
 
-            <div className="flex justify-center w-full min-w-0">
+            <div className="flex justify-center w-full min-w-0 px-0 overflow-x-auto">
               <div
-                className="inline-block p-2 sm:p-3 rounded-xl bg-slate-800/60 border-2 border-slate-700/60"
+                className="inline-block p-1.5 sm:p-2 md:p-3 rounded-xl bg-slate-800/60 border-2 border-slate-700/60"
                 role="grid"
                 aria-label="Connect Four board"
               >
-                <div className="grid grid-cols-7 gap-1 sm:gap-2">
+                <div className="grid grid-cols-7 gap-0.5 sm:gap-1 md:gap-2">
                   {Array.from({ length: COLS }, (_, col) => (
                     <button
                       key={col}
                       type="button"
                       onClick={() => makeMove(col)}
                       disabled={gameOver || (mode === 'ai' && !isRedTurn)}
-                      className="flex flex-col gap-1 p-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:pointer-events-none disabled:opacity-80 transition-colors touch-manipulation"
+                      className="flex flex-col gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:pointer-events-none disabled:opacity-80 transition-colors touch-manipulation min-w-[2.25rem] min-h-[3rem] sm:min-w-[2.5rem] sm:min-h-[3.5rem]"
                       aria-label={`Column ${col + 1}`}
                     >
                       {Array.from({ length: ROWS }, (_, row) => (
                         <div
                           key={`${row}-${col}`}
-                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-slate-600 flex items-center justify-center bg-slate-900/80"
+                          className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-slate-600 flex items-center justify-center bg-slate-900/80 flex-shrink-0"
                           aria-hidden
                         >
                           {board[row][col] === 'red' && (
-                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-red-500 shadow-inner" />
+                            <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-red-500 shadow-inner" />
                           )}
                           {board[row][col] === 'yellow' && (
-                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-amber-400 shadow-inner" />
+                            <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-amber-400 shadow-inner" />
                           )}
                         </div>
                       ))}

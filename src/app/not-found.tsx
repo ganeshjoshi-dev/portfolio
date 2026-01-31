@@ -44,6 +44,9 @@ export default function NotFound() {
           <Button href="/projects" variant="secondary" size="lg">
             View Projects
           </Button>
+          <Button href="/games" variant="secondary" size="lg">
+            All Games
+          </Button>
           <Button href="/tools" variant="ghost" size="lg">
             Explore Tools
           </Button>

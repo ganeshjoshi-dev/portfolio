@@ -137,10 +137,17 @@ input[type="number"] {
   max-width: 100%;
 }
 
-/* Responsive utilities for tools */
+/* Responsive utilities for tools only (do not apply to games) */
 @media (max-width: 640px) {
-  /* Ensure all tool layouts are mobile-friendly */
-  [class*="grid"] {
+  [data-tools-hub] [class*="grid"] {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Games: prevent overflow and ensure playable on all viewports */
+@media (max-width: 640px) {
+  [data-game-container] {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }

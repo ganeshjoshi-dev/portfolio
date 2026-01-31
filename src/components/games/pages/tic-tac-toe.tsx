@@ -201,7 +201,7 @@ export default function TicTacToePage({ slug }: { slug: string }) {
               </p>
             </div>
             <div
-              className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-[10rem] mx-auto p-3 sm:p-4 rounded-xl bg-slate-800/40 border border-slate-700/60"
+              className="grid grid-cols-3 gap-1 sm:gap-1.5 sm:gap-2 w-full max-w-[min(10rem,40vw)] mx-auto p-2 sm:p-3 md:p-4 rounded-xl bg-slate-800/40 border border-slate-700/60"
               style={{ aspectRatio: '1' }}
               aria-hidden
             >
@@ -265,9 +265,9 @@ export default function TicTacToePage({ slug }: { slug: string }) {
               </div>
             </div>
 
-            <div className="relative w-full max-w-xs mx-auto aspect-square min-h-0">
+            <div className="relative w-full max-w-[min(20rem,100%-2rem)] mx-auto aspect-square min-h-0">
               <div
-                className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1.5 sm:gap-2 md:gap-3"
+                className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1 sm:gap-1.5 sm:gap-2 md:gap-3"
                 role="grid"
                 aria-label="Tic-tac-toe board"
               >

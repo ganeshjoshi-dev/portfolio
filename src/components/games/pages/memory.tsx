@@ -275,8 +275,8 @@ export default function MemoryPage({ slug }: { slug: string }) {
       backLabel="All Games"
     >
       <div className="space-y-4 sm:space-y-6 w-full min-w-0">
-        <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">
-          <div className="flex flex-wrap items-center gap-4 text-slate-400 text-sm sm:text-base">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-3 sm:gap-4 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-slate-400 text-xs sm:text-sm md:text-base min-w-0">
             <span>Moves: {moves}</span>
             {settings.timerMode !== 'none' && (
               <span
@@ -308,12 +308,12 @@ export default function MemoryPage({ slug }: { slug: string }) {
               </span>
             )}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 flex-shrink-0">
             <button
               type="button"
               onClick={() => setShowSettings((s) => !s)}
               className="
-                px-4 py-2 rounded-lg text-sm font-medium
+                px-3 sm:px-4 py-2 rounded-lg text-sm font-medium touch-manipulation
                 bg-slate-800/60 border border-slate-700/60
                 text-slate-300 hover:text-cyan-300 hover:border-cyan-400/50
                 transition-all duration-300
@@ -325,7 +325,7 @@ export default function MemoryPage({ slug }: { slug: string }) {
               type="button"
               onClick={handleResetSameSettings}
               className="
-                px-4 py-2 rounded-lg text-sm font-medium
+                px-3 sm:px-4 py-2 rounded-lg text-sm font-medium touch-manipulation
                 bg-slate-800/60 border border-slate-700/60
                 text-slate-300 hover:text-cyan-300 hover:border-cyan-400/50
                 transition-all duration-300
@@ -342,8 +342,8 @@ export default function MemoryPage({ slug }: { slug: string }) {
 
         <div
           className={`
-            grid ${gridColsClass} gap-1.5 sm:gap-2 md:gap-3 w-full mx-auto
-            ${config.cols >= 6 ? 'max-w-[28rem]' : 'max-w-2xl'}
+            grid ${gridColsClass} gap-1 sm:gap-2 md:gap-3 w-full mx-auto min-w-0
+            ${config.cols >= 6 ? 'max-w-[min(28rem,100%-1rem)]' : 'max-w-[min(32rem,100%-1rem)]'}
           `}
           style={{
             aspectRatio: `${config.cols} / ${config.rows}`,
@@ -358,7 +358,7 @@ export default function MemoryPage({ slug }: { slug: string }) {
               className={`
                 relative rounded-lg sm:rounded-xl border-2 overflow-hidden
                 flex items-center justify-center min-h-0
-                text-lg sm:text-2xl md:text-3xl lg:text-4xl
+                text-base sm:text-xl md:text-2xl lg:text-3xl
                 transition-all duration-300 touch-manipulation
                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
                 disabled:pointer-events-none

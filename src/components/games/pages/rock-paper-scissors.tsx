@@ -80,26 +80,26 @@ export default function RockPaperScissorsPage({ slug }: { slug: string }) {
           </Button>
         </div>
 
-        <div className="flex flex-col items-center gap-8 w-full px-1 sm:px-0">
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+        <div className="flex flex-col items-center gap-6 sm:gap-8 w-full px-1 sm:px-0 min-w-0">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
             {CHOICES.map((choice) => (
               <button
                 key={choice}
                 type="button"
                 onClick={() => play(choice)}
                 className="
-                  flex flex-col items-center gap-2 p-6 sm:p-8
-                  rounded-2xl border-2 border-slate-700/60 bg-slate-800/60
+                  flex flex-col items-center gap-1.5 sm:gap-2 p-4 sm:p-6 md:p-8
+                  rounded-xl sm:rounded-2xl border-2 border-slate-700/60 bg-slate-800/60
                   hover:border-cyan-400/50 hover:bg-slate-800/80
                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
-                  transition-all duration-300 touch-manipulation
+                  transition-all duration-300 touch-manipulation min-w-0
                 "
                 aria-label={CHOICE_LABELS[choice]}
               >
-                <span className="text-4xl sm:text-5xl" aria-hidden>
+                <span className="text-3xl sm:text-4xl md:text-5xl" aria-hidden>
                   {CHOICE_EMOJI[choice]}
                 </span>
-                <span className="text-white font-semibold text-lg">
+                <span className="text-white font-semibold text-base sm:text-lg">
                   {CHOICE_LABELS[choice]}
                 </span>
               </button>
@@ -107,24 +107,24 @@ export default function RockPaperScissorsPage({ slug }: { slug: string }) {
           </div>
 
           {playerChoice !== null && computerChoice !== null && result !== null && (
-            <div className="w-full max-w-md mx-auto p-6 rounded-xl bg-slate-800/40 border border-slate-700/60 text-center space-y-4">
-              <div className="flex items-center justify-center gap-6 sm:gap-10">
+            <div className="w-full max-w-[min(28rem,100%-1rem)] mx-auto p-4 sm:p-6 rounded-xl bg-slate-800/40 border border-slate-700/60 text-center space-y-4">
+              <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-10 flex-wrap">
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-slate-500 text-sm">You</span>
-                  <span className="text-3xl" aria-hidden>
+                  <span className="text-2xl sm:text-3xl" aria-hidden>
                     {CHOICE_EMOJI[playerChoice]}
                   </span>
-                  <span className="text-slate-300 font-medium">
+                  <span className="text-slate-300 font-medium text-sm sm:text-base">
                     {CHOICE_LABELS[playerChoice]}
                   </span>
                 </div>
-                <span className="text-2xl text-slate-500 font-bold">vs</span>
+                <span className="text-xl sm:text-2xl text-slate-500 font-bold">vs</span>
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-slate-500 text-sm">Computer</span>
-                  <span className="text-3xl" aria-hidden>
+                  <span className="text-2xl sm:text-3xl" aria-hidden>
                     {CHOICE_EMOJI[computerChoice]}
                   </span>
-                  <span className="text-slate-300 font-medium">
+                  <span className="text-slate-300 font-medium text-sm sm:text-base">
                     {CHOICE_LABELS[computerChoice]}
                   </span>
                 </div>

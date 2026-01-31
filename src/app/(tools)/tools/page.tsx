@@ -66,7 +66,7 @@ function ToolsHubContent() {
 
   return (
     <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
-      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-tools-hub>
         {/* Hero Section */}
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-4 sm:mb-6">
@@ -386,7 +386,7 @@ function ToolsHubContent() {
 function ToolsLoadingFallback() {
   return (
     <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
-      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-tools-hub>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-full text-cyan-300 text-sm mb-4 sm:mb-6">
             <Sparkles className="w-4 h-4" />
