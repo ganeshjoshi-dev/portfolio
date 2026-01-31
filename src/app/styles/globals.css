@@ -65,9 +65,14 @@ h6 {
   letter-spacing: -0.01em;
 }
 
+/* Override browser default 5px focus ring with a smaller one */
+:focus {
+  outline: none;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
 /* Section padding - vertical only (container handles horizontal) */
