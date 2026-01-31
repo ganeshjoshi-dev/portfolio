@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { Info } from 'lucide-react';
+import { Info, Volume2, VolumeX } from 'lucide-react';
 import { getGameById } from '@/config/games';
 import { GameLayout } from '@/components/games/shared';
 import { Button, Accordion, Select, Input, ConfirmDialog, Modal } from '@/components/ui';
@@ -203,6 +203,15 @@ interface MoveHistoryEntry {
   captured?: number[];
 }
 
+interface UndoSnapshot {
+  board: Board;
+  turn: Player;
+  capturesByP1: number;
+  capturesByP2: number;
+  moveHistory: MoveHistoryEntry[];
+  fullMoveNumber: number;
+}
+
 /** Normal move: move to a directly adjacent empty node (from GRAPH). */
 function getValidMoves(
   board: Board,
@@ -298,7 +307,7 @@ function getMultiCapturePaths(
   return result;
 }
 
-function getAllMoves(board: Board, player: Player): Move[] {
+function getAllMoves(board: Board, player: Player, forcedCapture?: boolean): Move[] {
   const moves: Move[] = [];
   for (let from = 0; from < N_POINTS; from++) {
     if (board[from] !== player) continue;
@@ -308,6 +317,7 @@ function getAllMoves(board: Board, player: Player): Move[] {
     }
   }
   if (moves.length > 0) return moves;
+  if (forcedCapture) return moves;
   for (let from = 0; from < N_POINTS; from++) {
     if (board[from] !== player) continue;
     const tos = getValidMoves(board, from, player);
@@ -331,11 +341,16 @@ function applyMove(board: Board, move: Move): Board {
   return next;
 }
 
-function checkWinner(board: Board, currentTurn: Player): Player | null {
+type GameOutcome = Player | 'draw' | null;
+
+function checkWinner(board: Board, currentTurn: Player): GameOutcome {
   const p1Count = board.filter((c) => c === 'P1').length;
   const p2Count = board.filter((c) => c === 'P2').length;
   if (p1Count === 0) return 'P2';
   if (p2Count === 0) return 'P1';
+  const p1Moves = getAllMoves(board, 'P1').length;
+  const p2Moves = getAllMoves(board, 'P2').length;
+  if (p1Moves === 0 && p2Moves === 0) return 'draw';
   const moves = getAllMoves(board, currentTurn);
   if (moves.length === 0) return currentTurn === 'P1' ? 'P2' : 'P1';
   return null;
@@ -352,11 +367,14 @@ function evaluatePosition(board: Board): number {
   return score;
 }
 
-const AI_DEPTH = 3;
+const AI_DEPTHS = { easy: 1, medium: 3, hard: 5 } as const;
+const AI_DELAYS_MS = { easy: 400, medium: 400, hard: 700 } as const;
+type AiDifficulty = keyof typeof AI_DEPTHS;
 
 function minimax(
   board: Board,
   depth: number,
+  depthLimit: number,
   isP2: boolean,
   alpha: number,
   beta: number
@@ -364,7 +382,8 @@ function minimax(
   const winner = checkWinner(board, isP2 ? 'P2' : 'P1');
   if (winner === 'P2') return 1000 - depth;
   if (winner === 'P1') return -1000 + depth;
-  if (depth >= AI_DEPTH) return evaluatePosition(board);
+  if (winner === 'draw') return 0;
+  if (depth >= depthLimit) return evaluatePosition(board);
   const player: Player = isP2 ? 'P2' : 'P1';
   const moves = getAllMoves(board, player);
   if (moves.length === 0) return isP2 ? -1000 : 1000;
@@ -372,7 +391,7 @@ function minimax(
     let maxEval = -Infinity;
     for (const move of moves) {
       const next = applyMove(board, move);
-      const eval_ = minimax(next, depth + 1, false, alpha, beta);
+      const eval_ = minimax(next, depth + 1, depthLimit, false, alpha, beta);
       maxEval = Math.max(maxEval, eval_);
       alpha = Math.max(alpha, eval_);
       if (beta <= alpha) break;
@@ -382,7 +401,7 @@ function minimax(
     let minEval = Infinity;
     for (const move of moves) {
       const next = applyMove(board, move);
-      const eval_ = minimax(next, depth + 1, true, alpha, beta);
+      const eval_ = minimax(next, depth + 1, depthLimit, true, alpha, beta);
       minEval = Math.min(minEval, eval_);
       beta = Math.min(beta, eval_);
       if (beta <= alpha) break;
@@ -391,20 +410,38 @@ function minimax(
   }
 }
 
-function getAiMove(board: Board): Move | null {
-  const moves = getAllMoves(board, 'P2');
+function getAiMove(board: Board, depth: number, forcedCapture?: boolean): Move | null {
+  const moves = getAllMoves(board, 'P2', forcedCapture);
   if (moves.length === 0) return null;
   let best: Move = moves[0];
   let bestScore = -Infinity;
   for (const move of moves) {
     const next = applyMove(board, move);
-    const score = minimax(next, 1, false, -Infinity, Infinity);
+    const score = minimax(next, 1, depth, false, -Infinity, Infinity);
     if (score > bestScore) {
       bestScore = score;
       best = move;
     }
   }
   return best;
+}
+
+const HINT_DEPTH = 3;
+
+function getHintMove(board: Board, forcedCapture?: boolean): { from: number; to: number } | null {
+  const moves = getAllMoves(board, 'P1', forcedCapture);
+  if (moves.length === 0) return null;
+  let best: Move = moves[0];
+  let bestScore = Infinity;
+  for (const move of moves) {
+    const next = applyMove(board, move);
+    const score = minimax(next, 1, HINT_DEPTH, true, -Infinity, Infinity);
+    if (score < bestScore) {
+      bestScore = score;
+      best = move;
+    }
+  }
+  return { from: best.from, to: best.to };
 }
 
 const CAPTURED_ICON_SIZE = 10;
@@ -464,9 +501,45 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const [showBoardRefModal, setShowBoardRefModal] = useState(false);
   const [showWinningModal, setShowWinningModal] = useState(true);
   const [focusedPoint, setFocusedPoint] = useState<number | null>(null);
+  const [aiDifficulty, setAiDifficulty] = useState<AiDifficulty>('medium');
+  const [fullMoveNumber, setFullMoveNumber] = useState(1);
+  const [pastStates, setPastStates] = useState<UndoSnapshot[]>([]);
+  const [forcedCapture, setForcedCapture] = useState(false);
+  const [animatingMove, setAnimatingMove] = useState<{
+    from: number;
+    to: number;
+    captured?: number[];
+    player: Player;
+  } | null>(null);
+  const [animationProgress, setAnimationProgress] = useState(0);
+  const [hintMove, setHintMove] = useState<{ from: number; to: number } | null>(null);
+  const [soundEnabled, setSoundEnabled] = useState(false);
 
   const displayNameP1 = (playerNameP1?.trim() || 'Player 1');
   const displayNameP2 = (playerNameP2?.trim() || 'Player 2');
+
+  const playSound = useCallback(
+    (type: 'move' | 'capture' | 'gameover') => {
+      if (!soundEnabled) return;
+      try {
+        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const ctx = new AudioContextClass();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const freq = type === 'move' ? 400 : type === 'capture' ? 600 : 800;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.1);
+      } catch {
+        // ignore if AudioContext not supported
+      }
+    },
+    [soundEnabled]
+  );
 
   useEffect(() => {
     if (pieceColorP1 === pieceColorP2) {
@@ -479,8 +552,32 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const gameOver = winner !== null;
 
   useEffect(() => {
-    if (gameOver && winner) setShowWinningModal(true);
-  }, [gameOver, winner]);
+    if (gameOver && winner) {
+      setShowWinningModal(true);
+      playSound('gameover');
+    }
+  }, [gameOver, winner, playSound]);
+
+  const ANIM_DURATION_MS = 250;
+
+  useEffect(() => {
+    if (animatingMove === null) return;
+    const start = performance.now();
+    let rafId: number;
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / ANIM_DURATION_MS);
+      setAnimationProgress(t);
+      if (t < 1) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        setAnimatingMove(null);
+        setAnimationProgress(0);
+      }
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [animatingMove]);
 
   const validSimpleTargets = useMemo(() => {
     if (selected === null || board[selected] !== turn) return [];
@@ -495,10 +592,15 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     return jumps.map((j) => j.to);
   }, [board, turn, selected, multiCaptureFrom, lastTo]);
 
+  const hasAnyCapture = useMemo(
+    () => getAllMoves(board, turn).some((m) => m.kind === 'capture'),
+    [board, turn]
+  );
+
   const validTargets = useMemo(() => {
-    // Show both simple moves and captures so player can choose (capture is optional).
+    if (forcedCapture && hasAnyCapture) return [...validCaptureTargets];
     return [...new Set([...validCaptureTargets, ...validSimpleTargets])];
-  }, [validCaptureTargets, validSimpleTargets]);
+  }, [forcedCapture, hasAnyCapture, validCaptureTargets, validSimpleTargets]);
 
   const handlePointClick = useCallback(
     (index: number) => {
@@ -523,6 +625,33 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
         const from = multiCaptureFrom ?? selected!;
         const jumps = getCaptureMoves(board, from, turn, lastTo);
         const isCapture = jumps.some((j) => j.to === index);
+        const isEndOfTurn = isCapture
+          ? getCaptureMoves(
+              (() => {
+                const nb = board.slice();
+                nb[from] = null;
+                nb[jumps.find((j) => j.to === index)!.captured] = null;
+                nb[index] = turn;
+                return nb;
+              })(),
+              index,
+              turn,
+              from
+            ).length === 0
+          : true;
+        if (isEndOfTurn) {
+          setPastStates((prev) => [
+            ...prev,
+            {
+              board: board.slice(),
+              turn,
+              capturesByP1,
+              capturesByP2,
+              moveHistory: [...moveHistory],
+              fullMoveNumber,
+            },
+          ]);
+        }
         if (isCapture) {
           const jump = jumps.find((j) => j.to === index)!;
           const newBoard = board.slice();
@@ -533,6 +662,9 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
           else setCapturesByP2((prev) => prev + 1);
           setMoveHistory((prev) => [...prev, { player: turn, kind: 'capture', from, to: index, captured: [jump.captured] }]);
           setBoard(newBoard);
+          setAnimatingMove({ from, to: index, captured: [jump.captured], player: turn });
+          setAnimationProgress(0);
+          playSound('capture');
           const moreJumps = getCaptureMoves(newBoard, index, turn, from);
           if (moreJumps.length > 0) {
             setSelected(index);
@@ -543,6 +675,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
             setMultiCaptureFrom(null);
             setLastTo(undefined);
             setTurn(turn === 'P1' ? 'P2' : 'P1');
+            if (turn === 'P2') setFullMoveNumber((n) => n + 1);
           }
         } else {
           const newBoard = board.slice();
@@ -550,10 +683,14 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
           newBoard[from] = null;
           setMoveHistory((prev) => [...prev, { player: turn, kind: 'simple', from, to: index }]);
           setBoard(newBoard);
+          setAnimatingMove({ from, to: index, player: turn });
+          setAnimationProgress(0);
+          playSound('move');
           setSelected(null);
           setMultiCaptureFrom(null);
           setLastTo(undefined);
           setTurn(turn === 'P1' ? 'P2' : 'P1');
+          if (turn === 'P2') setFullMoveNumber((n) => n + 1);
         }
         return;
       }
@@ -561,13 +698,49 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
       setMultiCaptureFrom(null);
       setLastTo(undefined);
     },
-    [board, turn, selected, multiCaptureFrom, lastTo, validTargets, gameOver, mode]
+    [board, turn, selected, multiCaptureFrom, lastTo, validTargets, gameOver, mode, capturesByP1, capturesByP2, moveHistory, fullMoveNumber, playSound]
   );
+
+  const handleUndo = useCallback(() => {
+    if (pastStates.length === 0) return;
+    if (mode === 'ai' && turn === 'P2') return;
+    const snap = pastStates[pastStates.length - 1];
+    setBoard(snap.board.slice());
+    setTurn(snap.turn);
+    setCapturesByP1(snap.capturesByP1);
+    setCapturesByP2(snap.capturesByP2);
+    setMoveHistory([...snap.moveHistory]);
+    setFullMoveNumber(snap.fullMoveNumber);
+    setSelected(null);
+    setMultiCaptureFrom(null);
+    setLastTo(undefined);
+    setPastStates((prev) => prev.slice(0, -1));
+  }, [pastStates, mode, turn]);
+
+  const handleHint = useCallback(() => {
+    if (gameOver || (mode === 'ai' && turn === 'P2')) return;
+    const hint =
+      turn === 'P1'
+        ? getHintMove(board, forcedCapture)
+        : (() => {
+            const move = getAiMove(board, HINT_DEPTH, forcedCapture);
+            return move ? { from: move.from, to: move.to } : null;
+          })();
+    if (hint) setHintMove(hint);
+  }, [board, turn, gameOver, mode, forcedCapture]);
+
+  useEffect(() => {
+    if (hintMove === null) return;
+    const timer = setTimeout(() => setHintMove(null), 3000);
+    return () => clearTimeout(timer);
+  }, [hintMove]);
 
   useEffect(() => {
     if (mode !== 'ai' || turn !== 'P2' || gameOver) return;
+    const delay = AI_DELAYS_MS[aiDifficulty];
+    const depth = AI_DEPTHS[aiDifficulty];
     const timer = setTimeout(() => {
-      const aiMove = getAiMove(board);
+      const aiMove = getAiMove(board, depth, forcedCapture);
       if (aiMove) {
         if (aiMove.kind === 'capture') {
           setCapturesByP2((prev) => prev + aiMove.captured.length);
@@ -583,11 +756,21 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
           },
         ]);
         setBoard(applyMove(board, aiMove));
+        setAnimatingMove({
+          from: aiMove.from,
+          to: aiMove.to,
+          captured: aiMove.kind === 'capture' ? aiMove.captured : undefined,
+          player: 'P2',
+        });
+        setAnimationProgress(0);
+        if (aiMove.kind === 'capture') playSound('capture');
+        else playSound('move');
         setTurn('P1');
+        setFullMoveNumber((n) => n + 1);
       }
-    }, 400);
+    }, delay);
     return () => clearTimeout(timer);
-  }, [mode, turn, gameOver, board]);
+  }, [mode, turn, gameOver, board, aiDifficulty, forcedCapture, playSound]);
 
   const getInitialTurn = useCallback((): Player => {
     if (firstPlayer === 'random') return Math.random() < 0.5 ? 'P1' : 'P2';
@@ -604,6 +787,8 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
+    setFullMoveNumber(1);
+    setPastStates([]);
   }, [getInitialTurn]);
 
   const handleResetClick = useCallback(() => {
@@ -630,6 +815,8 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
+    setFullMoveNumber(1);
+    setPastStates([]);
     setTurn(initialTurn);
   }, [getInitialTurn]);
 
@@ -644,6 +831,8 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
+    setFullMoveNumber(1);
+    setPastStates([]);
     setTurn(initialTurn);
   }, [getInitialTurn]);
 
@@ -668,6 +857,10 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
           <p>
             <strong className="text-white">Rule:</strong> During multi-jump captures, you cannot 
             immediately return to the point you just left.
+          </p>
+          <p>
+            <strong className="text-white">Must capture:</strong> If you enable &quot;Must capture if possible&quot; in setup, 
+            you must take a capture when one is available (you cannot make a simple move instead).
           </p>
         </div>
       ),
@@ -961,6 +1154,56 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                     </div>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="forced-capture"
+                    checked={forcedCapture}
+                    onChange={(e) => setForcedCapture(e.target.checked)}
+                    className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-0"
+                    aria-describedby="forced-capture-desc"
+                  />
+                  <label htmlFor="forced-capture" className="text-sm font-medium text-slate-300 cursor-pointer">
+                    Must capture if possible
+                  </label>
+                </div>
+                <p id="forced-capture-desc" className="text-slate-500 text-xs -mt-2">
+                  When enabled, you must take a capture when one is available.
+                </p>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="sound-enabled"
+                    checked={soundEnabled}
+                    onChange={(e) => setSoundEnabled(e.target.checked)}
+                    className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-0"
+                    aria-describedby="sound-desc"
+                  />
+                  <label htmlFor="sound-enabled" className="text-sm font-medium text-slate-300 cursor-pointer">
+                    Sound effects
+                  </label>
+                </div>
+                <p id="sound-desc" className="text-slate-500 text-xs -mt-2">
+                  Short sounds on move, capture, and game over.
+                </p>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    AI difficulty (for Play vs AI)
+                  </label>
+                  <Select
+                    options={[
+                      { value: 'easy', label: 'Easy' },
+                      { value: 'medium', label: 'Medium' },
+                      { value: 'hard', label: 'Hard' },
+                    ]}
+                    value={aiDifficulty}
+                    onChange={(e) => setAiDifficulty(e.target.value as AiDifficulty)}
+                    className="text-slate-800"
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
@@ -988,26 +1231,70 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
         ) : (
           <>
             <div className="flex flex-col gap-3 min-w-0">
-              <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 min-w-0">
-                <p className="text-slate-400 text-xs sm:text-sm md:text-base min-w-0">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
+                <p className="text-slate-400 text-xs sm:text-sm md:text-base min-w-0 shrink-0">
+                  <span className="tabular-nums">Move {fullMoveNumber}</span>
+                  {' · '}
                   {gameOver
-                    ? `Winner: ${winner === 'P1' ? `${displayNameP1} (${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.label ?? 'P1'})` : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'})`}`
+                    ? winner === 'draw'
+                      ? 'Draw'
+                      : `Winner: ${winner === 'P1' ? `${displayNameP1} (${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.label ?? 'P1'})` : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'})`}`
                     : `Turn: ${turn === 'P1' ? `${displayNameP1} (${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.label ?? 'P1'})` : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'})`}`}
                   {mode === 'ai' && !gameOver && ` - You are ${displayNameP1}`}
                 </p>
-                <div className="flex gap-2">
-                <Button type="button" variant="secondary" size="sm" onClick={handleResetClick}>
-                  New game
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setGameStarted(false)}
-                >
-                  Change mode
-                </Button>
-              </div>
+                <div className="flex flex-wrap items-center gap-2 min-w-0">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleUndo}
+                    disabled={pastStates.length === 0 || (mode === 'ai' && turn === 'P2')}
+                    className="shrink-0 min-h-[2.25rem] touch-manipulation"
+                  >
+                    Undo
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleHint}
+                    disabled={gameOver || (mode === 'ai' && turn === 'P2')}
+                    className="shrink-0 min-h-[2.25rem] touch-manipulation"
+                  >
+                    Hint
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleResetClick}
+                    className="shrink-0 min-h-[2.25rem] touch-manipulation whitespace-nowrap"
+                  >
+                    New game
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setGameStarted(false)}
+                    className="shrink-0 min-h-[2.25rem] touch-manipulation whitespace-nowrap"
+                  >
+                    Change mode
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => setSoundEnabled((prev) => !prev)}
+                    className="inline-flex items-center justify-center rounded-md min-w-[2.25rem] min-h-[2.25rem] p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation"
+                    aria-label={soundEnabled ? 'Mute sound' : 'Turn sound on'}
+                    title={soundEnabled ? 'Mute sound' : 'Turn sound on'}
+                  >
+                    {soundEnabled ? (
+                      <Volume2 className="w-4 h-4 shrink-0" aria-hidden />
+                    ) : (
+                      <VolumeX className="w-4 h-4 shrink-0" aria-hidden />
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-stretch gap-3 sm:gap-4 rounded-lg border border-slate-600/50 bg-slate-800/30 px-3 py-2.5 sm:px-4 sm:py-2.5 w-full min-w-0" aria-label="Captures">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 min-w-0 flex-1 sm:min-w-0">
@@ -1072,11 +1359,15 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                   Game over
                 </p>
                 <p className="text-xl sm:text-2xl font-bold text-white mt-1">
-                  {winner === 'P1'
-                    ? `${displayNameP1} (${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.label ?? 'P1'}) wins!`
-                    : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'}) wins!`}
+                  {winner === 'draw'
+                    ? "It's a draw!"
+                    : winner === 'P1'
+                      ? `${displayNameP1} (${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.label ?? 'P1'}) wins!`
+                      : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'}) wins!`}
                 </p>
-                <p className="mt-2 text-slate-400 text-sm">🎉 Well played!</p>
+                <p className="mt-2 text-slate-400 text-sm">
+                  {winner === 'draw' ? 'No legal moves for either player.' : 'Well played!'}
+                </p>
                 <div className="mt-6 flex flex-wrap gap-2 justify-center items-stretch">
                   <Button
                     variant="primary"
@@ -1088,6 +1379,17 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                     }}
                   >
                     Restart game
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="whitespace-nowrap shrink-0"
+                    onClick={() => {
+                      reset();
+                      setShowWinningModal(false);
+                    }}
+                  >
+                    Rematch
                   </Button>
                   <Button
                     variant="secondary"
@@ -1183,6 +1485,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                   {/* Pieces */}
                   {POINT_COORDS.map((p, i) => {
                     if (!board[i]) return null;
+                    if (animatingMove && i === animatingMove.to) return null;
                     const pieceClass =
                       board[i] === 'P1'
                         ? `${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.fill ?? 'fill-amber-400'} ${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.stroke ?? 'stroke-amber-500/80'}`
@@ -1224,6 +1527,71 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                       />
                     );
                   })}
+                  {/* Animating piece (sliding from -> to) */}
+                  {animatingMove && (() => {
+                    const fromP = POINT_COORDS[animatingMove.from];
+                    const toP = POINT_COORDS[animatingMove.to];
+                    const t = animationProgress;
+                    const x = fromP.x + (toP.x - fromP.x) * t;
+                    const y = fromP.y + (toP.y - fromP.y) * t;
+                    const pieceClass =
+                      animatingMove.player === 'P1'
+                        ? `${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.fill ?? 'fill-amber-400'} ${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.stroke ?? 'stroke-amber-500/80'}`
+                        : `${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.fill ?? 'fill-cyan-400'} ${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.stroke ?? 'stroke-cyan-500/80'}`;
+                    const pieceProps = {
+                      className: pieceClass,
+                      strokeWidth: 0.8,
+                      style: { pointerEvents: 'none' as const },
+                    };
+                    const shape = animatingMove.player === 'P1' ? pieceShapeP1 : pieceShapeP2;
+                    if (shape === 'round') {
+                      return <circle key="anim-piece" {...pieceProps} cx={x} cy={y} r={PIECE_R} />;
+                    }
+                    if (shape === 'square') {
+                      return (
+                        <rect
+                          key="anim-piece"
+                          {...pieceProps}
+                          x={x - PIECE_R}
+                          y={y - PIECE_R}
+                          width={PIECE_R * 2}
+                          height={PIECE_R * 2}
+                        />
+                      );
+                    }
+                    return (
+                      <polygon
+                        key="anim-piece"
+                        {...pieceProps}
+                        points={`${x},${y - PIECE_R} ${x + PIECE_R},${y} ${x},${y + PIECE_R} ${x - PIECE_R},${y}`}
+                      />
+                    );
+                  })()}
+                  {/* Hint move highlight */}
+                  {hintMove && (
+                    <g style={{ pointerEvents: 'none' }}>
+                      <circle
+                        cx={POINT_COORDS[hintMove.from].x}
+                        cy={POINT_COORDS[hintMove.from].y}
+                        r={NODE_R + 1.5}
+                        fill="none"
+                        stroke="rgb(34, 211, 238)"
+                        strokeWidth="2"
+                        strokeDasharray="4 3"
+                        opacity={0.9}
+                      />
+                      <circle
+                        cx={POINT_COORDS[hintMove.to].x}
+                        cy={POINT_COORDS[hintMove.to].y}
+                        r={NODE_R + 1.5}
+                        fill="rgba(34, 211, 238, 0.2)"
+                        stroke="rgb(34, 211, 238)"
+                        strokeWidth="2"
+                        strokeDasharray="4 3"
+                        opacity={0.9}
+                      />
+                    </g>
+                  )}
                   {/* Selection and valid targets */}
                   {selected !== null && (
                     <g style={{ pointerEvents: 'none' }}>
