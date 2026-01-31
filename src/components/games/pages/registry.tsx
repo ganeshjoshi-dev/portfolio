@@ -17,6 +17,7 @@ export const gamePageRegistry: Record<
   'simon-says': lazy(() => import('./simon-says')),
   'rock-paper-scissors': lazy(() => import('./rock-paper-scissors')),
   'connect-four': lazy(() => import('./connect-four')),
+  'sola-haadi': lazy(() => import('./sola-haadi')),
 };
 
 /** All game slugs for generateStaticParams. */

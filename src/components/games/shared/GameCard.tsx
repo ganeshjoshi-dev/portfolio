@@ -8,6 +8,11 @@ import {
   LayoutGrid,
   Worm,
   HelpCircle,
+  Layers,
+  CircleDot,
+  Hand,
+  Circle,
+  Grid2X2,
   LucideIcon,
 } from 'lucide-react';
 import { Game } from '@/types/games';
@@ -21,6 +26,11 @@ const iconMap: Record<string, LucideIcon> = {
   LayoutGrid,
   Worm,
   HelpCircle,
+  Layers,
+  CircleDot,
+  Hand,
+  Circle,
+  Grid2X2,
 };
 
 interface GameCardProps {

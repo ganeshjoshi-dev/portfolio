@@ -83,7 +83,7 @@ export const games: Game[] = [
     description: 'Bounce the ball off the paddle and break all the bricks.',
     category: 'arcade',
     path: '/games/breakout',
-    icon: 'Square',
+    icon: 'Layers',
     keywords: ['breakout', 'brick', 'paddle', 'arcade', 'ball'],
   },
   {
@@ -112,6 +112,16 @@ export const games: Game[] = [
     path: '/games/connect-four',
     icon: 'Circle',
     keywords: ['connect four', 'four in a row', 'puzzle', 'strategy'],
+  },
+  {
+    id: 'sola-haadi',
+    name: 'Sola Haadi',
+    description:
+      'Traditional 16 vs 16 jumping game. Also known as Sixteen Soldiers. Capture by jumping; win by taking all or blocking.',
+    category: 'puzzle',
+    path: '/games/sola-haadi',
+    icon: 'Grid2X2',
+    keywords: ['sola haadi', 'sixteen soldiers', 'board', 'strategy'],
   },
 ];
 
