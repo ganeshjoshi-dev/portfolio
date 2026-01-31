@@ -31,8 +31,8 @@ export default function GameLayout({
   }, []);
 
   return (
-    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16">
-      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-x-hidden">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0 w-full">
         <Breadcrumbs items={breadcrumbItems} includeSchema={false} />
         <Link
           href={backLink}
@@ -52,7 +52,7 @@ export default function GameLayout({
             {description}
           </p>
         </header>
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0" data-game-container>
           {children}
         </div>
       </div>

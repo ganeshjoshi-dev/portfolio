@@ -157,9 +157,9 @@ export default function SnakePage({ slug }: { slug: string }) {
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0">
+        <div className="flex flex-col items-center gap-4 w-full px-1 sm:px-0 min-w-0">
           <div
-            className="w-full max-w-[320px] aspect-[5/4] border-2 border-slate-700/60 rounded-lg overflow-hidden bg-slate-900/80 touch-none select-none"
+            className="w-full max-w-[min(320px,100%-1rem)] aspect-[5/4] border-2 border-slate-700/60 rounded-lg overflow-hidden bg-slate-900/80 touch-none select-none"
             role="img"
             aria-label="Snake game board"
           >
@@ -194,7 +194,7 @@ export default function SnakePage({ slug }: { slug: string }) {
           {/* On-screen direction pad for touch devices */}
           {isPlaying && (
             <div
-              className="grid grid-cols-3 gap-1 w-[8rem] sm:w-[9rem] place-items-center"
+              className="grid grid-cols-3 gap-1.5 sm:gap-2 w-[min(10rem,90vw)] max-w-[10rem] place-items-center"
               role="group"
               aria-label="Direction controls"
             >
@@ -202,7 +202,7 @@ export default function SnakePage({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => setNextDirection((d) => (d !== 'down' ? 'up' : d))}
-                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
                 aria-label="Move up"
               >
                 <ChevronUp className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
@@ -211,7 +211,7 @@ export default function SnakePage({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => setNextDirection((d) => (d !== 'right' ? 'left' : d))}
-                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
                 aria-label="Move left"
               >
                 <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
@@ -220,7 +220,7 @@ export default function SnakePage({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => setNextDirection((d) => (d !== 'left' ? 'right' : d))}
-                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
                 aria-label="Move right"
               >
                 <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />
@@ -229,7 +229,7 @@ export default function SnakePage({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => setNextDirection((d) => (d !== 'up' ? 'down' : d))}
-                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
+                className="flex items-center justify-center min-w-[3rem] min-h-[3rem] w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-700/80 border border-slate-600 hover:bg-slate-600/80 active:bg-slate-500/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 touch-manipulation transition-colors"
                 aria-label="Move down"
               >
                 <ChevronDown className="w-6 h-6 sm:w-7 sm:h-7 text-slate-300" />

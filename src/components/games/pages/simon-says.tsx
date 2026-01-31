@@ -145,8 +145,8 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-6 w-full px-1 sm:px-0">
-          <p className="text-slate-400 text-sm text-center min-h-[2.5rem]">
+        <div className="flex flex-col items-center gap-6 w-full px-1 sm:px-0 min-w-0">
+          <p className="text-slate-400 text-sm text-center min-h-[2.5rem] px-1">
             {phase === 'idle' &&
               'Click Start game. Then watch which colors light up in order.'}
             {phase === 'getReady' && (
@@ -160,7 +160,7 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
           </p>
 
           <div
-            className="relative w-full max-w-[300px] min-h-[280px] aspect-square rounded-full overflow-hidden border-4 border-slate-600 shadow-xl"
+            className="relative w-full max-w-[min(300px,100%-2rem)] min-h-[min(280px,80vw)] aspect-square rounded-full overflow-hidden border-4 border-slate-600 shadow-xl"
             role="group"
             aria-label="Simon Says: four colored buttons"
           >
@@ -234,10 +234,10 @@ export default function SimonSaysPage({ slug }: { slug: string }) {
             />
             {/* Center: score + phase hint */}
             <div
-              className="absolute inset-0 m-auto w-[38%] h-[38%] min-w-[80px] min-h-[80px] rounded-full bg-slate-800 border-4 border-slate-600 flex flex-col items-center justify-center pointer-events-none z-10"
+              className="absolute inset-0 m-auto w-[38%] h-[38%] min-w-[56px] min-h-[56px] sm:min-w-[72px] sm:min-h-[72px] md:min-w-[80px] md:min-h-[80px] rounded-full bg-slate-800 border-4 border-slate-600 flex flex-col items-center justify-center pointer-events-none z-10"
               aria-hidden
             >
-              <span className="text-slate-300 font-bold text-2xl">{score}</span>
+              <span className="text-slate-300 font-bold text-xl sm:text-2xl">{score}</span>
               {(phase === 'getReady' || phase === 'show') && (
                 <span className="text-slate-500 text-xs mt-0.5">Watch</span>
               )}
