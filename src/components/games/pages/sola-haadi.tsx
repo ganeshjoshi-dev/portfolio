@@ -462,6 +462,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const [capturesByP2, setCapturesByP2] = useState(0);
   const [moveHistory, setMoveHistory] = useState<MoveHistoryEntry[]>([]);
   const [showBoardRefModal, setShowBoardRefModal] = useState(false);
+  const [showWinningModal, setShowWinningModal] = useState(true);
   const [focusedPoint, setFocusedPoint] = useState<number | null>(null);
 
   const displayNameP1 = (playerNameP1?.trim() || 'Player 1');
@@ -476,6 +477,10 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
 
   const winner = useMemo(() => checkWinner(board, turn), [board, turn]);
   const gameOver = winner !== null;
+
+  useEffect(() => {
+    if (gameOver && winner) setShowWinningModal(true);
+  }, [gameOver, winner]);
 
   const validSimpleTargets = useMemo(() => {
     if (selected === null || board[selected] !== turn) return [];
@@ -1056,12 +1061,13 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
             </div>
 
             <Modal
-              open={!!(gameOver && winner)}
-              dismissOnBackdrop={false}
-              contentClassName="max-w-xs"
+              open={!!(gameOver && winner && showWinningModal)}
+              onClose={() => setShowWinningModal(false)}
+              dismissOnBackdrop={true}
+              contentClassName="max-w-md w-full"
               aria-label="Game over"
             >
-              <div className="text-center">
+              <div className="text-center min-w-0 overflow-x-hidden">
                 <p className="text-sm uppercase tracking-wider text-slate-400">
                   Game over
                 </p>
@@ -1071,6 +1077,30 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                     : `${displayNameP2} (${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.label ?? 'P2'}) wins!`}
                 </p>
                 <p className="mt-2 text-slate-400 text-sm">🎉 Well played!</p>
+                <div className="mt-6 flex flex-wrap gap-2 justify-center items-stretch">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className="whitespace-nowrap min-w-0 sm:min-w-[7rem]"
+                    onClick={() => {
+                      reset();
+                      setShowWinningModal(false);
+                    }}
+                  >
+                    Restart game
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="whitespace-nowrap shrink-0"
+                    onClick={() => {
+                      setGameStarted(false);
+                      setShowWinningModal(false);
+                    }}
+                  >
+                    New game
+                  </Button>
+                </div>
               </div>
             </Modal>
 
