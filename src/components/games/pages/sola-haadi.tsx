@@ -165,15 +165,20 @@ const PIECE_SHAPES = [
   { value: 'diamond', label: 'Diamond' },
 ] as const;
 
-// P1: top triangle + top 2 rows of grid
-const P1_START = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-// P2: bottom 2 rows of grid + bottom triangle
-const P2_START = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+// N side (top): indices 0–15. M side (bottom): indices 21–36.
+const N_SIDE = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const M_SIDE = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 
-function createInitialBoard(): Board {
+/** First mover gets M (bottom) side, other gets N (top) side. */
+function createInitialBoard(firstMover: Player): Board {
   const board: Board = Array(N_POINTS).fill(null);
-  for (const i of P1_START) board[i] = 'P1';
-  for (const i of P2_START) board[i] = 'P2';
+  if (firstMover === 'P1') {
+    for (const i of M_SIDE) board[i] = 'P1';
+    for (const i of N_SIDE) board[i] = 'P2';
+  } else {
+    for (const i of M_SIDE) board[i] = 'P2';
+    for (const i of N_SIDE) board[i] = 'P1';
+  }
   return board;
 }
 
@@ -438,7 +443,7 @@ function CapturedPieceIcon({ color, shape }: { color: string; shape: string }) {
 
 export default function SolaHaadiPage({ slug }: { slug: string }) {
   const game = getGameById(slug)!;
-  const [board, setBoard] = useState<Board>(createInitialBoard);
+  const [board, setBoard] = useState<Board>(() => createInitialBoard('P1'));
   const [turn, setTurn] = useState<Player>('P1');
   const [selected, setSelected] = useState<number | null>(null);
   const [mode, setMode] = useState<'2p' | 'ai'>('2p');
@@ -449,7 +454,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const [pieceColorP2, setPieceColorP2] = useState<string>('cyan');
   const [pieceShapeP1, setPieceShapeP1] = useState<string>('round');
   const [pieceShapeP2, setPieceShapeP2] = useState<string>('square');
-  const [firstPlayer, setFirstPlayer] = useState<'P1' | 'P2' | 'random'>('P1');
+  const [firstPlayer, setFirstPlayer] = useState<'P1' | 'P2' | 'random'>('P2');
   const [playerNameP1, setPlayerNameP1] = useState<string>('Player 1');
   const [playerNameP2, setPlayerNameP2] = useState<string>('Player 2');
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -578,21 +583,22 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     return () => clearTimeout(timer);
   }, [mode, turn, gameOver, board]);
 
+  const getInitialTurn = useCallback((): Player => {
+    if (firstPlayer === 'random') return Math.random() < 0.5 ? 'P1' : 'P2';
+    return firstPlayer;
+  }, [firstPlayer]);
+
   const reset = useCallback(() => {
-    setBoard(createInitialBoard());
-    setTurn('P1');
+    const initialTurn = getInitialTurn();
+    setBoard(createInitialBoard(initialTurn));
+    setTurn(initialTurn);
     setSelected(null);
     setMultiCaptureFrom(null);
     setLastTo(undefined);
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
-  }, []);
-
-  const getInitialTurn = useCallback((): Player => {
-    if (firstPlayer === 'random') return Math.random() < 0.5 ? 'P1' : 'P2';
-    return firstPlayer;
-  }, [firstPlayer]);
+  }, [getInitialTurn]);
 
   const handleResetClick = useCallback(() => {
     setShowResetConfirm(true);
@@ -608,29 +614,31 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   }, []);
 
   const start2P = useCallback(() => {
+    const initialTurn = getInitialTurn();
     setMode('2p');
     setGameStarted(true);
-    setBoard(createInitialBoard());
+    setBoard(createInitialBoard(initialTurn));
     setSelected(null);
     setMultiCaptureFrom(null);
     setLastTo(undefined);
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
-    setTurn(getInitialTurn());
+    setTurn(initialTurn);
   }, [getInitialTurn]);
 
   const startAi = useCallback(() => {
+    const initialTurn = getInitialTurn();
     setMode('ai');
     setGameStarted(true);
-    setBoard(createInitialBoard());
+    setBoard(createInitialBoard(initialTurn));
     setSelected(null);
     setMultiCaptureFrom(null);
     setLastTo(undefined);
     setCapturesByP1(0);
     setCapturesByP2(0);
     setMoveHistory([]);
-    setTurn(getInitialTurn());
+    setTurn(initialTurn);
   }, [getInitialTurn]);
 
   const howToPlayItems = [
@@ -641,7 +649,8 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
         <div className="space-y-3 text-slate-300">
           <p>
             <strong className="text-white">Also known as</strong> Sixteen Soldiers (Sholo Gutti). 
-            Traditional board game with 37 points: a 5×5 alquerque grid plus two triangular camps.
+            Traditional board game with 37 points: a 5×5 alquerque grid plus two triangular camps. 
+            Sola Haadi is famous in Rajasthan, India.
           </p>
           <p>
             <strong className="text-white">Objective:</strong> Capture all opponent pieces or block them completely.
@@ -712,6 +721,27 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
         ]
       : []),
   ];
+
+  const historyMarksLegend = gameStarted ? (
+    <div className="rounded-lg border border-slate-600/40 bg-slate-800/30 px-4 py-3 space-y-2 w-full h-full min-h-0">
+      <p className="text-slate-300 text-sm font-medium">What the marks mean</p>
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-slate-400">
+        <span className="flex items-center gap-2">
+          <span className="w-5 h-5 rounded-full border-2 border-amber-400 bg-transparent shrink-0" aria-hidden title="Board highlight" />
+          From
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="w-5 h-5 rounded-full border-2 border-green-500 bg-transparent shrink-0" aria-hidden title="Board highlight" />
+          To
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="w-5 h-5 rounded-full border-2 border-rose-400 bg-transparent shrink-0" aria-hidden title="Board highlight" />
+          Captured
+        </span>
+      </div>
+      <p className="text-slate-500 text-sm leading-snug">On the board, the last move is highlighted with these colors. In move history, <span className="text-slate-400">From → To</span> and <span className="text-rose-400/90">+n capture</span> mean the move and any pieces taken.</p>
+    </div>
+  ) : null;
 
   const boardRefModalContent = (
     <div className="space-y-3">
@@ -791,7 +821,16 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
       backLabel="All Games"
     >
       <div className="space-y-6 w-full min-w-0 relative" data-game-container>
-        <Accordion items={howToPlayItems} className="max-w-2xl" />
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch w-full">
+          <div className="sm:w-1/2 min-w-0">
+            <Accordion items={howToPlayItems} />
+          </div>
+          {historyMarksLegend && (
+            <div className="sm:w-1/2 min-w-0">
+              {historyMarksLegend}
+            </div>
+          )}
+        </div>
 
         <Modal
           open={showBoardRefModal}
@@ -964,18 +1003,18 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                 </Button>
               </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 rounded-lg border border-slate-600/50 bg-slate-800/30 px-3 py-2 sm:px-4 sm:py-2.5" aria-label="Captures">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
-                  <div className="flex items-center gap-2 min-w-0">
+              <div className="flex flex-col sm:flex-row sm:items-stretch gap-3 sm:gap-4 rounded-lg border border-slate-600/50 bg-slate-800/30 px-3 py-2.5 sm:px-4 sm:py-2.5 w-full min-w-0" aria-label="Captures">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 min-w-0 flex-1 sm:min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 min-w-0 shrink-0">
                     <span
                       className={`shrink-0 w-3 h-3 rounded-full ${PIECE_COLORS.find((c) => c.value === pieceColorP1)?.fill ?? 'fill-amber-400'}`}
                       aria-hidden
                     />
-                    <span className="text-slate-300 text-sm truncate">{displayNameP1}</span>
-                    <span className="text-slate-500 text-sm">captured</span>
-                    <span className="text-white font-semibold tabular-nums text-sm">{capturesByP1}</span>
+                    <span className="text-slate-300 text-sm min-w-0 break-words">{displayNameP1}</span>
+                    <span className="text-slate-500 text-sm shrink-0">captured</span>
+                    <span className="text-white font-semibold tabular-nums text-sm shrink-0">{capturesByP1}</span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5" aria-label={`${capturesByP1} pieces captured by ${displayNameP1}`}>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 min-w-0 pl-5 sm:pl-0" aria-label={`${capturesByP1} pieces captured by ${displayNameP1}`}>
                     {Array.from({ length: capturesByP1 }, (_, i) => (
                       <CapturedPieceIcon
                         key={`p1-${i}`}
@@ -988,18 +1027,18 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                     )}
                   </div>
                 </div>
-                <div className="shrink-0 w-px h-8 sm:h-6 bg-slate-600" aria-hidden />
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
-                  <div className="flex items-center gap-2 min-w-0">
+                <div className="shrink-0 w-full h-px sm:w-px sm:h-6 sm:min-h-0 bg-slate-600" aria-hidden />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 min-w-0 flex-1 sm:min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 min-w-0 shrink-0">
                     <span
                       className={`shrink-0 w-3 h-3 rounded-full ${PIECE_COLORS.find((c) => c.value === pieceColorP2)?.fill ?? 'fill-cyan-400'}`}
                       aria-hidden
                     />
-                    <span className="text-slate-300 text-sm truncate">{displayNameP2}</span>
-                    <span className="text-slate-500 text-sm">captured</span>
-                    <span className="text-white font-semibold tabular-nums text-sm">{capturesByP2}</span>
+                    <span className="text-slate-300 text-sm min-w-0 break-words">{displayNameP2}</span>
+                    <span className="text-slate-500 text-sm shrink-0">captured</span>
+                    <span className="text-white font-semibold tabular-nums text-sm shrink-0">{capturesByP2}</span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5" aria-label={`${capturesByP2} pieces captured by ${displayNameP2}`}>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 min-w-0 pl-5 sm:pl-0" aria-label={`${capturesByP2} pieces captured by ${displayNameP2}`}>
                     {Array.from({ length: capturesByP2 }, (_, i) => (
                       <CapturedPieceIcon
                         key={`p2-${i}`}
