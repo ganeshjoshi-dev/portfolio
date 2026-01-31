@@ -142,7 +142,7 @@ export default function MemoryPage({ slug }: { slug: string }) {
     } else {
       timer.reset(0);
     }
-  }, [settings.timerMode, settings.countdownSeconds]);
+  }, [settings.timerMode, settings.countdownSeconds, timer]);
 
   const config = gridConfig[settings.gridSize];
   const matchedCount = useMemo(
