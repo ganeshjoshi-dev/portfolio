@@ -454,7 +454,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
   const [pieceColorP2, setPieceColorP2] = useState<string>('cyan');
   const [pieceShapeP1, setPieceShapeP1] = useState<string>('round');
   const [pieceShapeP2, setPieceShapeP2] = useState<string>('square');
-  const [firstPlayer, setFirstPlayer] = useState<'P1' | 'P2' | 'random'>('P2');
+  const [firstPlayer, setFirstPlayer] = useState<'P1' | 'P2' | 'random'>('P1');
   const [playerNameP1, setPlayerNameP1] = useState<string>('Player 1');
   const [playerNameP2, setPlayerNameP2] = useState<string>('Player 2');
   const [showResetConfirm, setShowResetConfirm] = useState(false);

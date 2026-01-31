@@ -74,7 +74,15 @@ export default function MemorySettings({
   const handleCountdownPresetChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       const value = e.target.value;
-      if (value === 'custom') return;
+      if (value === 'custom') {
+        // Use current value if already custom (not in presets), otherwise default to 45s
+        const current = settings.countdownSeconds ?? 60;
+        const countdownSeconds = countdownPresets.includes(current)
+          ? 45
+          : current;
+        setSettings({ ...settings, countdownSeconds });
+        return;
+      }
       const countdownSeconds = parseInt(value, 10);
       if (!Number.isNaN(countdownSeconds)) {
         setSettings({ ...settings, countdownSeconds });
@@ -149,7 +157,7 @@ export default function MemorySettings({
             <label className="block text-sm font-medium text-slate-300">
               Countdown time
             </label>
-            <div className="flex flex-wrap gap-2 items-end">
+            <div className="flex flex-wrap gap-2 items-center">
               <Select
                 value={
                   useCustomCountdown

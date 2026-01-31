@@ -128,6 +128,22 @@ export default function MemoryPage({ slug }: { slug: string }) {
     setCards(createInitialCards(stored));
   }, []);
 
+  // When settings load or change to a timer mode, sync timer state so we don't show "Time's up"
+  // with 0:00 (e.g. when stored settings had countdown but hook was first created with mode 'none').
+  useEffect(() => {
+    if (settings.timerMode === 'none') return;
+    setTimeUp(false);
+    if (settings.timerMode === 'countdown') {
+      const sec = Math.min(
+        600,
+        Math.max(10, settings.countdownSeconds ?? 60)
+      );
+      timer.reset(sec);
+    } else {
+      timer.reset(0);
+    }
+  }, [settings.timerMode, settings.countdownSeconds, timer]);
+
   const config = gridConfig[settings.gridSize];
   const matchedCount = useMemo(
     () => cards.filter((c) => c.isMatched).length,
