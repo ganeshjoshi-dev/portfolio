@@ -17,11 +17,13 @@ export const metadata: Metadata = {
     url: `${siteConfig.url}/games`,
     siteName: siteConfig.name,
     type: 'website',
+    images: [{ url: `${siteConfig.url}/games/opengraph-image`, width: 1200, height: 630, alt: siteConfig.gamesTitle }],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.gamesTitle,
     description: siteConfig.gamesDescription,
+    images: [`${siteConfig.url}/games/opengraph-image`],
   },
   robots: {
     index: true,

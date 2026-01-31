@@ -19,3 +19,9 @@ export { default as Accordion } from './Accordion';
 export type { AccordionProps, AccordionItemType } from './Accordion';
 
 export { default as ErrorBoundary } from './ErrorBoundary';
+
+export { default as Modal } from './Modal';
+export type { ModalProps } from './Modal';
+
+export { default as ConfirmDialog } from './ConfirmDialog';
+export type { ConfirmDialogProps } from './ConfirmDialog';

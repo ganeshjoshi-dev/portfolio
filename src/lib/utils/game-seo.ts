@@ -16,6 +16,8 @@ export function generateGameMetadata(game: Game): Metadata {
   ];
   const canonicalUrl = `${siteConfig.url}${game.path}`;
 
+  const ogImageUrl = `${siteConfig.url}${game.path}/opengraph-image`;
+
   return {
     title,
     description,
@@ -29,11 +31,13 @@ export function generateGameMetadata(game: Game): Metadata {
       url: canonicalUrl,
       siteName: siteConfig.name,
       type: 'website',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${game.name} - Free Online Game` }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [ogImageUrl],
     },
     robots: {
       index: true,
