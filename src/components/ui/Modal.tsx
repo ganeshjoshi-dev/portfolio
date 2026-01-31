@@ -84,13 +84,13 @@ export default function Modal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="absolute right-3 top-3 p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  className="absolute right-1 top-1 p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />
                 </button>
               )}
-              <div className={`overflow-y-auto min-h-0 flex-1 ${onClose ? 'pr-8' : ''}`.trim()}>
+              <div className={`overflow-y-auto min-h-0 flex-1`.trim()}>
                 {children}
               </div>
             </div>
