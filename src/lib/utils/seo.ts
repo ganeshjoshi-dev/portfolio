@@ -55,14 +55,23 @@ export const siteConfig = {
   // Games-specific SEO
   gamesTitle: "Free Browser Games | Ganesh Joshi",
   gamesDescription:
-    "Free online browser games. Play memory, puzzle, and arcade games — no sign-up, no ads. Built as portfolio projects.",
+    "Free online browser games. Play memory, puzzle, arcade, and strategy games — no sign-up, no ads. Memory, 2048, Snake, Wordle, Sola Haadi, and more.",
   gamesKeywords: [
     "free browser games",
     "online games",
+    "play games online free",
     "memory game",
     "card matching game",
     "browser games",
     "puzzle games",
+    "sola haadi",
+    "sixteen soldiers",
+    "sholo gutti",
+    "free wordle",
+    "2048 game",
+    "snake game online",
+    "connect four online",
+    "no download games",
   ],
 };
 
