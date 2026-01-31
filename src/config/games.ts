@@ -117,11 +117,11 @@ export const games: Game[] = [
     id: 'sola-haadi',
     name: 'Sola Haadi',
     description:
-      'Traditional 16 vs 16 jumping game. Also known as Sixteen Soldiers. Capture by jumping; win by taking all or blocking.',
+      'Traditional 16 vs 16 jumping game. Also known as Sixteen Soldiers. Famous in Rajasthan, India. Capture by jumping; win by taking all or blocking.',
     category: 'puzzle',
     path: '/games/sola-haadi',
     icon: 'Grid2X2',
-    keywords: ['sola haadi', 'sixteen soldiers', 'board', 'strategy'],
+    keywords: ['sola haadi', 'sixteen soldiers', 'rajasthan', 'board', 'strategy'],
   },
 ];
 
