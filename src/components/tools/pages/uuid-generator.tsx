@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { Plus, Trash2, RefreshCw } from 'lucide-react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 function generateUUID(): string {
@@ -70,24 +71,16 @@ export default function UuidGeneratorPage({ slug }: { slug: string }) {
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Options */}
         <div className="flex flex-wrap items-center gap-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700/60">
-          <label className="flex items-center gap-2 text-sm text-slate-300">
-            <input
-              type="checkbox"
-              checked={uppercase}
-              onChange={(e) => setUppercase(e.target.checked)}
-              className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-            />
-            Uppercase
-          </label>
-          <label className="flex items-center gap-2 text-sm text-slate-300">
-            <input
-              type="checkbox"
-              checked={noDashes}
-              onChange={(e) => setNoDashes(e.target.checked)}
-              className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-            />
-            No Dashes
-          </label>
+          <Checkbox
+            checked={uppercase}
+            onChange={(e) => setUppercase(e.target.checked)}
+            label="Uppercase"
+          />
+          <Checkbox
+            checked={noDashes}
+            onChange={(e) => setNoDashes(e.target.checked)}
+            label="No Dashes"
+          />
         </div>
 
         {/* Bulk Generate */}

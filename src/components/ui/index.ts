@@ -25,3 +25,6 @@ export type { ModalProps } from './Modal';
 
 export { default as ConfirmDialog } from './ConfirmDialog';
 export type { ConfirmDialogProps } from './ConfirmDialog';
+
+export { default as Checkbox } from './Checkbox';
+export type { CheckboxProps } from './Checkbox';

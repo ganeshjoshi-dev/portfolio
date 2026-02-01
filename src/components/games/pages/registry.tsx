@@ -18,6 +18,7 @@ export const gamePageRegistry: Record<
   'rock-paper-scissors': lazy(() => import('./rock-paper-scissors')),
   'connect-four': lazy(() => import('./connect-four')),
   'sola-haadi': lazy(() => import('./sola-haadi')),
+  'trap-run': lazy(() => import('./trap-run')),
 };
 
 /** All game slugs for generateStaticParams. */

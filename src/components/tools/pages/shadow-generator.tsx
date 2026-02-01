@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { ToolLayout, CodeOutput, TabSwitcher, SliderInput, ColorPicker } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 interface ShadowLayer {
@@ -166,15 +167,11 @@ export default function ShadowGeneratorPage({ slug }: { slug: string }) {
                   </div>
                 </div>
 
-                <label className="flex items-center gap-2 text-sm text-slate-300">
-                  <input
-                    type="checkbox"
-                    checked={shadow.inset}
-                    onChange={(e) => updateLayer(shadow.id, { inset: e.target.checked })}
-                    className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-                  />
-                  Inset Shadow
-                </label>
+                <Checkbox
+                  checked={shadow.inset}
+                  onChange={(e) => updateLayer(shadow.id, { inset: e.target.checked })}
+                  label="Inset Shadow"
+                />
               </div>
             ))}
           </div>

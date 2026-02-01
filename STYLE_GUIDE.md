@@ -44,6 +44,9 @@ transition-all duration-300
 hover:scale-105
 ```
 
+### Form controls
+- **Checkboxes:** Use the shared `Checkbox` from `@/components/ui` for all checkboxes so styling stays consistent with the dark + cyan theme (custom box, accent when checked). Supports optional `label` and `description` props.
+
 ### Animations
 - Transitions: `transition-all duration-300`
 - Hover effects: `hover:scale-105`

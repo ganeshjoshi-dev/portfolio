@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Info, Volume2, VolumeX } from 'lucide-react';
 import { getGameById } from '@/config/games';
 import { GameLayout } from '@/components/games/shared';
-import { Button, Accordion, Select, Input, ConfirmDialog, Modal } from '@/components/ui';
+import { Button, Accordion, Select, Input, ConfirmDialog, Modal, Checkbox } from '@/components/ui';
 
 const N_POINTS = 37;
 
@@ -1155,39 +1155,21 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    id="forced-capture"
-                    checked={forcedCapture}
-                    onChange={(e) => setForcedCapture(e.target.checked)}
-                    className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-0"
-                    aria-describedby="forced-capture-desc"
-                  />
-                  <label htmlFor="forced-capture" className="text-sm font-medium text-slate-300 cursor-pointer">
-                    Must capture if possible
-                  </label>
-                </div>
-                <p id="forced-capture-desc" className="text-slate-500 text-xs -mt-2">
-                  When enabled, you must take a capture when one is available.
-                </p>
+                <Checkbox
+                  id="forced-capture"
+                  checked={forcedCapture}
+                  onChange={(e) => setForcedCapture(e.target.checked)}
+                  label="Must capture if possible"
+                  description="When enabled, you must take a capture when one is available."
+                />
 
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    id="sound-enabled"
-                    checked={soundEnabled}
-                    onChange={(e) => setSoundEnabled(e.target.checked)}
-                    className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-0"
-                    aria-describedby="sound-desc"
-                  />
-                  <label htmlFor="sound-enabled" className="text-sm font-medium text-slate-300 cursor-pointer">
-                    Sound effects
-                  </label>
-                </div>
-                <p id="sound-desc" className="text-slate-500 text-xs -mt-2">
-                  Short sounds on move, capture, and game over.
-                </p>
+                <Checkbox
+                  id="sound-enabled"
+                  checked={soundEnabled}
+                  onChange={(e) => setSoundEnabled(e.target.checked)}
+                  label="Sound effects"
+                  description="Short sounds on move, capture, and game over."
+                />
 
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">

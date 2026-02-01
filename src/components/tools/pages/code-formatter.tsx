@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Sparkles } from 'lucide-react';
 import { ToolLayout, CopyButton, TabSwitcher } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 import * as prettier from 'prettier/standalone';
 import * as parserHTML from 'prettier/plugins/html';
@@ -121,15 +122,11 @@ export default function CodeFormatterPage({ slug }: { slug: string }) {
               </select>
             </div>
 
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={useTabs}
-                onChange={(e) => setUseTabs(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-              />
-              <span className="text-sm text-slate-300">Use Tabs</span>
-            </label>
+            <Checkbox
+              checked={useTabs}
+              onChange={(e) => setUseTabs(e.target.checked)}
+              label="Use Tabs"
+            />
           </div>
         </div>
 
