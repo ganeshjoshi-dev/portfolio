@@ -123,6 +123,16 @@ export const games: Game[] = [
     icon: 'Grid2X2',
     keywords: ['sola haadi', 'sixteen soldiers', 'rajasthan', 'board', 'strategy'],
   },
+  {
+    id: 'trap-run',
+    name: 'Trap Run',
+    description:
+      'Reach the exit without touching hazards. Tricky platformer with instant retry—learn through failure.',
+    category: 'arcade',
+    path: '/games/trap-run',
+    icon: 'Flame',
+    keywords: ['trap run', 'platformer', 'arcade', 'exit', 'hazards'],
+  },
 ];
 
 export function getGamesByCategory(category: GameCategory): Game[] {
