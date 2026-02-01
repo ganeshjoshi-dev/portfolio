@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { Upload, Download } from 'lucide-react';
 import { ToolLayout } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 import { saveAs } from 'file-saver';
 
@@ -326,24 +327,16 @@ export default function ImageResizerPage({ slug }: { slug: string }) {
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={lockAspect}
-                  onChange={(e) => setLockAspect(e.target.checked)}
-                  className="rounded border-slate-600 text-cyan-500 focus:ring-cyan-400"
-                />
-                <span className="text-sm text-slate-300">Lock aspect ratio</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={crop}
-                  onChange={(e) => setCrop(e.target.checked)}
-                  className="rounded border-slate-600 text-cyan-500 focus:ring-cyan-400"
-                />
-                <span className="text-sm text-slate-300">Center crop to exact size</span>
-              </label>
+              <Checkbox
+                checked={lockAspect}
+                onChange={(e) => setLockAspect(e.target.checked)}
+                label="Lock aspect ratio"
+              />
+              <Checkbox
+                checked={crop}
+                onChange={(e) => setCrop(e.target.checked)}
+                label="Center crop to exact size"
+              />
             </div>
 
             <div>

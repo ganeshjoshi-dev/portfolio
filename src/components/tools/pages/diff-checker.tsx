@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { Trash2, ChevronUp, ChevronDown, Upload } from 'lucide-react';
 import { getToolById, toolCategories } from '@/config/tools';
 
@@ -404,24 +405,16 @@ export default function DiffCheckerPage({ slug }: { slug: string }) {
       <div className="space-y-6">
         {/* Options Bar */}
         <div className="flex flex-wrap items-center gap-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={ignoreWhitespace}
-              onChange={(e) => setIgnoreWhitespace(e.target.checked)}
-              className="w-4 h-4 rounded bg-slate-800 border-slate-600 text-cyan-400 focus:ring-cyan-400/20 focus:ring-offset-0"
-            />
-            <span className="text-sm text-slate-300">Ignore whitespace</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={ignoreCase}
-              onChange={(e) => setIgnoreCase(e.target.checked)}
-              className="w-4 h-4 rounded bg-slate-800 border-slate-600 text-cyan-400 focus:ring-cyan-400/20 focus:ring-offset-0"
-            />
-            <span className="text-sm text-slate-300">Ignore case</span>
-          </label>
+          <Checkbox
+            checked={ignoreWhitespace}
+            onChange={(e) => setIgnoreWhitespace(e.target.checked)}
+            label="Ignore whitespace"
+          />
+          <Checkbox
+            checked={ignoreCase}
+            onChange={(e) => setIgnoreCase(e.target.checked)}
+            label="Ignore case"
+          />
           
           <div className="flex-1" />
           

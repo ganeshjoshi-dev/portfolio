@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 type SlugStyle = 'kebab' | 'snake' | 'camel' | 'pascal' | 'dot';
@@ -142,24 +143,16 @@ export default function SlugGeneratorPage({ slug }: { slug: string }) {
 
         {/* Options */}
         <div className="flex flex-wrap gap-4">
-          <label className="flex items-center gap-2 text-sm text-slate-300">
-            <input
-              type="checkbox"
-              checked={config.lowercase}
-              onChange={(e) => setConfig((prev) => ({ ...prev, lowercase: e.target.checked }))}
-              className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-            />
-            Force Lowercase
-          </label>
-          <label className="flex items-center gap-2 text-sm text-slate-300">
-            <input
-              type="checkbox"
-              checked={config.removeNumbers}
-              onChange={(e) => setConfig((prev) => ({ ...prev, removeNumbers: e.target.checked }))}
-              className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-            />
-            Remove Numbers
-          </label>
+          <Checkbox
+            checked={config.lowercase}
+            onChange={(e) => setConfig((prev) => ({ ...prev, lowercase: e.target.checked }))}
+            label="Force Lowercase"
+          />
+          <Checkbox
+            checked={config.removeNumbers}
+            onChange={(e) => setConfig((prev) => ({ ...prev, removeNumbers: e.target.checked }))}
+            label="Remove Numbers"
+          />
           <div className="flex items-center gap-2 text-sm text-slate-300">
             <span>Max Length:</span>
             <input

@@ -3,6 +3,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { RefreshCw, Copy } from 'lucide-react';
 import { ToolLayout, CopyButton } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 interface PasswordOptions {
@@ -169,42 +170,30 @@ export default function PasswordGeneratorPage({ slug }: { slug: string }) {
 
           {/* Character Options */}
           <div className="grid grid-cols-2 gap-3">
-            <label className="flex items-center gap-3 p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg cursor-pointer hover:border-cyan-400/30 transition-all duration-300">
-              <input
-                type="checkbox"
-                checked={options.uppercase}
-                onChange={(e) => updateOption('uppercase', e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-              />
-              <span className="text-sm text-slate-300">Uppercase (A-Z)</span>
-            </label>
-            <label className="flex items-center gap-3 p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg cursor-pointer hover:border-cyan-400/30 transition-all duration-300">
-              <input
-                type="checkbox"
-                checked={options.lowercase}
-                onChange={(e) => updateOption('lowercase', e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-              />
-              <span className="text-sm text-slate-300">Lowercase (a-z)</span>
-            </label>
-            <label className="flex items-center gap-3 p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg cursor-pointer hover:border-cyan-400/30 transition-all duration-300">
-              <input
-                type="checkbox"
-                checked={options.numbers}
-                onChange={(e) => updateOption('numbers', e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-              />
-              <span className="text-sm text-slate-300">Numbers (0-9)</span>
-            </label>
-            <label className="flex items-center gap-3 p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg cursor-pointer hover:border-cyan-400/30 transition-all duration-300">
-              <input
-                type="checkbox"
-                checked={options.symbols}
-                onChange={(e) => updateOption('symbols', e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-              />
-              <span className="text-sm text-slate-300">Symbols (!@#$...)</span>
-            </label>
+            <Checkbox
+              checked={options.uppercase}
+              onChange={(e) => updateOption('uppercase', e.target.checked)}
+              label="Uppercase (A-Z)"
+              className="p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg hover:border-cyan-400/30 transition-all duration-300"
+            />
+            <Checkbox
+              checked={options.lowercase}
+              onChange={(e) => updateOption('lowercase', e.target.checked)}
+              label="Lowercase (a-z)"
+              className="p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg hover:border-cyan-400/30 transition-all duration-300"
+            />
+            <Checkbox
+              checked={options.numbers}
+              onChange={(e) => updateOption('numbers', e.target.checked)}
+              label="Numbers (0-9)"
+              className="p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg hover:border-cyan-400/30 transition-all duration-300"
+            />
+            <Checkbox
+              checked={options.symbols}
+              onChange={(e) => updateOption('symbols', e.target.checked)}
+              label="Symbols (!@#$...)"
+              className="p-3 bg-slate-800/60 border border-slate-700/60 rounded-lg hover:border-cyan-400/30 transition-all duration-300"
+            />
           </div>
 
           {/* Strength Meter */}

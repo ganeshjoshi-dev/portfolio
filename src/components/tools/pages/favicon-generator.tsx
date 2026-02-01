@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { Upload, Download } from 'lucide-react';
 import { ToolLayout } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
@@ -242,21 +243,18 @@ export default function FaviconGeneratorPage({ slug }: { slug: string }) {
           </label>
           <div className="flex flex-wrap gap-2">
             {DEFAULT_SIZES.map((size) => (
-              <label
+              <Checkbox
                 key={size}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 cursor-pointer hover:border-slate-600"
-              >
-                <input
-                  type="checkbox"
-                  checked={sizes.includes(size)}
-                  onChange={() => toggleSize(size)}
-                  className="rounded border-slate-600 text-cyan-500 focus:ring-cyan-400"
-                />
-                <span className="text-sm text-slate-300">
-                  {size}×{size}
-                  {size === 180 && ' (Apple touch)'}
-                </span>
-              </label>
+                checked={sizes.includes(size)}
+                onChange={() => toggleSize(size)}
+                label={
+                  <>
+                    {size}×{size}
+                    {size === 180 && ' (Apple touch)'}
+                  </>
+                }
+                className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 hover:border-slate-600"
+              />
             ))}
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { ToolLayout, CodeOutput, CopyButton, TabSwitcher } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 type OutputMode = 'prettify' | 'minify';
@@ -156,15 +157,12 @@ export default function JsonFormatterPage({ slug }: { slug: string }) {
                     <option value={4}>4 spaces</option>
                   </select>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={sortKeys}
-                    onChange={(e) => setSortKeys(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400"
-                  />
-                  <span className="text-sm text-slate-400">Sort keys</span>
-                </label>
+                <Checkbox
+                  checked={sortKeys}
+                  onChange={(e) => setSortKeys(e.target.checked)}
+                  label="Sort keys"
+                  labelClassName="text-slate-400"
+                />
               </div>
             )}
             {result.valid ? (

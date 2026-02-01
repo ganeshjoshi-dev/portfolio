@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { ToolLayout, CopyButton, SliderInput } from '@/components/tools/shared';
+import { Checkbox } from '@/components/ui';
 import { getToolById, toolCategories } from '@/config/tools';
 
 const words = [
@@ -174,15 +175,11 @@ export default function LoremIpsumPage({ slug }: { slug: string }) {
 
         {/* Options */}
         <div className="flex items-center gap-4">
-          <label className="flex items-center gap-2 text-sm text-slate-300">
-            <input
-              type="checkbox"
-              checked={startWithLorem}
-              onChange={(e) => setStartWithLorem(e.target.checked)}
-              className="rounded border-slate-600 bg-slate-800 text-cyan-400 focus:ring-cyan-400"
-            />
-            Start with &quot;Lorem ipsum&quot;
-          </label>
+          <Checkbox
+            checked={startWithLorem}
+            onChange={(e) => setStartWithLorem(e.target.checked)}
+            label='Start with "Lorem ipsum"'
+          />
           <button
             onClick={regenerate}
             className="flex items-center gap-2 px-4 py-2 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-sm text-slate-300 hover:text-cyan-300 transition-all duration-300"
