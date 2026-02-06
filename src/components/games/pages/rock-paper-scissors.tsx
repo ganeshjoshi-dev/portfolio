@@ -67,6 +67,7 @@ export default function RockPaperScissorsPage({ slug }: { slug: string }) {
       description={game.description}
       backLink="/games"
       backLabel="All Games"
+      currentGameId={slug}
     >
       <div className="space-y-6 w-full min-w-0">
         <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">

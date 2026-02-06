@@ -855,6 +855,7 @@ export default function TrapRunPage({ slug }: { slug: string }) {
       description={game.description}
       backLink="/games"
       backLabel="All Games"
+      currentGameId={slug}
     >
       <div className="space-y-4 sm:space-y-6 w-full min-w-0">
         <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">

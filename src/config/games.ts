@@ -147,12 +147,23 @@ export function getGameBySlug(slug: string): Game | undefined {
   return getGameById(slug);
 }
 
+/** Score relevance: name start (best) > name contains > description > keywords. */
+function scoreGameMatch(game: Game, lowerQuery: string): number {
+  const name = game.name.toLowerCase();
+  const desc = game.description.toLowerCase();
+  if (name.startsWith(lowerQuery)) return 4;
+  if (name.includes(lowerQuery)) return 3;
+  if (desc.includes(lowerQuery)) return 2;
+  if (game.keywords?.some((k) => k.toLowerCase().includes(lowerQuery))) return 1;
+  return 0;
+}
+
 export function searchGames(query: string): Game[] {
-  const lowerQuery = query.toLowerCase();
-  return games.filter(
-    (game) =>
-      game.name.toLowerCase().includes(lowerQuery) ||
-      game.description.toLowerCase().includes(lowerQuery) ||
-      game.keywords?.some((keyword) => keyword.includes(lowerQuery))
-  );
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return [];
+  return games
+    .map((game) => ({ game, score: scoreGameMatch(game, lowerQuery) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || a.game.name.localeCompare(b.game.name))
+    .map(({ game }) => game);
 }

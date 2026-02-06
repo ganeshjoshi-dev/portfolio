@@ -1016,6 +1016,7 @@ export default function SolaHaadiPage({ slug }: { slug: string }) {
     <GameLayout
       title={game.name}
       description={game.description}
+      currentGameId={slug}
       backLink="/games"
       backLabel="All Games"
     >
