@@ -50,11 +50,14 @@ export default function ContactForm() {
         body: new FormData(e.target as HTMLFormElement),
       });
 
-      const json = await res.json();
-      if (json.ok) {
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
         setStatus('SUCCESS');
         setFormData({ name: '', email: '', inquiryType: '', message: '' });
       } else {
+        if (process.env.NODE_ENV === 'development' && (json.error || json.message)) {
+          console.warn('Formspree response:', res.status, json);
+        }
         setStatus('ERROR');
       }
     } catch {
