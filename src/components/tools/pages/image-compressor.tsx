@@ -276,7 +276,60 @@ export default function ImageCompressorPage({ slug }: { slug: string }) {
               <div className="lg:col-span-1">
                 <div className="sticky top-24 space-y-6">
                   <CompressionSettings options={options} onChange={handleOptionsChange} />
-                  
+
+                  {/* Primary actions - visible in first fold */}
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={handleCompress}
+                      disabled={isCompressing || images.every((img) => img.status !== 'pending')}
+                      className={`
+                        w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg
+                        text-sm font-medium transition-all duration-300
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0e27]
+                        ${
+                          isCompressing || images.every((img) => img.status !== 'pending')
+                            ? 'bg-slate-800/40 text-slate-500 border border-slate-700/60 cursor-not-allowed'
+                            : 'bg-cyan-400/20 text-cyan-300 border border-cyan-400/50 hover:bg-cyan-400/30'
+                        }
+                      `}
+                    >
+                      <Zap className="w-4 h-4" />
+                      {isCompressing ? 'Compressing...' : 'Compress All'}
+                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleDownloadAll}
+                        disabled={completedCount === 0}
+                        className={`
+                          flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg
+                          text-sm font-medium transition-all duration-300
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0e27]
+                          ${
+                            completedCount === 0
+                              ? 'bg-slate-800/40 text-slate-500 border border-slate-700/60 cursor-not-allowed'
+                              : 'bg-slate-800/60 text-slate-300 border border-slate-700/60 hover:border-cyan-400/50 hover:text-cyan-300'
+                          }
+                        `}
+                      >
+                        <Download className="w-4 h-4" />
+                        Download
+                      </button>
+                      <button
+                        onClick={handleClearAll}
+                        className="
+                          px-3 py-2.5 rounded-lg text-sm font-medium
+                          bg-slate-800/60 text-slate-400 border border-slate-700/60
+                          hover:border-red-500/50 hover:text-red-400 hover:bg-red-500/10
+                          transition-all duration-300
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0e27]
+                        "
+                        aria-label="Clear all images"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Add More Images */}
                   <div className="p-4 bg-slate-900/40 border border-slate-700/60 rounded-xl">
                     <p className="text-sm text-slate-400 mb-3">Add more images</p>

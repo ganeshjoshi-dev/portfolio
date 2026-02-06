@@ -9,6 +9,7 @@ export const toolPageRegistry: Record<string, LazyExoticComponent<ToolPageCompon
   'case-converter': lazy(() => import('./case-converter')),
   'code-formatter': lazy(() => import('./code-formatter')),
   'code-minifier': lazy(() => import('./code-minifier')),
+  'color-converter': lazy(() => import('./color-converter')),
   'color-palette': lazy(() => import('./color-palette')),
   'cron-generator': lazy(() => import('./cron-generator')),
   'css-animations': lazy(() => import('./css-animations')),
