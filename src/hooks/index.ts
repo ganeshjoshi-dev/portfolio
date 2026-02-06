@@ -6,3 +6,4 @@ export { useGSAP } from "./useGSAP";
 export { useGameTimer } from "./useGameTimer";
 export type { UseGameTimerOptions, UseGameTimerReturn, TimerMode } from "./useGameTimer";
 export { useLocalStorage } from "./useLocalStorage";
+export { useContainedWheelScroll } from "./useContainedWheelScroll";

@@ -63,6 +63,35 @@ export const toolSEOData: Record<string, ToolSEOConfig> = {
     ],
     alternateNames: ['Gradient Maker', 'CSS Gradient Tool', 'Background Gradient Generator'],
   },
+  'color-converter': {
+    title: 'Color Converter - HEX, RGB, RGBA, HSL, HSLA Converter',
+    metaDescription: 'Convert between color formats instantly. Paste HEX, RGB, RGBA, HSL or HSLA and see all equivalents. Copy CSS snippets and Tailwind classes. Free and in-browser.',
+    longTailKeywords: [
+      'color converter',
+      'hex to rgb',
+      'rgba to hex',
+      'hsl to hex',
+      'rgb to hex converter',
+      'hex to hsl',
+      'color format converter',
+      'css color converter',
+    ],
+    faqs: [
+      {
+        question: 'How do I convert HEX to RGBA?',
+        answer: 'Paste your HEX color (e.g. #3b82f6) into the input. The tool shows RGBA and all other formats. Click copy next to RGBA to use it in CSS.',
+      },
+      {
+        question: 'Is the color converter free?',
+        answer: 'Yes. The tool runs entirely in your browser with no sign-up. Convert unlimited colors and copy any format.',
+      },
+      {
+        question: 'What color formats are supported?',
+        answer: 'You can paste or type HEX (3, 6, or 8 digits), rgb(), rgba(), hsl(), and hsla(). All formats are shown and can be copied.',
+      },
+    ],
+    alternateNames: ['Hex to RGB', 'RGB to Hex', 'Color Format Converter'],
+  },
   'color-palette': {
     title: 'Color Palette Generator - Create Harmonious Color Schemes',
     metaDescription: 'Generate beautiful color palettes with accessibility checks. Create complementary, analogous, and triadic color schemes for your designs.',

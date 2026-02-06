@@ -188,6 +188,7 @@ export default function TicTacToePage({ slug }: { slug: string }) {
       description={game.description}
       backLink="/games"
       backLabel="All Games"
+      currentGameId={slug}
     >
       <div className="space-y-6">
         {!gameStarted ? (

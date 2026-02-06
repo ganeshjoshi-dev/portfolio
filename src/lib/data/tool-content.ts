@@ -319,6 +319,31 @@ export const toolContent: Record<string, ToolContent> = {
     relatedTools: ['css-unit-converter', 'css-to-tailwind', 'lorem-ipsum'],
   },
 
+  'color-converter': {
+    howToUse: {
+      title: 'How to Convert Colors',
+      steps: [
+        {
+          title: 'Paste or Type a Color',
+          description: 'Enter any color in the text field: HEX (#ff5500), RGB (rgb(255, 85, 0)), RGBA, HSL, or HSLA. The tool accepts all common formats.',
+        },
+        {
+          title: 'Or Use the Color Picker',
+          description: 'Click the color swatch to open the picker and choose a color visually. The picker and text input stay in sync.',
+        },
+        {
+          title: 'View All Equivalent Formats',
+          description: 'See HEX, HEX with alpha, RGB, RGBA, HSL, and HSLA side by side. Each row has a copy button for quick use.',
+        },
+        {
+          title: 'Copy CSS Snippets',
+          description: 'Use the CSS snippets section to copy ready-to-paste lines for color, background-color, border-color, CSS variables, or Tailwind arbitrary classes.',
+        },
+      ],
+    },
+    relatedTools: ['color-palette', 'contrast-checker', 'tailwind-colors'],
+  },
+
   'regex-tester': {
     howToUse: {
       title: 'How to Test Regular Expressions',

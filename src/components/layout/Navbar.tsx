@@ -34,11 +34,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        isScrolled || isMenuOpen
           ? "bg-slate-900/80 backdrop-blur-md border-b border-slate-700/60"
           : "bg-transparent"
-      }`}
+      } ${isScrolled || isMenuOpen ? "border-b border-slate-700/60" : ""}`}
+      style={{
+        transitionProperty: "background-color, box-shadow, backdrop-filter, color",
+        transitionDuration: "300ms",
+      }}
     >
       <div className={brandTheme.components.container.base}>
         <div className="flex items-center justify-between h-16">
@@ -125,7 +129,7 @@ export default function Navbar() {
           role="region"
           aria-label="Mobile navigation"
           className={`lg:hidden ${brandTheme.transitions.base} ease-in-out ${
-            isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+            isMenuOpen ? "max-h-9/12 overflow-y-auto opacity-100 pb-4" : "max-h-0 opacity-0"
           } overflow-hidden`}
         >
           <div className="px-2 pt-2 pb-4 space-y-1 rounded-b-lg bg-slate-900/80 border border-slate-700/60">

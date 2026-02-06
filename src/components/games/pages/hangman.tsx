@@ -75,6 +75,7 @@ export default function HangmanPage({ slug }: { slug: string }) {
       description={game.description}
       backLink="/games"
       backLabel="All Games"
+      currentGameId={slug}
     >
       <div className="space-y-4 sm:space-y-6 w-full overflow-x-hidden">
         {!gameStarted ? (

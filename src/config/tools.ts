@@ -126,6 +126,16 @@ export const tools: Tool[] = [
     isNew: true,
     keywords: ['css', 'letter-spacing', 'typography', 'font', 'spacing', 'tracking', 'convert'],
   },
+  {
+    id: 'color-converter',
+    name: 'Color Converter',
+    description: 'Convert between HEX, RGB, RGBA, HSL, HSLA and more. Paste any format, see all equivalents and copy CSS snippets.',
+    category: 'converters',
+    path: '/tools/color-converter',
+    icon: 'Droplets',
+    isNew: true,
+    keywords: ['color converter', 'hex to rgb', 'rgba to hex', 'hsl to hex', 'rgb to hex', 'color format', 'hex rgb hsl'],
+  },
 
   // Utility Tools
   {
@@ -611,14 +621,25 @@ export function getToolByPath(path: string): Tool | undefined {
   return tools.find((tool) => tool.path === path);
 }
 
+/** Score relevance: name start (best) > name contains > description > keywords. */
+function scoreToolMatch(tool: Tool, lowerQuery: string): number {
+  const name = tool.name.toLowerCase();
+  const desc = tool.description.toLowerCase();
+  if (name.startsWith(lowerQuery)) return 4;
+  if (name.includes(lowerQuery)) return 3;
+  if (desc.includes(lowerQuery)) return 2;
+  if (tool.keywords?.some((k) => k.toLowerCase().includes(lowerQuery))) return 1;
+  return 0;
+}
+
 export function searchTools(query: string): Tool[] {
-  const lowerQuery = query.toLowerCase();
-  return tools.filter(
-    (tool) =>
-      tool.name.toLowerCase().includes(lowerQuery) ||
-      tool.description.toLowerCase().includes(lowerQuery) ||
-      tool.keywords?.some((keyword) => keyword.includes(lowerQuery))
-  );
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return [];
+  return tools
+    .map((tool) => ({ tool, score: scoreToolMatch(tool, lowerQuery) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || a.tool.name.localeCompare(b.tool.name))
+    .map(({ tool }) => tool);
 }
 
 export function getNewTools(): Tool[] {

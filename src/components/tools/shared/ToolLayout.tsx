@@ -10,6 +10,7 @@ import { getToolContent } from '@/lib/data/tool-content';
 import { toolSEOData } from '@/lib/utils/tool-seo';
 import FAQ from './FAQ';
 import RelatedTools from './RelatedTools';
+import ToolSearch from './ToolSearch';
 
 interface ToolLayoutProps {
   children: React.ReactNode;
@@ -58,15 +59,20 @@ export default function ToolLayout({
       )}
 
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumbs items={breadcrumbItems} includeSchema={false} />
+        {/* Top bar: Breadcrumb + Search */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <Breadcrumbs items={breadcrumbItems} includeSchema={false} />
+          <div className="w-full sm:w-64 sm:shrink-0">
+            <ToolSearch currentToolId={tool?.id} compact />
+          </div>
+        </div>
 
-        {/* Back Link */}
+        {/* Back link */}
         <Link
           href={backLink}
           className="
             inline-flex items-center gap-2 text-slate-400 hover:text-cyan-300
-            transition-all duration-300 mt-3 mb-4 sm:mt-4 sm:mb-6 group
+            transition-all duration-300 mt-3 mb-4 sm:mt-4 sm:mb-6 group w-fit
           "
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

@@ -61,6 +61,7 @@ export default function FaviconGeneratorPage({ slug }: { slug: string }) {
   const [sizes, setSizes] = useState<number[]>(DEFAULT_SIZES);
   const [error, setError] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleSize = (size: number) => {
@@ -91,10 +92,23 @@ export default function FaviconGeneratorPage({ slug }: { slug: string }) {
     }
   }, [preview]);
 
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer.types.includes('Files')) setIsDragOver(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDragOver(false);
+    }
+  }, []);
+
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
       e.stopPropagation();
+      setIsDragOver(false);
       const f = e.dataTransfer.files[0];
       if (f && f.type.startsWith('image/')) handleFile(f);
     },
@@ -175,12 +189,18 @@ export default function FaviconGeneratorPage({ slug }: { slug: string }) {
     >
       <div className="max-w-2xl mx-auto w-full space-y-6 px-1 sm:px-0">
         <div
+          onDragEnter={handleDragEnter}
           onDragOver={(e) => {
             e.preventDefault();
             e.stopPropagation();
           }}
+          onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          className="min-h-[180px] sm:min-h-[220px] flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 rounded-xl border-2 border-dashed border-slate-700/60 bg-slate-900/40 hover:border-cyan-400/50 transition-colors"
+          className={`min-h-[180px] sm:min-h-[220px] flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 rounded-xl border-2 border-dashed transition-all duration-200 ${
+            isDragOver
+              ? 'border-cyan-400 bg-cyan-500/15 scale-[1.01]'
+              : 'border-slate-700/60 bg-slate-900/40 hover:border-cyan-400/50'
+          }`}
         >
           <input
             ref={inputRef}
@@ -222,8 +242,9 @@ export default function FaviconGeneratorPage({ slug }: { slug: string }) {
                 <button
                   type="button"
                   onClick={() => inputRef.current?.click()}
-                  className="mt-2 text-xs text-cyan-400 hover:text-cyan-300"
+                  className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-cyan-300 bg-cyan-500/15 border border-cyan-400/50 rounded-lg hover:bg-cyan-500/25 hover:border-cyan-400 transition-colors"
                 >
+                  <Upload className="w-3.5 h-3.5" />
                   Choose another
                 </button>
               </div>

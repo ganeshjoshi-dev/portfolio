@@ -211,6 +211,7 @@ export default function ConnectFourPage({ slug }: { slug: string }) {
       description={game.description}
       backLink="/games"
       backLabel="All Games"
+      currentGameId={slug}
     >
       <div className="space-y-6 w-full min-w-0">
         {!gameStarted ? (

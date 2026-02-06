@@ -8,6 +8,7 @@ export { default as ToolCard } from './ToolCard';
 export { default as HowToUse } from './HowToUse';
 export { default as FAQ } from './FAQ';
 export { default as RelatedTools } from './RelatedTools';
+export { default as ToolSearch } from './ToolSearch';
 export { ToolStructuredData } from '../ToolStructuredData';
 
 export type { HowToStep } from './HowToUse';
