@@ -27,11 +27,9 @@ const cardStyles =
 function OutputRow({
   label,
   value,
-  disabled,
 }: {
   label: string;
   value: string;
-  disabled?: boolean;
 }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 py-2 border-b border-slate-700/40 last:border-0">

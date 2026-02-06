@@ -126,7 +126,7 @@ export function parseColor(input: string): RGBARec | null {
 
 // --- Formatting ---
 
-export function toHex({ r, g, b, a }: RGBARec): string {
+export function toHex({ r, g, b }: RGBARec): string {
   const rr = clamp(Math.round(r), 0, 255).toString(16).padStart(2, '0');
   const gg = clamp(Math.round(g), 0, 255).toString(16).padStart(2, '0');
   const bb = clamp(Math.round(b), 0, 255).toString(16).padStart(2, '0');
