@@ -104,10 +104,10 @@ export default function EscapeUnescapePage({ slug }: { slug: string }) {
           onChange={(id) => setFormat(id as FormatId)}
         />
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-slate-300">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
+              <label className="text-sm font-medium text-slate-300">
                 {format === 'json' && 'Plain text → escaped'}
                 {format === 'html' && 'Plain text → HTML entities'}
                 {format === 'url' && 'Plain text → encoded'}
@@ -132,9 +132,9 @@ export default function EscapeUnescapePage({ slug }: { slug: string }) {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-slate-300">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
+              <label className="text-sm font-medium text-slate-300">
                 {format === 'json' && 'Escaped → plain'}
                 {format === 'html' && 'HTML entities → plain'}
                 {format === 'url' && 'Encoded → decoded'}

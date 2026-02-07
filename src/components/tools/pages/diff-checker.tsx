@@ -458,8 +458,8 @@ export default function DiffCheckerPage({ slug }: { slug: string }) {
         </div>
 
         {/* Input Text Areas */}
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div className="space-y-3">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-3 min-w-0">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">Original Text</label>
               <label className="flex items-center gap-1.5 px-2 py-1 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-xs text-slate-400 hover:text-cyan-300 transition-all duration-300 cursor-pointer">
@@ -485,8 +485,8 @@ export default function DiffCheckerPage({ slug }: { slug: string }) {
               "
             />
           </div>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">Modified Text</label>
               <label className="flex items-center gap-1.5 px-2 py-1 bg-slate-800/60 border border-slate-700/60 hover:border-cyan-400/50 rounded-lg text-xs text-slate-400 hover:text-cyan-300 transition-all duration-300 cursor-pointer">
                 <Upload className="w-3 h-3" />

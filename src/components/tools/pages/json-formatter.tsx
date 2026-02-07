@@ -193,12 +193,12 @@ export default function JsonFormatterPage({ slug }: { slug: string }) {
         </div>
 
         <div
-          className={`grid gap-6 ${expandedPanel === 'none' ? 'lg:grid-cols-2' : 'grid-cols-1'}`}
+          className={`grid gap-4 sm:gap-6 ${expandedPanel === 'none' ? 'lg:grid-cols-2' : 'grid-cols-1'}`}
         >
           <div
-            className={`space-y-3 ${expandedPanel === 'output' ? 'hidden' : ''}`}
+            className={`space-y-3 min-w-0 ${expandedPanel === 'output' ? 'hidden' : ''}`}
           >
-            <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="min-h-[2.5rem] flex items-center justify-between gap-2 flex-wrap">
               <h3 className="text-sm font-medium text-slate-300">JSON Input</h3>
               <div className="flex items-center gap-2">
                 <input
@@ -262,9 +262,9 @@ export default function JsonFormatterPage({ slug }: { slug: string }) {
           </div>
 
           <div
-            className={`space-y-3 ${expandedPanel === 'input' ? 'hidden' : ''}`}
+            className={`space-y-3 min-w-0 ${expandedPanel === 'input' ? 'hidden' : ''}`}
           >
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="min-h-[2.5rem] flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-medium text-slate-300">Output</h3>
                 {result.valid && (

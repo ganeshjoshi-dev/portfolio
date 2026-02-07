@@ -968,6 +968,78 @@ export const toolContent: Record<string, ToolContent> = {
     },
     relatedTools: ['image-compressor', 'code-formatter', 'base64'],
   },
+  'pdf-to-image': {
+    howToUse: {
+      title: 'How to Use PDF to Image',
+      steps: [
+        { title: 'Select a PDF', description: 'Choose a PDF file (max 20MB). Processing runs entirely in your browser—your file never leaves your device.' },
+        { title: 'Choose mode', description: 'Use "PDF to Image" to convert pages to PNG or JPG, or "Extract pages" to save each page as a separate PDF.' },
+        { title: 'Download', description: 'Download individual images or all extracted PDFs. No data is sent to any server.' },
+      ],
+    },
+    relatedTools: ['pdf-merger', 'image-compressor', 'image-resizer'],
+  },
+  'json-to-csv': {
+    howToUse: {
+      title: 'How to Convert JSON to CSV',
+      steps: [
+        { title: 'Paste JSON', description: 'Paste a JSON array or object. The first object\'s keys (or flattened keys) become CSV headers.' },
+        { title: 'Pick delimiter', description: 'Choose comma, semicolon, tab, or pipe for the CSV output.' },
+        { title: 'Copy or download', description: 'Copy the CSV or download it as a file. All conversion runs in your browser.' },
+      ],
+    },
+    relatedTools: ['csv-to-json', 'json-formatter', 'yaml-json'],
+  },
+  'html-to-markdown': {
+    howToUse: {
+      title: 'How to Convert HTML to Markdown',
+      steps: [
+        { title: 'Paste HTML', description: 'Paste your HTML content. Headings, links, lists, and formatting are converted to Markdown.' },
+        { title: 'Copy result', description: 'Copy the generated Markdown. Conversion runs in your browser; nothing is sent to a server.' },
+      ],
+    },
+    relatedTools: ['markdown-to-html', 'escape-unescape', 'code-formatter'],
+  },
+  'html-entities': {
+    howToUse: {
+      title: 'How to Use HTML Entity Encoder/Decoder',
+      steps: [
+        { title: 'Decode', description: 'Paste text with HTML entities (&amp;, &lt;, &nbsp;, &#160;) and get plain text.' },
+        { title: 'Encode', description: 'Encode to named entities (e.g. &copy;) or numeric (&#169; or &#xA9;). All processing in your browser.' },
+      ],
+    },
+    relatedTools: ['escape-unescape', 'url-encoder', 'code-formatter'],
+  },
+  'svg-optimizer': {
+    howToUse: {
+      title: 'How to Optimize SVG',
+      steps: [
+        { title: 'Paste SVG', description: 'Paste your SVG code. Comments and extra whitespace are removed.' },
+        { title: 'Copy result', description: 'Copy the minified SVG. Optimization runs locally; your data never leaves your device.' },
+      ],
+    },
+    relatedTools: ['svg-to-react', 'image-compressor', 'code-minifier'],
+  },
+  'xml-to-json': {
+    howToUse: {
+      title: 'How to Convert XML to JSON',
+      steps: [
+        { title: 'Paste XML or JSON', description: 'Switch between XML→JSON and JSON→XML. Paste input and see the result instantly.' },
+        { title: 'Copy output', description: 'Copy the converted result. All processing runs in your browser.' },
+      ],
+    },
+    relatedTools: ['json-formatter', 'yaml-json', 'json-to-csv'],
+  },
+  'user-agent-parser': {
+    howToUse: {
+      title: 'How to Parse User-Agent',
+      steps: [
+        { title: 'Paste User-Agent', description: 'Paste any User-Agent string (or use the default). Parsing runs entirely in your browser.' },
+        { title: 'View result', description: 'See browser, OS, device type, and engine. Copy the full JSON if needed. No data is sent to any server.' },
+      ],
+    },
+    relatedTools: ['url-encoder', 'escape-unescape', 'meta-tags'],
+  },
 };
 
 /**

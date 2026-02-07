@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Breadcrumbs } from '@/components/ui';
 import GameSearch from './GameSearch';
+import RelatedGames from './RelatedGames';
 
 interface GameLayoutProps {
   children: React.ReactNode;
@@ -67,6 +68,10 @@ export default function GameLayout({
         <div className="space-y-6 min-w-0" data-game-container>
           {children}
         </div>
+
+        {currentGameId && (
+          <RelatedGames currentGameId={currentGameId} />
+        )}
       </div>
     </main>
   );

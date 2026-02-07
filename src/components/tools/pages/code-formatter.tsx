@@ -134,7 +134,7 @@ export default function CodeFormatterPage({ slug }: { slug: string }) {
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Input */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">Unformatted Code</label>
               <button
                 onClick={() => setInput(examples[language])}
@@ -153,8 +153,8 @@ export default function CodeFormatterPage({ slug }: { slug: string }) {
           </div>
 
           {/* Output */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">Formatted Code</label>
               <CopyButton text={formatted} />
             </div>

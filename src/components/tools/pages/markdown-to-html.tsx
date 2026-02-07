@@ -80,10 +80,10 @@ export default function MarkdownToHTMLPage({ slug }: { slug: string }) {
       category={category}
     >
       <div className="max-w-7xl mx-auto space-y-6">
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Input Panel */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">Markdown Input</label>
               <button
                 onClick={() => setMarkdown(defaultMarkdown)}
@@ -102,8 +102,8 @@ export default function MarkdownToHTMLPage({ slug }: { slug: string }) {
           </div>
 
           {/* Output Panel */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <TabSwitcher
                 options={[
                   { id: 'preview', label: 'Preview' },

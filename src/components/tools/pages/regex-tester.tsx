@@ -149,10 +149,13 @@ export default function RegexTesterPage({ slug }: { slug: string }) {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Test String */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-slate-300">Test String</label>
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
+              <label className="text-sm font-medium text-slate-300">Test String</label>
+              <span className="min-w-[2.5rem] flex-shrink-0" aria-hidden />
+            </div>
             <textarea
               value={testString}
               onChange={(e) => setTestString(e.target.value)}
@@ -167,11 +170,12 @@ export default function RegexTesterPage({ slug }: { slug: string }) {
           </div>
 
           {/* Matches */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 min-w-0">
+            <div className="min-h-[2.5rem] flex items-center justify-between">
               <label className="text-sm font-medium text-slate-300">
                 Matches ({matches.length})
               </label>
+              <span className="min-w-[2.5rem] flex-shrink-0" aria-hidden />
             </div>
             <div className="h-[300px] p-4 bg-slate-900/60 border border-slate-700/60 rounded-xl overflow-y-auto">
               {matches.length > 0 ? (

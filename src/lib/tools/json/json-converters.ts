@@ -66,8 +66,9 @@ function flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string
   return out;
 }
 
-function escapeCsvCell(str: string): string {
-  if (/[",\n\r]/.test(str)) {
+function escapeCsvCell(str: string, delimiter: string): string {
+  const needsQuote = new RegExp(`["\n\r${delimiter === '"' ? '' : delimiter}]`).test(str);
+  if (needsQuote) {
     return `"${str.replace(/"/g, '""')}"`;
   }
   return str;
@@ -76,8 +77,9 @@ function escapeCsvCell(str: string): string {
 /**
  * Convert JSON to CSV. Works best when root is an array of objects.
  * Uses first object's keys (flattened) as headers. Single object becomes one row.
+ * @param delimiter - CSV field delimiter (default ',')
  */
-export function jsonToCsv(data: unknown): string {
+export function jsonToCsv(data: unknown, delimiter = ','): string {
   let rows: Record<string, string>[];
   if (Array.isArray(data)) {
     if (data.length === 0) return '';
@@ -94,13 +96,14 @@ export function jsonToCsv(data: unknown): string {
   } else if (data !== null && typeof data === 'object' && !Array.isArray(data)) {
     rows = [flattenObject(data as Record<string, unknown>)];
   } else {
-    return escapeCsvCell(String(data));
+    return escapeCsvCell(String(data), delimiter);
   }
   const allKeys = new Set<string>();
   rows.forEach((r) => Object.keys(r).forEach((k) => allKeys.add(k)));
   const headers = Array.from(allKeys).sort();
-  const headerLine = headers.map(escapeCsvCell).join(',');
-  const dataLines = rows.map((row) => headers.map((h) => escapeCsvCell(row[h] ?? '')).join(','));
+  const escape = (s: string) => escapeCsvCell(s, delimiter);
+  const headerLine = headers.map(escape).join(delimiter);
+  const dataLines = rows.map((row) => headers.map((h) => escape(row[h] ?? '')).join(delimiter));
   return [headerLine, ...dataLines].join('\n');
 }
 
