@@ -94,9 +94,12 @@ export default function UrlEncoderPage({ slug }: { slug: string }) {
         />
 
         {activeTab === 'encode' && (
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-slate-300">Plain text</label>
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="space-y-3 min-w-0">
+              <div className="min-h-[2.5rem] flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-300">Plain text</label>
+                <span className="min-w-[2.5rem] flex-shrink-0" aria-hidden />
+              </div>
               <textarea
                 value={encodeInput}
                 onChange={(e) => setEncodeInput(e.target.value)}
@@ -105,9 +108,9 @@ export default function UrlEncoderPage({ slug }: { slug: string }) {
                 spellCheck={false}
               />
             </div>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium text-slate-300">Encoded (component)</label>
+            <div className="space-y-3 min-w-0">
+              <div className="min-h-[2.5rem] flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-300">Encoded (component)</label>
                 <CopyButton text={encoded} />
               </div>
               <div className="h-40 px-4 py-3 bg-slate-900/60 border border-slate-700/60 rounded-xl font-mono text-sm text-slate-300 overflow-auto break-all">
@@ -121,9 +124,12 @@ export default function UrlEncoderPage({ slug }: { slug: string }) {
         )}
 
         {activeTab === 'decode' && (
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-slate-300">Encoded URL / component</label>
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="space-y-3 min-w-0">
+              <div className="min-h-[2.5rem] flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-300">Encoded URL / component</label>
+                <span className="min-w-[2.5rem] flex-shrink-0" aria-hidden />
+              </div>
               <textarea
                 value={decodeInput}
                 onChange={(e) => setDecodeInput(e.target.value)}
@@ -132,9 +138,9 @@ export default function UrlEncoderPage({ slug }: { slug: string }) {
                 spellCheck={false}
               />
             </div>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium text-slate-300">Decoded</label>
+            <div className="space-y-3 min-w-0">
+              <div className="min-h-[2.5rem] flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-300">Decoded</label>
                 <CopyButton text={decoded} />
               </div>
               <div className="h-40 px-4 py-3 bg-slate-900/60 border border-slate-700/60 rounded-xl font-mono text-sm text-slate-300 overflow-auto break-all whitespace-pre-wrap">
