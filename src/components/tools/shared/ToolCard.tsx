@@ -22,12 +22,16 @@ import {
   Contrast,
   Shield,
   ImageDown,
+  Image,
+  FileImage,
+  Monitor,
   Minimize2,
   Sparkles,
   QrCode,
   Lock,
   Hash,
   Clock,
+  Grid3X3,
   LucideIcon,
 } from 'lucide-react';
 import { Tool } from '@/types/tools';
@@ -63,6 +67,10 @@ const iconMap: Record<string, LucideIcon> = {
   Lock,
   Hash,
   Clock,
+  Image,
+  FileImage,
+  Monitor,
+  Grid3X3,
 };
 
 interface ToolCardProps {

@@ -135,9 +135,9 @@ export default function Base64Page({ slug }: { slug: string }) {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Input */}
-          <div className="space-y-4">
+          <div className="space-y-4 min-w-0">
             <div className="flex items-center justify-between min-h-[36px]">
               <h3 className="text-sm font-medium text-slate-300">
                 {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
@@ -207,7 +207,7 @@ export default function Base64Page({ slug }: { slug: string }) {
           </div>
 
           {/* Output */}
-          <div className="space-y-4">
+          <div className="space-y-4 min-w-0">
             <div className="flex items-center justify-between min-h-[36px]">
               <h3 className="text-sm font-medium text-slate-300">
                 {mode === 'encode' ? 'Base64 Output' : 'Decoded Output'}

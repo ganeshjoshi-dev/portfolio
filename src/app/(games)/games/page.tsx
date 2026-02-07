@@ -12,6 +12,14 @@ import {
 import { GameCard } from '@/components/games/shared';
 import { GameCategory } from '@/types/games';
 
+/** For hub page: show a few games as "More to try" (pick from each category) */
+function getFeaturedRelatedGames() {
+  const puzzle = getGamesByCategory('puzzle').slice(0, 2);
+  const arcade = getGamesByCategory('arcade').slice(0, 2);
+  const word = getGamesByCategory('word').slice(0, 2);
+  return [...puzzle, ...arcade, ...word].slice(0, 6);
+}
+
 function GamesHubContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -163,6 +171,19 @@ function GamesHubContent() {
             </div>
           )}
         </section>
+
+        {activeCategory === 'all' && !searchQuery && (
+          <section className="mt-12 sm:mt-16">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+              More games to try
+            </h2>
+            <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {getFeaturedRelatedGames().map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-12 sm:mt-16 text-center">
           <div className="inline-block p-6 sm:p-8 bg-slate-900/40 border border-dashed border-slate-700/60 rounded-xl">

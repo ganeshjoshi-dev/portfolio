@@ -13,6 +13,14 @@ import {
   Hand,
   Circle,
   Grid2X2,
+  Flame,
+  Square,
+  Shuffle,
+  Hash,
+  Bomb,
+  Library,
+  Search,
+  Keyboard,
   LucideIcon,
 } from 'lucide-react';
 import { Game } from '@/types/games';
@@ -31,6 +39,14 @@ const iconMap: Record<string, LucideIcon> = {
   Hand,
   Circle,
   Grid2X2,
+  Flame,
+  Square,
+  Shuffle,
+  Hash,
+  Bomb,
+  Library,
+  Search,
+  Keyboard,
 };
 
 interface GameCardProps {

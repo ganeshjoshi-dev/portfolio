@@ -195,6 +195,13 @@ function ToolsHubContent() {
                     <span>Shadow Generator</span>
                   </Link>
                   <Link
+                    href="/tools/text-shadow-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Text Shadow Generator</span>
+                  </Link>
+                  <Link
                     href="/tools/css-to-tailwind"
                     className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
                   >
@@ -300,6 +307,46 @@ function ToolsHubContent() {
                     <span>→</span>
                     <span>Class Sorter</span>
                   </Link>
+                  <Link
+                    href="/tools/tailwind-to-css"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Tailwind to CSS</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Scheduling & Config */}
+              <div className="p-6 bg-slate-900/40 border border-slate-700/60 rounded-xl hover:border-cyan-400/50 transition-all duration-300">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  Scheduling & Config
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Cron expressions and config format conversion
+                </p>
+                <div className="space-y-2">
+                  <Link
+                    href="/tools/cron-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Cron Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/cron-decoder"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Cron Decoder</span>
+                  </Link>
+                  <Link
+                    href="/tools/yaml-json"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>YAML ↔ JSON</span>
+                  </Link>
                 </div>
               </div>
 
@@ -333,6 +380,13 @@ function ToolsHubContent() {
                     <span>→</span>
                     <span>Border Radius Generator</span>
                   </Link>
+                  <Link
+                    href="/tools/flexbox-grid-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>Flexbox & Grid Generator</span>
+                  </Link>
                 </div>
               </div>
 
@@ -365,6 +419,20 @@ function ToolsHubContent() {
                   >
                     <span>→</span>
                     <span>Diff Checker</span>
+                  </Link>
+                  <Link
+                    href="/tools/gitignore-generator"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>.gitignore Generator</span>
+                  </Link>
+                  <Link
+                    href="/tools/http-status-codes"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <span>→</span>
+                    <span>HTTP Status Reference</span>
                   </Link>
                 </div>
               </div>

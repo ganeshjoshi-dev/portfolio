@@ -98,10 +98,10 @@ export default function JsonToTypeScriptPage({ slug }: { slug: string }) {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {/* Input */}
-        <div className="space-y-3 lg:space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="space-y-3 lg:space-y-4 min-w-0">
+          <div className="min-h-[2.5rem] flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">JSON Input</h3>
             {!isValidJson && input.trim() && (
               <span className="text-xs text-red-400">Invalid JSON</span>
@@ -121,8 +121,8 @@ export default function JsonToTypeScriptPage({ slug }: { slug: string }) {
         </div>
 
         {/* Output */}
-        <div className="space-y-3 lg:space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="space-y-3 lg:space-y-4 min-w-0">
+          <div className="min-h-[2.5rem] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <h3 className="text-sm font-medium text-slate-300">TypeScript Output</h3>
             <TabSwitcher
               options={[

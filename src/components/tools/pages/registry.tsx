@@ -45,6 +45,21 @@ export const toolPageRegistry: Record<string, LazyExoticComponent<ToolPageCompon
   'contrast-checker': lazy(() => import('./contrast-checker')),
   'meta-tags': lazy(() => import('./meta-tags')),
   'escape-unescape': lazy(() => import('./escape-unescape')),
+  'cron-decoder': lazy(() => import('./cron-decoder')),
+  'text-shadow-generator': lazy(() => import('./text-shadow-generator')),
+  'yaml-json': lazy(() => import('./yaml-json')),
+  'http-status-codes': lazy(() => import('./http-status-codes')),
+  'flexbox-grid-generator': lazy(() => import('./flexbox-grid-generator')),
+  'csv-to-json': lazy(() => import('./csv-to-json')),
+  'gitignore-generator': lazy(() => import('./gitignore-generator')),
+  'tailwind-to-css': lazy(() => import('./tailwind-to-css')),
+  'pdf-to-image': lazy(() => import('./pdf-to-image')),
+  'json-to-csv': lazy(() => import('./json-to-csv')),
+  'html-to-markdown': lazy(() => import('./html-to-markdown')),
+  'html-entities': lazy(() => import('./html-entities')),
+  'svg-optimizer': lazy(() => import('./svg-optimizer')),
+  'xml-to-json': lazy(() => import('./xml-to-json')),
+  'user-agent-parser': lazy(() => import('./user-agent-parser')),
 };
 
 /** All tool slugs for generateStaticParams. */

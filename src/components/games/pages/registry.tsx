@@ -19,6 +19,14 @@ export const gamePageRegistry: Record<
   'connect-four': lazy(() => import('./connect-four')),
   'sola-haadi': lazy(() => import('./sola-haadi')),
   'trap-run': lazy(() => import('./trap-run')),
+  pong: lazy(() => import('./pong')),
+  'fifteen-puzzle': lazy(() => import('./fifteen-puzzle')),
+  'word-scramble': lazy(() => import('./word-scramble')),
+  sudoku: lazy(() => import('./sudoku')),
+  minesweeper: lazy(() => import('./minesweeper')),
+  solitaire: lazy(() => import('./solitaire')),
+  'word-search': lazy(() => import('./word-search')),
+  'typing-speed': lazy(() => import('./typing-speed')),
 };
 
 /** All game slugs for generateStaticParams. */

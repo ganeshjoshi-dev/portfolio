@@ -93,9 +93,9 @@ export default function ShadowGeneratorPage({ slug }: { slug: string }) {
       tool={tool}
       category={category}
     >
-      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {/* Preview */}
-        <div className="space-y-4 lg:space-y-6">
+        <div className="space-y-4 lg:space-y-6 min-w-0">
           <div className="aspect-video bg-slate-800/40 rounded-xl border border-slate-700/60 flex items-center justify-center p-4 sm:p-8 min-h-[200px]">
             <div
               className="w-32 h-24 sm:w-48 sm:h-32 bg-slate-700 rounded-xl transition-shadow duration-300"
@@ -121,7 +121,7 @@ export default function ShadowGeneratorPage({ slug }: { slug: string }) {
         </div>
 
         {/* Controls */}
-        <div className="space-y-4 lg:space-y-6">
+        <div className="space-y-4 lg:space-y-6 min-w-0">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-slate-300">Shadow Layers</h3>
             <button
@@ -178,7 +178,6 @@ export default function ShadowGeneratorPage({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {/* Output */}
       <div className="mt-8 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium text-white">Output</h3>
