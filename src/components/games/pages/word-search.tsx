@@ -54,18 +54,6 @@ export default function WordSearchPage({ slug }: { slug: string }) {
     return getCellsInLine(r0, c0, r1, c1);
   }, [selection, hoverCell]);
 
-  const selectedWord = useMemo(() => {
-    if (!selectionLine) return null;
-    const letters = selectionLine
-      .map(([r, c]) => grid[r]?.[c])
-      .filter(Boolean)
-      .join('');
-    const rev = letters.split('').reverse().join('');
-    if (words.includes(letters)) return letters;
-    if (words.includes(rev)) return rev;
-    return null;
-  }, [selectionLine, grid, words]);
-
   const handleCellClick = useCallback(
     (r: number, c: number) => {
       if (!selection) {

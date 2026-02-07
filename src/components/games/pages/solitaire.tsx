@@ -249,11 +249,9 @@ export default function SolitairePage({ slug }: { slug: string }) {
             >
               {col.cards.map((card, cardIndex) => {
                 const isHidden = cardIndex < col.hidden;
-                const isTop = cardIndex === col.cards.length - 1;
                 const run = getColumnRun(col);
                 const runStart = col.cards.length - run.length;
                 const isInRun = cardIndex >= runStart;
-                const isRunBottom = cardIndex === runStart;
                 const selected =
                   selection?.type === 'column' &&
                   selection.col === colIndex &&

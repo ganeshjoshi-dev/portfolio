@@ -8,7 +8,7 @@ const srcRoot = path.resolve(projectRoot, 'src');
 export default defineConfig({
   root: srcRoot,
   plugins: [react()],
-  css: { postcss: false },
+  css: { postcss: {} },
   test: {
     globals: true,
     environment: 'jsdom',

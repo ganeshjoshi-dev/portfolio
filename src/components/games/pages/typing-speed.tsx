@@ -7,10 +7,7 @@ import { Button } from '@/components/ui';
 import { getRandomPassage } from '@/lib/data/typing-passages';
 
 function computeStats(passage: string, typed: string): { wpm: number; accuracy: number; errors: number } {
-  const passageWords = passage.trim().split(/\s+/).filter(Boolean);
   const typedWords = typed.trim().split(/\s+/).filter(Boolean);
-  const passageChars = passage.replace(/\s/g, '');
-  const typedChars = typed.replace(/\s/g, '');
   let errors = 0;
   const len = Math.min(passage.length, typed.length);
   for (let i = 0; i < len; i++) {
