@@ -392,12 +392,12 @@ function ToolsLoadingFallback() {
             <Sparkles className="w-4 h-4" />
             <span>Free Developer Tools</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Developer{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Tools
             </span>
-          </h2>
+          </h1>
           <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-8">
             Beautiful, modern tools for everyday development. CSS generators, converters, 
             and utilities — all free, no sign-up required.

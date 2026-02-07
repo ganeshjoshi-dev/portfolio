@@ -183,9 +183,9 @@ function GamesLoadingFallback() {
             <Sparkles className="w-4 h-4" />
             <span>Free Browser Games</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Games
-          </h2>
+          </h1>
           <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-8">
             Free online browser games — no sign-up, no ads.
           </p>
